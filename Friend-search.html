@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0px auto;
+        }
+
+        /*head*/
+        .head{
+            border-bottom: 10px solid black;
+            height: 150px;
+            background-color: #9600bf;
+            display: flex;
+            align-items: center;
+            
+        }
+
+        .head div{
+            margin-left: 50px;
+        }
+
+        .pp{
+            border-radius: 50%;
+            width: 100px;
+            width: 100px;
+        }
+
+        #pp_picture{
+            margin: 20px;
+            margin-left: 50px;
+        }
+
+        /*container*/
+        .container{
+            border: 2px solid rgb(177, 177, 177);
+            border-radius: 5px;
+            width:500px;
+            height:500px;
+            margin: 20px auto;
+            display:flex;
+            flex-direction: column;
+   
+        }
+        .container>*{
+            align-items: center;
+            text-align: center;
+        }
+
+        .timeline{
+            width:500px;
+            height:60px;
+        }
+
+        .friends-part{
+           width:100%;
+            height:440px;
+            overflow-y: scroll;
+           
+        }
+
+        .friend{
+            display:flex;
+            margin:2px auto;
+            width:80%;
+            height:60px;
+            background-color:grey;
+            border-radius: 5px;
+            align-items: center;
+        }
+         .friend img{width:50px;border-radius: 50px;}
+        .friend a{
+            display: flex;
+            width: 10px;
+            height: 10px;
+            border-radius:20px;
+            padding:10px;
+            text-decoration: none;
+            background-color:white;
+            align-items: center;
+            justify-content: center;
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="head">
+        <div>
+            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="pp" id="pp_picture">
+        </div>
+        <div id="pp_info">
+            <h4>John Doe</h4>
+            <p>ssssssssssssssssssssssssssssssssssssss</p>
+        </div>
+    </div>
+    <section class="container">
+        <div class="timeline">
+            <h4>Search For A Friend</h4>
+            <input type="text">
+            <select name="filter-option" id="">
+                <option value="mail">mail</option>
+                <option value="first-name">first name</option>
+                <option value="last-name">last name</option>
+            </select>
+            <button>Search</button>
+           
+        </div>
+        <div class="friends-part">
+            <div class="friend">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
+                <p>Eren Yeşiltepe</p>
+                <a href="">+</a>
+            </div>
+
+            <div class="friend">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
+                <p>Eren Yeşiltepe</p>
+                <a href="">+</a>
+            </div>
+
+            <div class="friend">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
+                <p>Eren Yeşiltepe</p>
+                <a href="">+</a>
+            </div>
+
+            <div class="friend">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
+                <p>Eren Yeşiltepe</p>
+                <a href="">+</a>
+            </div>
+
+            <div class="friend">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
+                <p>Eren Yeşiltepe</p>
+                <a href="">+</a>
+            </div>
+
+            <div class="friend">
+                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
+                <p>Eren Yeşiltepe</p>
+                <a href="">+</a>
+            </div>
+        </div>
+
+    </section>
+</body>
+</html>
