@@ -3,7 +3,6 @@
 <head>
 <meta charset="utf-8">
 
-
 <title>Ahpapol Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
@@ -11,6 +10,16 @@
 <link rel="stylesheet" href="./login.css">
 </head>
 <body>
+<?php
+   if($_SERVER["REQUEST_METHOD"] == "POST"){
+    extract($_POST);
+    $email = $_POST["e-mail"];
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $errorMail = "Enter a valid email!!" ;
+    }
+  
+   }
+?>
 <div class="container">
   <div id="content">
     <div class="container-fluid">
@@ -19,10 +28,11 @@
           <img src="./ahpapol.png" class="img-circle img-login">
           <form action="" method="post">
             <div class="panel-body">
-              <input class="form-control" type="text" placeholder="Username" >
-              <input class="form-control" type="password" placeholder="Enter Password" >
-              <a href="#index.html" class="btn btn-success" style=" background-color:#9600bf;">Login</a>
-              <a href="Ahpapol_Register.html" class="btn btn-success"  id="register-btn">Register</a>
+              <input class="form-control" name="e-mail" type="text" placeholder="User Email" value = "<?= $email ?? ""?>" >
+              <span class = "error" ><?= $errorMail ?? "" ?></span>
+              <input class="form-control" name="password" type="password" placeholder="Enter Password" >
+              <button type="submit" class="btn btn-success" style=" background-color:#9600bf;">Login</button>
+              <a href="Ahpapol_Register.php" class="btn btn-success"  id="register-btn">Register</a>
               <!--<a href="#" class="forgot-password">Forgot password?</a>-->
             </div>
           </form>
