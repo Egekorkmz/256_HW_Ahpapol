@@ -12,7 +12,7 @@
 
         /*head*/
         .head{
-            border-bottom: 10px solid black;
+            border-bottom: 10px solid rgb(221, 216, 216);;
             height: 150px;
             background-color: #9600bf;
             display: flex;
@@ -30,15 +30,47 @@
             width: 100px;
         }
 
-        #pp_picture{
+        #pp_pic_head{
             margin: 20px;
             margin-left: 50px;
         }
 
         /*container*/
         .container{
-            border: 1px solid rgb(177, 177, 177);
+            
+        }
+
+        .timeline{
+            /*border: 1px solid rgb(221, 216, 216);*/
             margin: 100px;
+        }
+
+        .timeline div{
+            margin: 30px;
+        }
+
+        #btn_share{
+            background-color: rgb(144, 232, 12);
+            border-radius: 10%;
+            width: 70px;
+        }
+
+        .posts div{
+            border: 1px solid rgb(221, 216, 216);
+            margin-top: 100px;
+        }
+
+        /*pp_pic_container*/
+        .pp_pic_container{
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+
+        }
+
+
+        @media only screen and (min-width: 1000px){
+
         }
         
     </style>
@@ -46,7 +78,7 @@
 <body>
     <div class="head">
         <div>
-            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="pp" id="pp_picture">
+            <img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="pp" id="pp_pic_head">
         </div>
         <div id="pp_info">
             <h4>John Doe</h4>
@@ -55,11 +87,87 @@
     </div>
     <div class="container">
         <div class="timeline">
-            <input type="text"><button>Share</button>
-            <h4>What is on your mind?</h4>
+            <div class="post_share">
+                <input type="text"><button id="btn_share">Share</button>
+                <h4>What is on your mind?</h4>
+            </div>
+            <div class="posts">
+                <div class="post_1">
+                    <table>
+                        <tr>
+                            <td rowspan="2"><img src="https://bootdey.com/img/Content/avatar/avatar6.png"  class="pp_pic_container"></td>
+                            <td><p>Stephen Palmer</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>2 hours</p></td>
+                        </tr>
+                        <tr colspan="2">
+                            <td>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas omnis rerum accusantium magni nobis eos harum pariatur laborum! Architecto voluptatibus, illo ea provident velit quam. Amet at non blanditiis consequuntur.</p>
+                            </td>
+                        </tr>
+                        <tr colspan="2">
+                            <td>
+                                <button>Like</button>
+                                <button>Share</button>
+                                <button>Comment</button>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="post_2">
+                    <table>
+                        <tr>
+                            <td rowspan="2"><img src="https://bootdey.com/img/Content/avatar/avatar6.png"  class="pp_pic_container"></td>
+                            <td><p>Stephen Palmer</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>2 hours</p></td>
+                        </tr>
+                        <tr colspan="2">
+                            <td>
+                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" >
+                            </td>
+                        </tr>
+                        <tr colspan="2">
+                            <td>
+                                <button>Like</button>
+                                <button>Share</button>
+                                <button>Comment</button>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+                <div class="post_3">
+                    <table>
+                        <tr>
+                            <td rowspan="2"><img src="https://bootdey.com/img/Content/avatar/avatar6.png"  class="pp_pic_container"></td>
+                            <td><p>Stephen Palmer</p></td>
+                        </tr>
+                        <tr>
+                            <td><p>2 hours</p></td>
+                        </tr>
+                        <tr colspan="2">
+                            <td>
+                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas omnis rerum accusantium magni nobis eos harum pariatur laborum! Architecto voluptatibus, illo ea provident velit quam. Amet at non blanditiis consequuntur.</p>
+                            </td>
+                        </tr>
+                        <tr colspan="2">
+                            <td>
+                                <button>Like</button>
+                                <button>Share</button>
+                                <button>Comment</button>
+                            </td>
+
+                        </tr>
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="friends">
-
+            <h5>Friends</h5>
         </div>
     </div>
 </body>
