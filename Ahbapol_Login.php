@@ -32,7 +32,7 @@
               <span class = "error" ><?= $errorMail ?? "" ?></span>
               <input class="form-control" name="password" type="password" placeholder="Enter Password" >
               <button type="submit" class="btn btn-success" style=" background-color:#9600bf;">Login</button>
-              <a href="Ahpapol_Register.php" class="btn btn-success"  id="register-btn">Register</a>
+              <a href="Ahbapol_Register.php" class="btn btn-success"  id="register-btn">Register</a>
               <!--<a href="#" class="forgot-password">Forgot password?</a>-->
             </div>
           </form>
