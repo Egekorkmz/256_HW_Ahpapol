@@ -11,6 +11,29 @@
 <link rel="stylesheet" href="./register.css">
 </head>
 <body>
+<?php
+  if($_SERVER["REQUEST_METHOD"] == "POST"){
+    extract($_POST);
+
+    $firstName = $_POST["firstName"];
+    $lastName = $_POST["lastName"];
+    $email = $_POST["e-mail"];
+    $password1 = $_POST["password1"];
+    $password2 = $_POST["password2"];
+    $date = $_POST["date"];
+
+    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+        $errorMail = "Enter a valid email!!" ;
+    }
+    if($password1 != $password2){
+        $errorPassword = "Passwords do not match!!" ;
+    }
+
+  
+
+
+  }
+?>
 
 <div class="container">
   <div id="content">
@@ -24,9 +47,10 @@
                   <p>Profile Image:</p>
                   <input type="file" name="profile" style="width: 200px;" >
                 </div>
-                <input class="form-control" type="text" name="firstName" placeholder="First Name" >
-                <input class="form-control" type="text" name="lastName" placeholder="Last Name" >
-                <input class="form-control" type="text" name="e-mail" placeholder="e-mail" >
+                <input class="form-control" type="text" name="firstName" placeholder="First Name" value = "<?= $firstName ?? "" ?>">
+                <input class="form-control" type="text" name="lastName" placeholder="Last Name"  value = "<?= $lastName ?? "" ?>" >
+                <input class="form-control" type="text" name="e-mail" placeholder="e-mail" value = "<?= $email ?? "" ?>" >
+                <span class = "error" ><?= $errorMail ?? "" ?></span>
                 <input class="form-control" type="password" name="password1" placeholder="Enter Password" >
                 <input class="form-control" type="password" name="password2" placeholder="Re-enter Password" >
                 <input type="date" class="date" name="" style="width: 320px;" id=""><br>

@@ -137,3 +137,11 @@ body.login .lock-container .panel input {
   color:#9600bf;
   background-color: transparent;
 }
+
+.error{
+  display: flex;
+  justify-content: center;
+  color:red;
+  margin: 10px 10px;
+  
+}
