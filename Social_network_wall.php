@@ -563,6 +563,7 @@
                 <div class="">
                 <button type="button" class="btn btn-flat btn-primary">Friends</button>
                 <button type="button" class="btn btn-flat btn-primary">Notifications</button>
+                <button type="button" class="btn btn-flat btn-primary">Search</button>
                 </div>
             </div>
             <div class="container-lg ng-scope">
