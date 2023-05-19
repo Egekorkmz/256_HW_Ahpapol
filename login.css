@@ -39,7 +39,7 @@ body.login .lock-container h1 {
 }
 
 body.login .lock-container .panel {
-  max-width: 300px !important;
+  max-width: 350px !important;
   background: #fff;
   position: relative;
 }
@@ -128,8 +128,8 @@ body.login .lock-container .panel input {
 }
 
 .img-login {
-    width:120px;
-    height:120px;
+    width:150px;
+    height:150px;
 }
 
 #register-btn{
