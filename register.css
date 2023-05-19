@@ -14,7 +14,7 @@ body.login {
   }
   
   body.login .lock-container {
-    margin: auto;
+    margin: 15% auto; 
     width: 450px;
   }
   
