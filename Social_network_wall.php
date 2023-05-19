@@ -543,6 +543,21 @@
             padding-left: 0;
             list-style: none
         }
+
+        .pop{
+            visibility: visible;
+            border: 3px solid black;
+            background-color: #F5F5F5;
+            margin-left: 100px;
+            position: absolute;
+            height: 500px;
+            width: 200px;
+            right: 120px;
+            top: 100px;
+            z-index: 3;
+            overflow: scroll;
+        }
+
     </style>
 </head>
 
@@ -561,10 +576,24 @@
 
                 </div>
                 <div class="">
+
                 <button type="button" class="btn btn-flat btn-primary">Friends</button>
                 <button type="button" class="btn btn-flat btn-primary">Notifications</button>
                 <button type="button" class="btn btn-flat btn-primary">Search</button>
+
                 </div>
+                <div class="pop">
+                    <div id="pop_frnds">
+
+                    </div>
+                    <div id="pop_not">
+
+                    </div>
+                    <div id="pop_srch">
+
+                    </div>
+                </div>
+
             </div>
             <div class="container-lg ng-scope">
                 <div class="row">
@@ -714,6 +743,7 @@
                 </div>
             </div>
         </div>
+
     </section>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
