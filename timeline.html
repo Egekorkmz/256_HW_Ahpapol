@@ -41,7 +41,7 @@
         }
 
         .timeline{
-            /*border: 1px solid rgb(221, 216, 216);*/
+            border: 1px solid rgb(221, 216, 216);
             margin: 100px;
         }
 
@@ -50,9 +50,13 @@
         }
 
         #btn_share{
-            background-color: rgb(144, 232, 12);
+            background-color: rgb(168, 232, 144);
             border-radius: 10%;
             width: 70px;
+        }
+
+        .posts *{
+            margin-left: 5px;
         }
 
         .posts div{
@@ -60,7 +64,6 @@
             margin-top: 100px;
         }
 
-        /*pp_pic_container*/
         .pp_pic_container{
             width: 50px;
             height: 50px;
@@ -68,6 +71,17 @@
 
         }
 
+        .like{
+            background-color: rgb(212, 124, 175);
+        }
+
+        .reshare{
+            background-color: rgb(168, 232, 144);
+        }
+
+        .comment{
+            background-color: rgb(222, 222, 131);
+        }
 
         @media only screen and (min-width: 1000px){
 
@@ -108,9 +122,9 @@
                         </tr>
                         <tr colspan="2">
                             <td>
-                                <button>Like</button>
-                                <button>Share</button>
-                                <button>Comment</button>
+                                <button class="like">Like</button>
+                                <button class="reshare">Reshare</button>
+                                <button class="comment">Comment</button>
                             </td>
 
                         </tr>
@@ -132,9 +146,9 @@
                         </tr>
                         <tr colspan="2">
                             <td>
-                                <button>Like</button>
-                                <button>Share</button>
-                                <button>Comment</button>
+                                <button class="like">Like</button>
+                                <button class="reshare">Reshare</button>
+                                <button class="comment">Comment</button>
                             </td>
 
                         </tr>
@@ -144,21 +158,22 @@
                     <table>
                         <tr>
                             <td rowspan="2"><img src="https://bootdey.com/img/Content/avatar/avatar6.png"  class="pp_pic_container"></td>
-                            <td><p>Stephen Palmer</p></td>
+                            <td></td><p>Stephen Palmer</p></td>
                         </tr>
                         <tr>
                             <td><p>2 hours</p></td>
                         </tr>
                         <tr colspan="2">
                             <td>
-                                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptas omnis rerum accusantium magni nobis eos harum pariatur laborum! Architecto voluptatibus, illo ea provident velit quam. Amet at non blanditiis consequuntur.</p>
+                                <p>This is the content!!!</p>
+                                <p>Add anything here.</p>
                             </td>
                         </tr>
                         <tr colspan="2">
                             <td>
-                                <button>Like</button>
-                                <button>Share</button>
-                                <button>Comment</button>
+                                <button class="like">Like</button>
+                                <button class="reshare">Reshare</button>
+                                <button class="comment">Comment</button>
                             </td>
 
                         </tr>
