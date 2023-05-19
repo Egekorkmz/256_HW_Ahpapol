@@ -14,19 +14,30 @@
 <?php
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     extract($_POST);
-
     $firstName_sanitized = filter_var($firstName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $lastName_sanitized = filter_var($lastName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
 
-    if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
+    if(empty($firstName) || empty($lastName)){
+        $errorName = "Enter a name!!" ;
+    }
+
+    if(empty($email)){
+        $errorMail = "Enter an email!!" ;
+    }else{
+      if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $errorMail = "Enter a valid email!!" ;
+      }
     }
-    if($password1 != $password2){
+  
+    if(empty($password1) || empty($password2)){
+        $errorPassword = "Enter a password!!" ;
+    }else{
+      if($password1 != $password2){
         $errorPassword = "Passwords do not match!!" ;
+     }
     }
-    var_dump($date);
-    $today = date("Y-m-d");
-    var_dump($today);
+    
+    $today = date("Y-m-d"); 
     if ($date < $today && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $date)) {}
     else{
       $errorDate = "Enter a valid date!!" ;
@@ -52,10 +63,12 @@
                 </div>
                 <input class="form-control" type="text" name="firstName" placeholder="First Name" value = "<?= $firstName ?? "" ?>">
                 <input class="form-control" type="text" name="lastName" placeholder="Last Name"  value = "<?= $lastName ?? "" ?>" >
+                <span class = "error" ><?= $errorName ?? "" ?></span>
                 <input class="form-control" type="text" name="email" placeholder="e-mail" value = "<?= $email ?? "" ?>" >
                 <span class = "error" ><?= $errorMail ?? "" ?></span>
                 <input class="form-control" type="password" name="password1" placeholder="Enter Password" >
                 <input class="form-control" type="password" name="password2" placeholder="Re-enter Password" >
+                <span class = "error" ><?= $errorPassword ?? "" ?></span>
                 <input type="date" class="date" name="date" style="width: 320px;" value = "<?= $date ?? "" ?> "><br>
                 <span class = "error" ><?= $errorDate ?? "" ?></span>
                 <button type="submit" style="background-color: #9600bf;" class="btn btn-success">Register</button>
