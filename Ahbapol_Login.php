@@ -19,7 +19,7 @@
 <title>Ahpapol Login</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="./ahbapol.png">
+<link rel="icon" type="image/x-icon" href="./logo.png">
 <link rel="stylesheet" href="./login.css">
 </head>
 <body>
@@ -33,16 +33,12 @@
         $errorPass = "Enter a password!!" ;
     }else{
       if ( checkUser($email, $password) ) {
-        // the user is authenticated
-        // Store data to use in other php files. 
         $_SESSION["user"] = getUser($email) ;
-        header("Location: test.php") ; // redirect to main page
+        header("Location: test.php") ;
         exit ;
     }
     $authError = true ;
     }
-    $hashPassw = password_hash("sex", PASSWORD_BCRYPT) ;
-    var_dump($hashPassw);
    }
 ?>
 <div class="container">
@@ -50,7 +46,7 @@
     <div class="container-fluid">
       <div class="lock-container">
           <div class="panel panel-default text-center">
-          <img src="./ahbapol.png" class="img-circle img-login">
+          <img src="./ahbapol" class="img-login">
           <form action="" method="post">
             <div class="panel-body">
               <input class="form-control" name="e-mail" type="text" placeholder="User Email" value = "<?= $email ?? ""?>" >
