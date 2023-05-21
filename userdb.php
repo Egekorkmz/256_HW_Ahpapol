@@ -10,7 +10,7 @@ const PASSWORD = "" ;
      global $db ;
      $user = getUser($email) ;
      if ( $user ) {
-         return password_verify($pass, $user["password"]) ;
+         return password_verify($pass, $user["password_hashed"]) ;
      }
      return false ;
  }

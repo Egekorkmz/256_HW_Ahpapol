@@ -36,7 +36,7 @@
         // the user is authenticated
         // Store data to use in other php files. 
         $_SESSION["user"] = getUser($email) ;
-        header("Location: main.php") ; // redirect to main page
+        header("Location: test.php") ; // redirect to main page
         exit ;
     }
     $authError = true ;
