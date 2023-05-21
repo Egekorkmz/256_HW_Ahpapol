@@ -49,7 +49,7 @@
       $errorDate = "Enter a valid date!!" ;
     }
     if(empty($errorName) && empty($errorMail) && empty($errorPassword) && empty($errorDate)){
-      $profile = new Upload("profile", "images");
+      $profile = new Upload("profile", "../images");
       $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate,profile_picture) values (?,?,?,?,?,?)" ;
       $stmt = $db->prepare($sql) ;
       $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date,  $profile->filename]) ;
@@ -66,7 +66,7 @@
       <div class="lock-container">
           <div class="panel panel-default text-center">
           <img src="../Img/ahbapol.png" class="img-login">
-            <form action="?" method="post">
+            <form action="?" method="post" enctype="multipart/form-data">
               <div class="panel-body">
                 <div class = "profile-img">
                   <p>Profile Image:</p>
