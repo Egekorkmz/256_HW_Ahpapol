@@ -1,3 +1,16 @@
+<?php
+  session_start();
+  require "userdb.php" ;
+  
+  // auto login 
+  if ( validSession()) {
+      header("Location: timeline.html") ;
+      exit ;
+  }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,8 +29,20 @@
     $email = $_POST["e-mail"];
     if(!filter_var($email, FILTER_VALIDATE_EMAIL)){
         $errorMail = "Enter a valid email!!" ;
+    }elseif(empty($password)){
+        $errorPass = "Enter a password!!" ;
+    }else{
+      if ( checkUser($email, $password) ) {
+        // the user is authenticated
+        // Store data to use in other php files. 
+        $_SESSION["user"] = getUser($email) ;
+        header("Location: main.php") ; // redirect to main page
+        exit ;
     }
-  
+    $authError = true ;
+    }
+    $hashPassw = password_hash("sex", PASSWORD_BCRYPT) ;
+    var_dump($hashPassw);
    }
 ?>
 <div class="container">
