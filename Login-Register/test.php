@@ -23,6 +23,14 @@
     <h1>Sensitive Information</h1>
     <h3>Welcome <?= $userData["first_name"] ?></h3>
     <div>
+        <?php
+          if (empty($user["profile"])) {
+            echo "<img src='images/default.jpg'>" ;
+          } else { 
+            echo "<img src='images/{$user["profile"]}'>" ;
+          } ?>
+    </div>
+    <div>
         <a href="logout.php">Logout</a>
     </div>
 </body>

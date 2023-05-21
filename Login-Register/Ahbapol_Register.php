@@ -13,14 +13,17 @@
 <body>
 <?php
   if($_SERVER["REQUEST_METHOD"] == "POST"){
+    require "userDb.php";
+    require "Upload.php"; 
     extract($_POST);
     $firstName_sanitized = filter_var($firstName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $lastName_sanitized = filter_var($lastName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
+    $today = date("Y-m-d"); 
 
     if(empty($firstName) || empty($lastName)){
         $errorName = "Enter a name!!" ;
     }
-
+    
     if(empty($email)){
         $errorMail = "Enter an email!!" ;
     }else{
@@ -28,24 +31,29 @@
         $errorMail = "Enter a valid email!!" ;
       }
     }
-  
+    
     if(empty($password1) || empty($password2)){
         $errorPassword = "Enter a password!!" ;
     }else{
       if($password1 != $password2){
         $errorPassword = "Passwords do not match!!" ;
+     }else{
+        $hashPassw = password_hash($password1, PASSWORD_BCRYPT) ;
      }
     }
     
-    $today = date("Y-m-d"); 
     if ($date < $today && preg_match("/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/", $date)) {}
     else{
       $errorDate = "Enter a valid date!!" ;
     }
-    
-  
-
-
+    if(empty($errorName) && empty($errorMail) && empty($errorPassword) && empty($errorDate)){
+      $profile = new Upload("profile", "./images");
+      $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate,profile_picture) values (?,?,?,?,?,?)" ;
+      $stmt = $db->prepare($sql) ;
+      $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date,  $profile->filename]) ;
+      header("Location: Ahbapol_Login.php?register=ok") ;
+      exit ;
+    }
   }
 ?>
 
