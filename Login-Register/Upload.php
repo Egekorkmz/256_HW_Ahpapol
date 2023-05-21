@@ -7,6 +7,7 @@ class Upload {
 
     public function __construct($filebox, $uploadFolder)
     {
+      
         if (!empty($_FILES[$filebox]["name"])) {
            // a file uploaded
           extract($_FILES[$filebox]) ;

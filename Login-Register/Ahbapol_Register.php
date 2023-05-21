@@ -13,12 +13,14 @@
 <body>
 <?php
   if($_SERVER["REQUEST_METHOD"] == "POST"){
+    var_dump($_POST);
     require "userDb.php";
-    require "Upload.php"; 
     extract($_POST);
     $firstName_sanitized = filter_var($firstName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $lastName_sanitized = filter_var($lastName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $today = date("Y-m-d"); 
+    var_dump($_FILES);
+    require "Upload.php"; 
 
     if(empty($firstName) || empty($lastName)){
         $errorName = "Enter a name!!" ;
