@@ -47,12 +47,13 @@
       $errorDate = "Enter a valid date!!" ;
     }
     if(empty($errorName) && empty($errorMail) && empty($errorPassword) && empty($errorDate)){
-      $profile = new Upload("profile", "./images");
+      $profile = new Upload("profile", "images");
       $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate,profile_picture) values (?,?,?,?,?,?)" ;
       $stmt = $db->prepare($sql) ;
       $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date,  $profile->filename]) ;
-      header("Location: Ahbapol_Login.php?register=ok") ;
-      exit ;
+      var_dump($profile);
+      //header("Location: Ahbapol_Login.php?register=ok") ;
+      //exit ;
     }
   }
 ?>
