@@ -7,7 +7,7 @@
 <title>Ahpapol Register</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
-<link rel="icon" type="image/x-icon" href="./ahbapol.png">
+<link rel="icon" type="image/x-icon" href="../Img/logo.png">
 <link rel="stylesheet" href="./register.css">
 </head>
 <body>
@@ -54,7 +54,7 @@
     <div class="container-fluid">
       <div class="lock-container">
           <div class="panel panel-default text-center">
-          <img src="./ahbapol.png" class="img-circle img-login">
+          <img src="../Img/ahbapol.png" class="img-login">
             <form action="?" method="post">
               <div class="panel-body">
                 <div class = "profile-img">
