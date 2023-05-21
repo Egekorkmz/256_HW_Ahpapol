@@ -4,4 +4,4 @@
    session_destroy() ;
    // delete cookie
    setcookie(session_name(), "", 1 , "/") ; // delete memory cookie 
-   header("Location: index.php") ;
+   header("Location: Ahbapol_Login.php") ;

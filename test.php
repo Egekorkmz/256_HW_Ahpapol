@@ -21,7 +21,7 @@
 </head>
 <body>
     <h1>Sensitive Information</h1>
-    <h3>Welcome <?= $userData["name"] ?></h3>
+    <h3>Welcome <?= $userData["first_name"] ?></h3>
     <div>
         <a href="logout.php">Logout</a>
     </div>

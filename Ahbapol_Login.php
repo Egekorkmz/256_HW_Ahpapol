@@ -4,7 +4,7 @@
   
   // auto login 
   if ( validSession()) {
-      header("Location: timeline.html") ;
+      header("Location: test.php") ;
       exit ;
   }
 
