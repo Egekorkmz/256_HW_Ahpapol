@@ -545,7 +545,6 @@
         }
 
         .pop{
-            visibility: visible;
             border: 3px solid black;
             background-color: #F5F5F5;
             margin-left: 100px;
@@ -556,6 +555,25 @@
             top: 100px;
             z-index: 3;
             overflow: scroll;
+        }
+
+        #pop_frnds{
+            visibility: collapse;
+            top: 33px;
+        }
+        
+        .inside button{
+            margin-bottom: 5px;
+        }
+
+        #pop_not{
+            visibility: collapse;
+            top: 63px;
+        }
+
+        .inside{
+            border-bottom: 1px solid rgba(162, 162, 162, .50);
+            margin: 10px;
         }
 
     </style>
@@ -576,21 +594,34 @@
 
                 </div>
                 <div class="">
-
-                <button type="button" class="btn btn-flat btn-primary">Friends</button>
-                <button type="button" class="btn btn-flat btn-primary">Notifications</button>
-                <button type="button" class="btn btn-flat btn-primary">Search</button>
-
+                    <button type="button" class="btn btn-flat btn-primary">Friends</button>
+                    <button type="button" class="btn btn-flat btn-primary">Notifications</button>
+                    <button type="button" class="btn btn-flat btn-primary"><a href="./Friend-search.html">Search</a></button>
                 </div>
-                <div class="pop">
-                    <div id="pop_frnds">
 
+                <div class="pop" id="pop_frnds">
+                    <div class="inside">
+                        <p>New friendship request from: Angela</p>
+                        <button>Accept</button>
+                        <button>Reject</button>
                     </div>
-                    <div id="pop_not">
-
+                    <div class="inside">
+                        <p>New friendship request from: Harry</p>
+                        <button>Accept</button>
+                        <button>Reject</button>
                     </div>
-                    <div id="pop_srch">
-
+                    <div class="inside">
+                        <p>New friendship request from: Eren Yeşiltepe</p>
+                        <button>Accept</button>
+                        <button>Reject</button>
+                    </div>
+                </div>
+                <div class="pop" id="pop_not" >
+                    <div class="inside">
+                        <p>Stephen Palmer shared a new post</p>
+                    </div>
+                    <div class="inside">
+                        <p>My talking Tom liked your post</p>
                     </div>
                 </div>
 
