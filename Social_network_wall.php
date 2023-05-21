@@ -10,7 +10,7 @@
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <style type="text/css">
         .text-white {
-            color: #2b44bd;
+            color: rgba(255, 255, 255, .87);
         }
 
         .container-fluid,
@@ -576,6 +576,10 @@
             margin: 10px;
         }
 
+        .bu button{
+            background-color: yellowgreen;
+        }
+
     </style>
 </head>
 
@@ -593,10 +597,10 @@
                     </div>
 
                 </div>
-                <div class="">
+                <div class="bu">
                     <button type="button" class="btn btn-flat btn-primary">Friends</button>
                     <button type="button" class="btn btn-flat btn-primary">Notifications</button>
-                    <button type="button" class="btn btn-flat btn-primary"><a href="./Friend-search.html">Search</a></button>
+                    <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.html">Search</a></button>
                 </div>
 
                 <div class="pop" id="pop_frnds">
