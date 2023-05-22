@@ -9,6 +9,7 @@
  
   $userData = $_SESSION["user"] ;
 //   $userData = getUser($token) ;
+var_dump($userData);
  
 ?>
 <!DOCTYPE html>
@@ -24,10 +25,10 @@
     <h3>Welcome <?= $userData["first_name"] ?></h3>
     <div>
         <?php
-          if (empty($user["profile"])) {
-            echo "<img src='images/default.jpg'>" ;
+          if (empty($userData['profile_picture'])) {
+            echo "<img style = 'width: 100px;' src='../Img/default.png'>" ;
           } else { 
-            echo "<img src='images/{$user["profile"]}'>" ;
+            echo "<img style = 'width: 100px;' src='../images/{$userData["profile_picture"]}'>" ;
           } ?>
     </div>
     <div>

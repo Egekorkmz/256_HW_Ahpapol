@@ -1,6 +1,6 @@
 <?php
 
-const DSN = "mysql:host=localhost;dbname=ahbapol;port=3306;charset=utf8mb4" ;
+const DSN = "mysql:host=localhost;dbname=ahbappol;port=3306;charset=utf8mb4" ;
 const USER = "root" ; 
 const PASSWORD = "" ;
 
