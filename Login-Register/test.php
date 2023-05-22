@@ -9,6 +9,7 @@
  
   $userData = $_SESSION["user"] ;
 //   $userData = getUser($token) ;
+var_dump($userData);
  
 ?>
 <!DOCTYPE html>
@@ -27,7 +28,7 @@
           if (empty($user["profile"])) {
             echo "<img src='images/default.jpg'>" ;
           } else { 
-            echo "<img src='images/{$user["profile"]}'>" ;
+            echo "<img src='../images/d7c3b06f1e0b982c27acf4134340c68755f52222.png'>" ;
           } ?>
     </div>
     <div>

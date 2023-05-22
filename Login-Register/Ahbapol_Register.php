@@ -54,8 +54,8 @@
       $stmt = $db->prepare($sql) ;
       $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date,  $profile->filename]) ;
       var_dump($profile);
-      //header("Location: Ahbapol_Login.php?register=ok") ;
-      //exit ;
+      header("Location: Ahbapol_Login.php?register=ok") ;
+      exit ;
     }
   }
 ?>
