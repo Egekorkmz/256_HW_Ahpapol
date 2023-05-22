@@ -25,10 +25,10 @@ var_dump($userData);
     <h3>Welcome <?= $userData["first_name"] ?></h3>
     <div>
         <?php
-          if (empty($user["profile"])) {
-            echo "<img src='images/default.jpg'>" ;
+          if (empty($userData['profile_picture'])) {
+            echo "<img style = 'width: 100px;' src='../Img/default.png'>" ;
           } else { 
-            echo "<img src='../images/d7c3b06f1e0b982c27acf4134340c68755f52222.png'>" ;
+            echo "<img style = 'width: 100px;' src='../images/{$userData["profile_picture"]}'>" ;
           } ?>
     </div>
     <div>
