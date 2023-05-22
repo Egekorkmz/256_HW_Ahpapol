@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,6 +8,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
     <style>
         *{
             margin: 0px auto;
@@ -91,8 +95,52 @@
             align-items: center;
             justify-content: center;
         }
-        
     </style>
+    <script>
+        $(function(){
+            $("#searchbtn").click(function(e){
+                e.preventDefault();
+                var text=$("#tosearch").val();
+                var filter=$("#filter-opt").val();
+                //getResults(text,filter);
+                $.ajax({
+                    url: 'try.php', // PHP script URL
+                    method: 'GET', // Use GET method
+                    data: { key1: 'value1', key2: 'value2' }, // Send data as query parameters
+                    //dataType: 'json',
+                    success: function(response) {
+                      // Handle the response
+                      console.log(response);
+                    },
+                    error: function(xhr, status, error) {
+                      // Handle errors, if any
+                      console.log("fail");
+                    }
+                  });
+                  
+                  
+            })
+        })
+
+        function getResults(text,filter){
+             $.ajax({
+                type: "GET",
+                url: "try.php",
+                //dataType:"json",
+               // data: { textto:text, filtered:filter }
+              })
+                .done(function( jsonResult ) {
+                   var jresult=JSON.parse(jsonResult);
+                    console.log(jsonResult);
+                }
+            );
+
+          /*  $.getJSON("try.php",function(data){
+                console.log(data);
+            })
+            */  
+        }
+    </script>
 </head>
 <body>
     <div class="head">
@@ -107,13 +155,13 @@
     <section class="container">
         <div class="timeline">
             <h4>Search For A Friend</h4>
-            <input type="text">
-            <select name="filter-option" id="">
+            <input type="text" id="tosearch">
+            <select name="filter-option" id="filter-opt">
                 <option value="mail">mail</option>
                 <option value="first-name">first name</option>
                 <option value="last-name">last name</option>
             </select>
-            <button>Search</button>
+            <button id="searchbtn">Search</button>
            
         </div>
         <div class="friends-part">

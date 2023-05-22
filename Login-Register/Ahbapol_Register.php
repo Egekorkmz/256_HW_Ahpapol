@@ -13,13 +13,13 @@
 <body>
 <?php
   if($_SERVER["REQUEST_METHOD"] == "POST"){
-    var_dump($_POST);
+    //var_dump($_POST);
     require "userDb.php";
     extract($_POST);
     $firstName_sanitized = filter_var($firstName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $lastName_sanitized = filter_var($lastName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $today = date("Y-m-d"); 
-    var_dump($_FILES);
+    //var_dump($_FILES);
     require "Upload.php"; 
 
     if(empty($firstName) || empty($lastName)){
@@ -53,9 +53,9 @@
       $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate,profile_picture) values (?,?,?,?,?,?)" ;
       $stmt = $db->prepare($sql) ;
       $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date,  $profile->filename]) ;
-      var_dump($profile);
-      //header("Location: Ahbapol_Login.php?register=ok") ;
-      //exit ;
+      //var_dump($profile);
+      header("Location: Ahbapol_Login.php?register=ok") ;
+      exit ;
     }
   }
 ?>
