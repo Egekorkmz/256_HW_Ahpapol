@@ -10,10 +10,14 @@ const PASSWORD = "" ;
      global $db ;
      $user = getUser($email) ;
      if ( $user ) {
-         return password_verify($pass, $user["password_hashed"]) ;
+         if (password_verify($pass, $user["password_hashed"])) {
+             return 1 ;
+         }else{
+             return 0 ;
+         }
      }
-     return false ;
- }
+     return 2 ;
+}
 
  function validSession() {
      return isset($_SESSION["user"]) ;
