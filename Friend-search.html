@@ -84,7 +84,7 @@
             align-items: center;
         }
          .friend img{width:50px;border-radius: 50px;}
-        .friend a{
+        .friend div{
             display: flex;
             width: 10px;
             height: 10px;
@@ -95,54 +95,84 @@
             align-items: center;
             justify-content: center;
         }
+        .friend div:hover{cursor:pointer;}
     </style>
     <script>
         $(function(){
+            //sadece insert ettiğimin div i clickable mı diye test amaçlı
+            $(".friends-part").html(` <div class="friend">
+                <img src= "images/8ec228577688b365ea087f4979e176df6ab642ed.jpg" >
+                <p>ddfghjgjmökmjhngfd</p>
+                <div class="">+</div>
+            </div>`);
+         
+            //search + display
             $("#searchbtn").click(function(e){
                 e.preventDefault();
                 var text=$("#tosearch").val();
                 var filter=$("#filter-opt").val();
-                //getResults(text,filter);
+               // getResults(text,filter);
                 $.ajax({
-                    url: 'try.php', // PHP script URL
+                    url: './try.php', // PHP script URL
                     method: 'GET', // Use GET method
-                    data: { key1: 'value1', key2: 'value2' }, // Send data as query parameters
+                    //cache:false,
+                    data: { afilter: text, filter_type: filter }, // Send data as query parameters
                     //dataType: 'json',
                     success: function(response) {
                       // Handle the response
-                      console.log(response);
+                      result=JSON.parse(response);
+                      console.log(result);
+                      displayFriends(result);
                     },
                     error: function(xhr, status, error) {
                       // Handle errors, if any
                       console.log("fail");
                     }
                   });
-                  
-                  
             })
+            
+            //arkadaş ekleme butonu
+            $(".friend div").click(function(e){
+                e.preventDefault();
+                console.log("clicked");
+               /* $.ajax({
+                    url: './try.php', // PHP script URL
+                    method: 'POST', // Use GET method
+                    //cache:false,
+                    data: {   }, // Send data as query parameters
+                    //dataType: 'json',
+                    success: function(response) {
+                      // Handle the response
+                 
+                    },
+                    error: function(xhr, status, error) {
+                      // Handle errors, if any
+                      console.log("fail");
+                    }
+                  });*/
+            });
         })
 
-        function getResults(text,filter){
-             $.ajax({
-                type: "GET",
-                url: "try.php",
-                //dataType:"json",
-               // data: { textto:text, filtered:filter }
-              })
-                .done(function( jsonResult ) {
-                   var jresult=JSON.parse(jsonResult);
-                    console.log(jsonResult);
-                }
-            );
+        function displayFriends(result){
+            $(".friends-part").html("");
+            for(var fr of result){
+                part=`
+                    <div class="friend">
+                        <img src= "images/`+fr["profile_picture"]+`" >
+                        <p>`+fr["first_name"]+" "+fr["last_name"]+`</p>
+                        <div class="`+fr["user_id"]+`">+</div>
+                    </div>
+                `;
+                console.log(part);
+                $(".friends-part").append(part);
+            }
 
-          /*  $.getJSON("try.php",function(data){
-                console.log(data);
-            })
-            */  
+              
         }
     </script>
 </head>
 <body>
+    
     <div class="head">
         <div>
             <a href="./timeline.html"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="pp" id="pp_picture"></a>
@@ -157,49 +187,16 @@
             <h4>Search For A Friend</h4>
             <input type="text" id="tosearch">
             <select name="filter-option" id="filter-opt">
-                <option value="mail">mail</option>
-                <option value="first-name">first name</option>
-                <option value="last-name">last name</option>
+                <option value="email">mail</option>
+                <option value="first_name">first name</option>
+                <option value="last_name">last name</option>
             </select>
             <button id="searchbtn">Search</button>
            
         </div>
         <div class="friends-part">
-            <div class="friend">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
-                <p>Eren Yeşiltepe</p>
-                <a href="">+</a>
-            </div>
-
-            <div class="friend">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
-                <p>Eren Yeşiltepe</p>
-                <a href="">+</a>
-            </div>
-
-            <div class="friend">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
-                <p>Eren Yeşiltepe</p>
-                <a href="">+</a>
-            </div>
-
-            <div class="friend">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
-                <p>Eren Yeşiltepe</p>
-                <a href="">+</a>
-            </div>
-
-            <div class="friend">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
-                <p>Eren Yeşiltepe</p>
-                <a href="">+</a>
-            </div>
-
-            <div class="friend">
-                <img src="https://bootdey.com/img/Content/avatar/avatar6.png"  >
-                <p>Eren Yeşiltepe</p>
-                <a href="">+</a>
-            </div>
+           
+           
         </div>
 
     </section>
