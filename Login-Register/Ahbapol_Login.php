@@ -31,11 +31,17 @@
     }elseif(empty($password)){
         $errorPass = "Enter a password!!" ;
     }else{
-      if ( checkUser($email, $password) ) {
+      $check = checkUser($email, $password) ;
+      var_dump($check) ;
+      if ( $check === 1 ) {
         $_SESSION["user"] = getUser($email) ;
         header("Location: test.php") ;
         exit ;
-    }
+      }elseif($check === 2){
+        $errorMail = "Wrong email!!" ;
+      }else{
+        $errorPass = "Wrong password!!";
+      }
     $authError = true ;
     }
    }
@@ -51,6 +57,7 @@
               <input class="form-control" name="e-mail" type="text" placeholder="User Email" value = "<?= $email ?? ""?>" >
               <span class = "error" ><?= $errorMail ?? "" ?></span>
               <input class="form-control" name="password" type="password" placeholder="Enter Password" >
+              <span class = "error" ><?= $errorPass ?? "" ?></span>
               <button type="submit" class="btn btn-success" style=" background-color:#9600bf;">Login</button>
               <a href="Ahbapol_Register.php" class="btn btn-success"  id="register-btn">Register</a>
               <!--<a href="#" class="forgot-password">Forgot password?</a>-->
