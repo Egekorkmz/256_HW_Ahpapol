@@ -1,11 +1,24 @@
 <?php
-$key1 = $_GET['key1'];
-$key2 = $_GET['key2'];
+//var_dump($_GET);
 
-// Process the data and prepare the response
-$response = array('result' => 'success', 'message' => 'Data received');
+//header('Content-Type: application/json');
+require_once "./Login-Register/userdb.php";
 
-// Send the response back to the client
-header('Content-Type: application/json');
-echo json_encode($response);
+
+if(isset($_GET)){
+    $text=$_GET["afilter"];
+    $filter=$_GET["filter_type"];
+
+    // Process the data and prepare the response
+    $q="select * from users where ".$filter." like '%".$text."%' ";
+    //var_dump($q);
+    $stmt = $db->prepare($q) ;
+    $stmt->execute();
+    $result= $stmt->fetchAll() ;
+
+    //var_dump($result);
+    // Send the response back to the client
+
+    echo json_encode($result);
+}
 
