@@ -9,7 +9,7 @@
  
   $userData = $_SESSION["user"] ;
 //   $userData = getUser($token) ;
-var_dump($userData);
+//var_dump($userData);
  
 ?>
 <!DOCTYPE html>

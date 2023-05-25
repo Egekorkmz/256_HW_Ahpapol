@@ -29,3 +29,10 @@ const PASSWORD = "" ;
      $stmt->execute([$email]);
      return $stmt->fetch() ;
  }
+
+ function getUsers(){
+    global $db ;
+     $stmt = $db->prepare("select * from users") ;
+     $stmt->execute();
+     return $stmt->fetch() ;
+ }
