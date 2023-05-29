@@ -8,7 +8,7 @@
   }
  
   $userData = $_SESSION["user"] ;
-//   $userData = getUser($token) ;
+//$userData = getUser($token) ;
 //var_dump($userData);
  
 ?>
