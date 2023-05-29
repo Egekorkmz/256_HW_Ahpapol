@@ -1,6 +1,4 @@
 
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,7 +19,6 @@
             background-color: #9600bf;
             display: flex;
             align-items: center;
-            
         }
 
         .head div{
@@ -48,7 +45,6 @@
             margin: 20px auto;
             display:flex;
             flex-direction: column;
-   
         }
         .container>*{
             align-items: center;
@@ -99,12 +95,6 @@
     </style>
     <script>
         $(function(){
-            //sadece insert ettiğimin div i clickable mı diye test amaçlı
-            $(".friends-part").html(` <div class="friend">
-                <img src= "images/8ec228577688b365ea087f4979e176df6ab642ed.jpg" >
-                <p>ddfghjgjmökmjhngfd</p>
-                <div class="">+</div>
-            </div>`);
          
             //search + display
             $("#searchbtn").click(function(e){
@@ -129,46 +119,80 @@
                       console.log("fail");
                     }
                   });
-            })
-            
-            //arkadaş ekleme butonu
-            $(".friend div").click(function(e){
-                e.preventDefault();
-                console.log("clicked");
-               /* $.ajax({
+            });
+
+            $(".friends-part").on("click",".addFriend",function(){
+                id=$(this).attr("id");
+                console.log("clicked"+id);
+                $.ajax({
                     url: './try.php', // PHP script URL
                     method: 'POST', // Use GET method
                     //cache:false,
-                    data: {   }, // Send data as query parameters
+                    data: { friend_id:id }, // Send data as query parameters
                     //dataType: 'json',
                     success: function(response) {
                       // Handle the response
-                 
+                      //response=JSON.parse(response);
+                        console.log(response)
                     },
                     error: function(xhr, status, error) {
                       // Handle errors, if any
                       console.log("fail");
                     }
-                  });*/
-            });
+                  });
+            })
+            
         })
 
+        //insert yaptıktan sonra click eventlerini bind laman lazım yoksa çalışmıyor
         function displayFriends(result){
             $(".friends-part").html("");
             for(var fr of result){
-                part=`
-                    <div class="friend">
-                        <img src= "images/`+fr["profile_picture"]+`" >
-                        <p>`+fr["first_name"]+" "+fr["last_name"]+`</p>
-                        <div class="`+fr["user_id"]+`">+</div>
-                    </div>
-                `;
-                console.log(part);
-                $(".friends-part").append(part);
-            }
 
+                /*var friend=document.createElement("div");
+                friend.innerHTML=`
+                    <img src= "images/`+fr["profile_picture"]+`" >
+                    <p>`+fr["first_name"]+" "+fr["last_name"]+`</p>
+                `;
+                friend.classList.add("friend");
+
+                var link=document.createElement("div");
+                link.innerHTML="+";
+                link.classList.add(fr["user_id"]);
+                link.onclick=()=>{
+                    console.log("clicked");
+                    $.ajax({
+                        url: './try.php', // PHP script URL
+                        method: 'POST', // Use GET method
+                        //cache:false,
+                        data: { id:fr["user_id"] }, // Send data as query parameters
+                        //dataType: 'json',
+                        success: function(response) {
+                          // Handle the response
+                          console.log("success");
+                        },
+                        error: function(xhr, status, error) {
+                          // Handle errors, if any
+                          console.log("fail");
+                        }
+                      });
+                }
+
+                friend.append(link);
+                $(".friends-part").append(friend);*/
+
+                $(".friends-part").append(`
+                <div class="friend">
+                    <img src= "images/`+fr["profile_picture"]+`" >
+                    <p>`+fr["first_name"]+" "+fr["last_name"]+`</p>
+                    <div id="`+fr["user_id"]+`" class="addFriend">+</div>
+               </div>
+                `);
+            }
+   
               
         }
+       
     </script>
 </head>
 <body>
@@ -195,8 +219,7 @@
            
         </div>
         <div class="friends-part">
-           
-           
+        
         </div>
 
     </section>
