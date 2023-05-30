@@ -1,6 +1,6 @@
 <?php
 
-const DSN = "mysql:host=localhost;dbname=ahbapol;port=3306;charset=utf8mb4" ;
+const DSN = "mysql:host=localhost;dbname=ahbappol;port=3306;charset=utf8mb4" ;
 const USER = "root" ; 
 const PASSWORD = "" ;
 
@@ -39,28 +39,28 @@ const PASSWORD = "" ;
 
  function getNotification($user_id){
     global $db ;
-    $stmt = $db->prepare("select * from notification where user_id = ?") ;
+    $stmt = $db->prepare("select * from notification where reciever_id = ?") ;
     $stmt->execute([$user_id]);
     return $stmt->fetch();
  }
 
- function getPosts($user_id, $post_number){
+ function getPosts($user_id){
     global $db ;
-    $stmt = $db->prepare("select * from posts where LIMIT 10 OFFSET ? user_id = ?") ;
-    $stmt->execute([$post_number, $user_id]);
+    $stmt = $db->prepare("select * from posts where user_id = ?") ;
+    $stmt->execute([$user_id]);
     return $stmt->fetch();
  }
 
  function getComments($post_id){
     global $db ;
-    $stmt = $db->prepare("select * from comments where user_id = ?") ;
+    $stmt = $db->prepare("select * from comments where post_id = ?") ;
     $stmt->execute([$post_id]);
     return $stmt->fetch();
  }
 
  function getFriends($user_id){
     global $db ;
-    $stmt = $db->prepare("select * from friends_with where user_id = ?") ;
+    $stmt = $db->prepare("select friend_id from friends_with where user_id = ?") ;
     $stmt->execute([$user_id]);
     return $stmt->fetch();
  }

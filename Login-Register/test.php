@@ -1,6 +1,6 @@
 <?php
   session_start() ;
-  require "userdb.php" ;
+  require "../userdb.php" ;
   // check if the user authenticated before
   if( !validSession()) {
       header("Location: index.php?error") ; // redirect to login page
