@@ -1,6 +1,6 @@
 <?php
   session_start();
-  require "userdb.php" ;
+  require "..\userdb.php" ;
   
   // auto login 
   if ( validSession()) {

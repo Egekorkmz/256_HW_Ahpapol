@@ -14,7 +14,7 @@
 <?php
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     //var_dump($_POST);
-    require "userDb.php";
+    require "../userDb.php";
     extract($_POST);
     $firstName_sanitized = filter_var($firstName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $lastName_sanitized = filter_var($lastName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);

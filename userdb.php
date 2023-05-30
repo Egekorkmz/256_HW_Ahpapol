@@ -36,3 +36,31 @@ const PASSWORD = "" ;
      $stmt->execute();
      return $stmt->fetch() ;
  }
+
+ function getNotification($user_id){
+    global $db ;
+    $stmt = $db->prepare("select * from notification where user_id = ?") ;
+    $stmt->execute([$user_id]);
+    return $stmt->fetch();
+ }
+
+ function getPosts($user_id, $post_number){
+    global $db ;
+    $stmt = $db->prepare("select * from posts where LIMIT 10 OFFSET ? user_id = ?") ;
+    $stmt->execute([$post_number, $user_id]);
+    return $stmt->fetch();
+ }
+
+ function getComments($post_id){
+    global $db ;
+    $stmt = $db->prepare("select * from comments where user_id = ?") ;
+    $stmt->execute([$post_id]);
+    return $stmt->fetch();
+ }
+
+ function getFriends($user_id){
+    global $db ;
+    $stmt = $db->prepare("select * from friends_with where user_id = ?") ;
+    $stmt->execute([$user_id]);
+    return $stmt->fetch();
+ }
