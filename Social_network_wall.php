@@ -675,7 +675,7 @@
                                             <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
                                         </div>
                                         <div class="comment_to_post" id="comment1_by_user">
-                                            <p> </p>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -703,7 +703,7 @@
                                             <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
                                         </div>
                                         <div class="comment_to_post" id="comment2_by_user">
-                                            <p> </p>
+                                            
                                         </div>
                                     </div>
                                 </div>
@@ -734,7 +734,7 @@
                                         <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
                                     </div>
                                     <div class="comment_to_post" id="comment3_by_user">
-                                            <p> </p>
+                                            
                                     </div>
                                 </div>
                             </div>
@@ -826,8 +826,10 @@
         $(`.like`).on(`click`, function(){
             $i++;
             $(this).css("background", "pink");
+            $(this).text("Unlike");
             if($i%2==1){
-                $(this).css("background", "pink");
+                $(this).text("Like");
+                $(this).css("background", "grey");
             }
         });
         $i=1;
@@ -842,8 +844,10 @@
                 $(`#${$t}_to_post`).css("visibility", "collapse");
                 $(`#${$t}`).text("Comment");
                 $val = $(`#${$t}_to_post>textarea`).val();
-                $(`#${$t}_by_user>p`).text(`${$val}`);
-                $(`#${$t}_by_user>p`).css("visibility", "visible");
+                $(`#${$t}_by_user`).css("visibility", "visible");
+                $(`#${$t}_by_user`).append("<div><p></p></div>");
+                $(`#${$t}_by_user>div>p`).text(`${$val}`);
+                
             }
             $i++;
         });
