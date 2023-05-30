@@ -20,7 +20,7 @@
     $lastName_sanitized = filter_var($lastName, FILTER_SANITIZE_FULL_SPECIAL_CHARS);
     $today = date("Y-m-d"); 
     //var_dump($_FILES);
-    require "Upload.php"; 
+    //require "../Upload.php"; 
 
     if(empty($firstName) || empty($lastName)){
         $errorName = "Enter a name!!" ;

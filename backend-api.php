@@ -22,12 +22,34 @@
     sleep(1) ;  
  }
 
-    if ( $method === "GETNOT") {
-        $out = getNotification($input->user_id);
-        sleep(1) ;
-    }
+  if ( $method === "GETNOT") {
+      $out = getNotifications($input->user_id);
+      sleep(1) ;
+  }
 
+  if ( $method === "POST") {
+      $out = addPost($input->user_id, $input->text);
+      sleep(1) ;
+  }
 
+  if ( $method === "POSTCOMMENT") {
+      $out = addComment($input->user_id, $input->post_id, $input->text);
+      sleep(1) ;
+  }
 
+  if( $method === "POSTFRIEND"){
+    $out = addFriend($input->user_id, $input->friend_id);
+    sleep(1) ;
+  }
+
+  if( $method === "POSTREQUEST"){
+    $out = friendRequest($input->reciever, $input->sender, $input->type);
+    sleep(1) ;
+  }
+
+  if( $method === "FINDUSER"){
+    $out = findUser($input->filter, $input->keyword);
+    sleep(1) ;
+  }
 
   echo json_encode($out) ;

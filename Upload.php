@@ -12,7 +12,7 @@ class Upload {
            // a file uploaded
           extract($_FILES[$filebox]) ;
           $ext = strtolower(pathinfo( $name, PATHINFO_EXTENSION)) ;
-          $whitelist = ["png", "jpg", "jpeg", "gif"] ; 
+          $whitelist = ["png", "jpg", "jpeg"] ; 
            if ( !in_array($ext, $whitelist)) {
              $this->error = "Not an image file" ;
            } else if ($size > self::MAX_FILESIZE ) {
