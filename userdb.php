@@ -120,6 +120,7 @@ try {
     try {
         $stmt = $db->prepare("insert into friends_with (user_id, friend_id) values (?, ?)") ;
         $stmt->execute([$user_id, $friend_id]) ;
+        $stmt->execute([$friend_id ,$user_id]) ;
         $id = $db->lastInsertId() ;
         return ["id" => $id,] ;
      } catch(PDOException $e) {
