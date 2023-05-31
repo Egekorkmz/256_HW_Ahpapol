@@ -580,6 +580,11 @@
             background-color: yellowgreen;
         }
 
+        .comment_to_post{
+            margin-top: 10px;
+            visibility: collapse;
+        }
+
     </style>
 </head>
 
@@ -598,8 +603,8 @@
 
                 </div>
                 <div class="bu">
-                    <button type="button" class="btn btn-flat btn-primary">Friends</button>
-                    <button type="button" class="btn btn-flat btn-primary">Notifications</button>
+                    <button type="button" class="btn btn-flat btn-primary" id="friends">Friends</button>
+                    <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
                     <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.html">Search</a></button>
                 </div>
 
@@ -646,14 +651,13 @@
                                         </div>
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-success" style="margin-top:-44px">
-                                                Save
+                                                POST
                                             </button>
                                         </span>
                                     </div>
                                 </form>
                             </div>
                             <div class="card-body">
-
                                 <div class="card">
                                     <div class="card-heading">
                                         <div class="media m0">
@@ -665,8 +669,14 @@
                                         <div class="p">Ut egestas consequat faucibus. Donec id lectus tortor. Maecenas at porta purus. Etiam feugiat risus massa. Vivamus fermentum libero vel felis aliquet interdum. </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary">Like</button>
-                                        <button type="button" class="btn btn-flat btn-primary">Comment</button>
+                                        <button type="button" class="btn btn-flat btn-primary like">Like</button>
+                                        <button type="button" class="btn btn-flat btn-primary comment" id="comment1">Comment</button>
+                                        <div class="comment_to_post" id="comment1_to_post">
+                                            <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
+                                        </div>
+                                        <div class="comment_to_post" id="comment1_by_user">
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -687,8 +697,14 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary">Like</button>
-                                        <button type="button" class="btn btn-flat btn-primary">Comment</button>
+                                        <button type="button" class="btn btn-flat btn-primary like">Like</button>
+                                        <button type="button" class="btn btn-flat btn-primary comment" id="comment2">Comment</button>
+                                        <div class="comment_to_post" id="comment2_to_post">
+                                            <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
+                                        </div>
+                                        <div class="comment_to_post" id="comment2_by_user">
+                                            
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -711,9 +727,14 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary">Like</button>
-                                        
-                                        <button type="button" class="btn btn-flat btn-primary">Comment</button>
+                                        <button type="button" class="btn btn-flat btn-primary like">Like</button>
+                                        <button type="button" class="btn btn-flat btn-primary comment" id="comment3">Comment</button>
+                                    </div>
+                                    <div class="comment_to_post" id="comment3_to_post">
+                                        <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
+                                    </div>
+                                    <div class="comment_to_post" id="comment3_by_user">
+                                            
                                     </div>
                                 </div>
                             </div>
@@ -783,8 +804,53 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
     <script type="text/javascript">
+        $i=1;
+        $(`#notifications`).on(`click`, function(){
+            $(".pop").css("visibility", "collapse");
+            $i++;
+            $("#pop_not").css("visibility", "visible");
+            if($i%2==1){
+                $("#pop_not").css("visibility", "collapse");
+            }
+        });
+        $i=1;
+        $(`#friends`).on(`click`, function(){
+            $(".pop").css("visibility", "collapse");
+            $i++;
+            $("#pop_frnds").css("visibility", "visible");
+            if($i%2==1){
+                $("#pop_frnds").css("visibility", "collapse");
+            }
+        });
+        $i=1;
+        $(`.like`).on(`click`, function(){
+            $i++;
+            $(this).css("background", "pink");
+            $(this).text("Unlike");
+            if($i%2==1){
+                $(this).text("Like");
+                $(this).css("background", "grey");
+            }
+        });
+        $i=1;
+        $(`.comment`).on(`click`, function(){
+            $t = (this.id);
+            
+            if($i%2==1){
+                $(`#${$t}_to_post`).css("visibility", "visible");
+                $(`#${$t}`).text("Post");
 
+            }else{
+                $(`#${$t}_to_post`).css("visibility", "collapse");
+                $(`#${$t}`).text("Comment");
+                $val = $(`#${$t}_to_post>textarea`).val();
+                $(`#${$t}_by_user`).css("visibility", "visible");
+                $(`#${$t}_by_user`).append("<div><p></p></div>");
+                $(`#${$t}_by_user>div>p`).text(`${$val}`);
+                
+            }
+            $i++;
+        });
     </script>
 </body>
-
 </html>
