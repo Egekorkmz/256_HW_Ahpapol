@@ -10,13 +10,55 @@ function sanitize(string) {
     };
     const reg = /[&<>"'/]/ig;
     return string.replace(reg, (match)=>(map[match]));
-  }
+}
+
+function generatePost(data) {
+    $(`<div class='card-body'>
+        <div class='card'>
+            <div class='card-heading'>
+                <div class='media m0'>
+                    <div class='media-left'>
+                        <a href='#'>
+                            <img src='${data}' alt='User' class='media-object img-circle thumb48'>
+                        </a>
+                    </div>
+                    <div class='media-body media-middle pt-sm'>
+                        <p class='media-heading m0 text-bold'>Stephen Palmer</p>
+                        <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>2 hours</span></small>
+                    </div>
+                </div>
+            <div class='p'></div>
+        </div>
+        <div class='card-footer'>
+            <button type='button' class='btn btn-flat btn-primary like' id='like1'>Like</button>
+            <button type='button' class='btn btn-flat btn-primary comment' id='comment1'>Comment</button>
+        <div class='comment_to_post' id='comment1_to_post'>
+            <textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea>
+        </div>
+        <div class='comment_to_post' id='comment1_by_user'></div>
+        </div></div></div>`);
+}
 
 $(function() {
     //log out button
     $("#log_out").click(function() {
         window.location = "./Login-Register/logout.php"
     })
+
+    //getting posts
+    $.ajax({
+        url: './backend-api.php', 
+        method: 'POST',
+        data: JSON.stringify({user_id:user.user_id,text:val}),
+        contentType: "application/json",
+        success: function(response) {
+          //displayFriends(response);
+        },
+        error: function(xhr, status, error) {
+          // Handle errors, if any
+          console.log("fail");
+        }
+      });
 
     //share post button
     $i=3;
