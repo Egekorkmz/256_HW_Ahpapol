@@ -1,4 +1,4 @@
-//tetx sanitization
+//text sanitization
 function sanitize(string) {
     const map = {
         '&': '&amp;',
@@ -46,7 +46,7 @@ $(function() {
     })
 
     //getting posts
-    $.ajax({
+    /*$.ajax({
         url: './backend-api.php', 
         method: 'POST',
         data: JSON.stringify({user_id:user.user_id,text:val}),
@@ -59,7 +59,7 @@ $(function() {
           console.log("fail");
         }
       });
-
+      */
     //share post button
     $i=3;
     $(`#share_post`).on(`click`, function(){
