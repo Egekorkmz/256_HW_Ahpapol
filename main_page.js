@@ -1,3 +1,17 @@
+//tetx sanitization
+function sanitize(string) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match)=>(map[match]));
+  }
+
 $(function() {
     //log out button
     $("#log_out").click(function() {
@@ -7,7 +21,7 @@ $(function() {
     //share post button
     $i=3;
     $(`#share_post`).on(`click`, function(){
-        val=$(`#share_post_txt`).val();
+        val=sanitize($(`#share_post_txt`).val());
         $.ajax({
             url: './backend-api.php', 
             method: 'POST',
