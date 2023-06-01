@@ -4,7 +4,7 @@
   
   // auto login 
   if ( validSession()) {
-      header("Location: test.php") ;
+      header("Location: ..\main_page.php") ;
       exit ;
   }
 
@@ -35,7 +35,7 @@
       var_dump($check) ;
       if ( $check === 1 ) {
         $_SESSION["user"] = getUser($email) ;
-        header("Location: test.php") ;
+        header("Location: ..\main_page.php") ;
         exit ;
       }elseif($check === 2){
         $errorMail = "Wrong email!!" ;
