@@ -24,6 +24,11 @@ else {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="main_page.css">
+    <script>
+        //user data dump
+        user = <?=json_encode($_SESSION['user'])?>;
+        //console.log(user)
+    </script>
     <script src="jquery-3.7.0.min.js"></script>
     <script src="main_page.js"></script>
 </head>
@@ -249,7 +254,7 @@ else {
         //
         //carried it to main_page.js
         //
-        
+
         /*$i=3;
         $(`#share_post`).on(`click`, function(){
             $e = $("<div class='card-body'><div class='card'><div class='card-heading'><div class='media m0'><div class='media-left'><a href='#'><img src='https://bootdey.com/img/Content/avatar/avatar6.png' alt='User' class='media-object img-circle thumb48'></a></div><div class='media-body media-middle pt-sm'><p class='media-heading m0 text-bold'>Stephen Palmer</p><small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>2 hours</span></small></div></div><div class='p'></div></div><div class='card-footer'><button type='button' class='btn btn-flat btn-primary like' id='like1'>Like</button><button type='button' class='btn btn-flat btn-primary comment' id='comment1'>Comment</button><div class='comment_to_post' id='comment1_to_post'><textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea></div><div class='comment_to_post' id='comment1_by_user'></div></div></div></div>");
