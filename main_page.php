@@ -1,10 +1,16 @@
 <?php
-if(!isset($_COOKIE['PHPSESSID'])) {
+session_start();
+if($_SESSION == null) {
+    //if user is not logged in
     header("Location: Login-Register\Ahbapol_Login.php");
     exit;
 }
 else {
-    session_start();
+    var_dump($_SESSION);
+    $userData = $_SESSION['user'];
+    $userName = $userData['first_name'] . " ". $userData['last_name'];
+    $userEmail = $userData['email'];
+    $userPic = $userData['profile_picture'] ?? "Img\default.png";
 }
 ?>
 <!DOCTYPE html>
@@ -29,10 +35,10 @@ else {
             <div class="container-overlap bg-indigo-500 ng-scope">
 
                 <div class="media m0 pv">
-                    <div class="media-left"><a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User" class="media-object img-circle thumb64"></a></div>
+                    <div class="media-left"><a href="#"><img src=<?=$userPic?> alt="User" class="media-object img-circle thumb64"></a></div>
                     <div class="media-body media-middle">
-                        <h4 class="media-heading text-white">John Doe</h4>
-                        <span class="text-white">Aliquam viverra nibh at ipsum dapibus pulvinar et eu ligula.</span>
+                        <h4 class="media-heading text-white"><?=$userName?></h4>
+                        <span class="text-white"><?=$userEmail?></span>
                     </div>
 
                 </div>
@@ -79,6 +85,7 @@ else {
                                     <div class="input-group mda-input-group">
                                         <div class="mda-form-group">
                                             <div class="mda-form-control">
+                                                <!--post text area-->
                                                 <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
                                                 <div class="mda-form-control-line"></div>
                                                 <label class="m0">What's on your mind?</label>
@@ -238,10 +245,12 @@ else {
         </div>
 
     </section>
-    <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-
     <script type="text/javascript">
-        $i=3;
+        //
+        //carried it to main_page.js
+        //
+        
+        /*$i=3;
         $(`#share_post`).on(`click`, function(){
             $e = $("<div class='card-body'><div class='card'><div class='card-heading'><div class='media m0'><div class='media-left'><a href='#'><img src='https://bootdey.com/img/Content/avatar/avatar6.png' alt='User' class='media-object img-circle thumb48'></a></div><div class='media-body media-middle pt-sm'><p class='media-heading m0 text-bold'>Stephen Palmer</p><small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>2 hours</span></small></div></div><div class='p'></div></div><div class='card-footer'><button type='button' class='btn btn-flat btn-primary like' id='like1'>Like</button><button type='button' class='btn btn-flat btn-primary comment' id='comment1'>Comment</button><div class='comment_to_post' id='comment1_to_post'><textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea></div><div class='comment_to_post' id='comment1_by_user'></div></div></div></div>");
             
@@ -301,7 +310,7 @@ else {
                 
             }
             $i++;
-        });
+        });*/
     </script>
 </body>
 </html>
