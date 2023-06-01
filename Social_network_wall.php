@@ -657,6 +657,7 @@
                                     </div>
                                 </form>
                             </div>
+                        <div class="posts">
                             <div class="card-body">
                                 <div class="card">
                                     <div class="card-heading">
@@ -669,7 +670,7 @@
                                         <div class="p">Ut egestas consequat faucibus. Donec id lectus tortor. Maecenas at porta purus. Etiam feugiat risus massa. Vivamus fermentum libero vel felis aliquet interdum. </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary like">Like</button>
+                                        <button type="button" class="btn btn-flat btn-primary like" id="like1">Like</button>
                                         <button type="button" class="btn btn-flat btn-primary comment" id="comment1">Comment</button>
                                         <div class="comment_to_post" id="comment1_to_post">
                                             <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
@@ -697,7 +698,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary like">Like</button>
+                                        <button type="button" class="btn btn-flat btn-primary like" id="like2">Like</button>
                                         <button type="button" class="btn btn-flat btn-primary comment" id="comment2">Comment</button>
                                         <div class="comment_to_post" id="comment2_to_post">
                                             <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
@@ -727,7 +728,7 @@
                                         </div>
                                     </div>
                                     <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary like">Like</button>
+                                        <button type="button" class="btn btn-flat btn-primary like" id="like3">Like</button>
                                         <button type="button" class="btn btn-flat btn-primary comment" id="comment3">Comment</button>
                                     </div>
                                     <div class="comment_to_post" id="comment3_to_post">
@@ -738,6 +739,7 @@
                                     </div>
                                 </div>
                             </div>
+                        </div>
                         </div>
                     </div>
                     <div class="col-md-4">
@@ -804,6 +806,7 @@
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
 
     <script type="text/javascript">
+
         $i=1;
         $(`#notifications`).on(`click`, function(){
             $(".pop").css("visibility", "collapse");
@@ -824,12 +827,13 @@
         });
         $i=1;
         $(`.like`).on(`click`, function(){
+            $t=(this.id);
             $i++;
-            $(this).css("background", "pink");
-            $(this).text("Unlike");
+            $(`#${$t}`).css("background", "pink");
+            $(`#${$t}`).text("Unlike");
             if($i%2==1){
-                $(this).text("Like");
-                $(this).css("background", "grey");
+                $(`#${$t}`).text("Like");
+                $(`#${$t}`).css("background", "grey");
             }
         });
         $i=1;
@@ -845,8 +849,12 @@
                 $(`#${$t}`).text("Comment");
                 $val = $(`#${$t}_to_post>textarea`).val();
                 $(`#${$t}_by_user`).css("visibility", "visible");
-                $(`#${$t}_by_user`).append("<div><p></p></div>");
-                $(`#${$t}_by_user>div>p`).text(`${$val}`);
+
+                $e = $("<div class='inside'><p></p></div>");
+                $e.attr(`id`, `${$t}_by_user${$i}`);
+
+                $(`#${$t}_by_user`).append($e);
+                $(`#${$t}_by_user${$i}`).text(`${$val}`);
                 
             }
             $i++;
