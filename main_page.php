@@ -24,12 +24,6 @@ else {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="main_page.css">
-    <style>
-        .thumbMain {
-        width: 128px !important;
-        height: 128px !important;
-    }
-    </style>
     <script>
         //user data dump
         user = <?=json_encode($_SESSION['user'])?>;
@@ -47,7 +41,7 @@ else {
             <div class="container-overlap bg-indigo-500 ng-scope">
 
                 <div class="media m0 pv">
-                    <div class="media-left"><a href="#"><img src=<?=$userPic?> alt="User" class="media-object img-circle thumb64 thumbMain"></a></div>
+                    <div class="media-left"><a href="#"><img src=<?=$userPic?> alt="User" class="media-object img-circle thumbMain"></a></div>
                     <div class="media-body media-middle">
                         <h4 class="media-heading text-white"><?=$userName?></h4>
                         <span class="text-white"><?=$userEmail?></span>
