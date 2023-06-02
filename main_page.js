@@ -40,7 +40,30 @@ function generatePost(data) {
 }
 
 function getPostData(user_id, lim) {
-    $.ajax({
+        $.ajax( {
+            url: './backend-api.php',
+            method: 'GETFRIENDSPOST',
+            data: JSON.stringify({user_id:user_id, limit: lim}),
+            contentType: "application/json",
+            success : function(result){
+                console.log(result)
+                if ( result.error ) {
+                $("#error").text(result.error) ;
+                } else {
+                    if (result.length !== 0) {
+                        for (let item of result) {
+                            appendToList(item.name) ;  
+                        }
+                    }
+                }
+            },
+            error: function() {
+                // status code 404
+                $("#loader").hide() ;
+                showError("Error: API is not accessible, check api path.", 6000) ;
+            }
+        })
+    /*$.ajax({
         url: './backend-api.php', 
         method: 'GETFRIENDSPOST',
         data: JSON.stringify({user_id:user_id, limit: lim}),
@@ -52,7 +75,7 @@ function getPostData(user_id, lim) {
           //return null;
           console.log("fail");
         }
-      });
+      });*/
 }
 
 $(function() {
