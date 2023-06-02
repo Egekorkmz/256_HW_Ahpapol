@@ -57,6 +57,14 @@ try {
     return $stmt->fetchALL();
  }
 
+ //gets the posts posted by friends, page should be multiples of 10
+ function getFriendsPosts($user_id, $limit) {
+   global $db ;
+    $stmt = $db->prepare("select users.user_id, users.first_name, users.last_name, users.profile_picture, posts.text, posts.image, posts.date, posts.likes user FROM `posts`, `friends_with`, `users` WHERE users.user_id = friends_with.friend_id and posts.user_id = friends_with.friend_id and friends_with.user_id = ? order by posts.date limit $limit,".$limit + 10 . ";") ;
+    $stmt->execute([$user_id]);
+    return $stmt->fetchALL();
+ }
+
  function getComments($post_id){
     global $db ;
     $stmt = $db->prepare("select * from comments where post_id = ?") ;
