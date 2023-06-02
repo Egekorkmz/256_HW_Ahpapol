@@ -31,7 +31,7 @@ function generatePost(data) {
                 <div class='p'>${data.text}</div>
             </div>
             <div class='card-footer'>
-                <button type='button' class='btn btn-flat btn-primary like' id='like1'>Like</button>
+                <button type='button' class='btn btn-flat btn-primary like' id='like1'>${data.user} Like</button>
                 <button type='button' class='btn btn-flat btn-primary comment' id='comment1'>Comment</button>
             <div class='comment_to_post' id='comment1_to_post'>
                 <textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea>
@@ -44,15 +44,15 @@ function generatePost(data) {
             <div class="card">
                 <div class="card-heading">
                     <div class="media m0">
-                        <div class="media-left"><a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User" class="media-object img-circle thumb48"></a></div>
+                        <div class="media-left"><a href="#"><img src="${data.profile_picture}" alt="User" class="media-object img-circle thumb48"></a></div>
                         <div class="media-body media-middle pt-sm">
-                            <p class="media-heading m0 text-bold">Ricky Wagner</p><small class="text-muted"><em class="ion-earth text-muted mr-sm"></em><span>10 hours</span></small>
+                            <p class="media-heading m0 text-bold">${data.first_name} ${data.last_name}</p><small class="text-muted"><em class="ion-earth text-muted mr-sm"></em><span>${data.date}</span></small>
                         </div>
                     </div>
                 </div>
-                <div class="card-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="MaterialImg" class="fw img-responsive">
+                <div class="card-item"><img src="images/posts/${data.profile_picture}" alt="MaterialImg" class="fw img-responsive">
                     <div class="card-item-text bg-transparent">
-                        <p>The sun was shinning</p>
+                        <p>${data.text}</p>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -67,6 +67,7 @@ function generatePost(data) {
                 </div>
             </div>
         </div>`)
+        
     }
 }
 
