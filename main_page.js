@@ -42,12 +42,12 @@ function generatePost(data) {
 function getPostData(user_id, lim) {
     $.ajax({
         url: './backend-api.php', 
-        method: 'GETFRIENDSPOST',
+        method: 'GETFRIENDPOST',
         data: JSON.stringify({user_id:user_id, limit: lim}),
         contentType: "application/json",
-        dataType: 'json',
         success: function(response) {
-          return response;
+            console.log(response)
+            return response;
         },
         error: function(xhr, status, error) {
           //return null;
