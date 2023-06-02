@@ -39,31 +39,38 @@ function generatePost(data) {
         </div></div></div>`);
 }
 
+function getPostData(user_id, limit) {
+    $.ajax({
+        url: './backend-api.php', 
+        method: 'GETFRIENDSPOST',
+        data: JSON.stringify({user_id:user_id, limit: this.limit}),
+        contentType: "application/json",
+        success: function(response) {
+          return response;
+        },
+        error: function(xhr, status, error) {
+          //return null;
+          console.log("fail");
+        }
+      });
+}
+
 $(function() {
+    
     //log out button
     $("#log_out").click(function() {
         window.location = "./Login-Register/logout.php"
     })
 
     //getting posts
-    /*$.ajax({
-        url: './backend-api.php', 
-        method: 'POST',
-        data: JSON.stringify({user_id:user.user_id,text:val}),
-        contentType: "application/json",
-        success: function(response) {
-          //displayFriends(response);
-        },
-        error: function(xhr, status, error) {
-          // Handle errors, if any
-          console.log("fail");
-        }
-      });
-      */
+    posts = getPostData(4, 0)
+    console.log(posts)
+    console.log("asdsdf")
+    alert("whuy")
     //share post button
     $i=3;
     $(`#share_post`).on(`click`, function(){
-        val=sanitize($(`#share_post_txt`).val());
+        val=$(`#share_post_txt`).val();
         $.ajax({
             url: './backend-api.php', 
             method: 'POST',
@@ -139,4 +146,5 @@ $(function() {
         }
         $i++;
     });
+
 })
