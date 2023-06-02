@@ -1,16 +1,15 @@
 <?php
 session_start();
-if($_SESSION == null) {
+if ($_SESSION == null) {
     //if user is not logged in
     header("Location: Login-Register\Ahbapol_Login.php");
     exit;
-}
-else {
+} else {
     //var_dump($_SESSION);
     $userData = $_SESSION['user'];
-    $userName = $userData['first_name'] . " ". $userData['last_name'];
+    $userName = $userData['first_name'] . " " . $userData['last_name'];
     $userEmail = $userData['email'];
-    $userPic = $userData['profile_picture'] != null ? "images\/".$userData['profile_picture'] : "Img\default.png";
+    $userPic = $userData['profile_picture'] != null ? "images\/" . $userData['profile_picture'] : "Img\default.png";
 }
 ?>
 <!DOCTYPE html>
@@ -24,7 +23,7 @@ else {
     <link rel="stylesheet" href="main_page.css">
     <script>
         //user data dump
-        user = <?=json_encode($_SESSION['user'])?>;
+        user = <?= json_encode($_SESSION['user']) ?>;
         //console.log(user)
     </script>
     <script src="jquery-3.7.0.min.js"></script>
@@ -38,15 +37,20 @@ else {
             <div class="container-overlap bg-indigo-500 ng-scope">
 
                 <div class="media m0 pv">
-                    <div class="media-left"><a href="#"><img src=<?=$userPic?> alt="User" class="media-object img-circle thumbMain"></a></div>
+                    <div class="media-left"><a href="#"><img src=<?= $userPic ?> alt="User" class="media-object img-circle thumbMain"></a></div>
                     <div class="media-body media-middle">
-                        <h4 class="media-heading text-white"><?=$userName?></h4>
-                        <span class="text-white"><?=$userEmail?></span>
+                        <h4 class="media-heading text-white"><?= $userName ?></h4>
+                        <span class="text-white"><?= $userEmail ?></span>
                     </div>
 
                 </div>
                 <div class="bu">
-                    <button type="button" class="btn btn-flat btn-primary" id="friends">Friends</button>
+                    <button type="button" class="btn btn-flat btn-primary position-relative" id="friends">
+                        Friends
+                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                            99+
+                        </span>
+                    </button>
                     <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
                     <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
                     <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
@@ -55,8 +59,8 @@ else {
                 <div class="pop" id="pop_frnds">
                     <div class="inside">
                         <p>New friendship request from: Angela</p>
-                        <button>Accept</button>
-                        <button>Reject</button>
+                        <button type="button" class="btn btn-flat btn-success">Accept</button>
+                        <button type="button" class="btn btn-flat btn-danger">Reject</button>
                     </div>
                     <div class="inside">
                         <p>New friendship request from: Harry</p>
@@ -69,7 +73,7 @@ else {
                         <button>Reject</button>
                     </div>
                 </div>
-                <div class="pop" id="pop_not" >
+                <div class="pop" id="pop_not">
                     <div class="inside">
                         <p>Stephen Palmer shared a new post</p>
                     </div>
@@ -85,26 +89,38 @@ else {
                         <div class="card">
                             <div class="card-body">
                                 <form action class="mt ng-pristine ng-valid">
-                                    <div class="input-group mda-input-group">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1">What's on your mind?</label>
+                                        <textarea rows="2" cols="" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputFile">Picture(Optional)</label>
+                                        <input type="file" id="exampleInputFile">
+                                        <p class="help-block">Example block-level help text here.</p>
+                                    </div>
+                                    <button type="submit" class="btn btn-success" id="share_post">Submit</button>
+                                    <!--<div class="input-group mda-input-group">
                                         <div class="mda-form-group">
                                             <div class="mda-form-control">
-                                                <!--post text area-->
-                                                <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
+                                                post text area
+                                                
                                                 <div class="mda-form-control-line"></div>
                                                 <label class="m0">What's on your mind?</label>
-                                            </div><span class="mda-form-msg right">Any message here</span>
+                                            </div>
                                         </div>
                                         <span class="input-group-btn">
                                             <button type="button" class="btn btn-success" style="margin-top:-44px" id="share_post">
                                                 POST
                                             </button>
                                         </span>
-                                    </div>
+                                    </div>-->
                                 </form>
                             </div>
-                        <div class="posts">
+                            <div class="posts">
+                            </div>
+
                         </div>
-                        </div>
+                        <div class="page-buttons"><span class="badge bg-secondary">New</span><button type="button" class="btn btn-flat btn-light" id="friends">Next</button></div>
                     </div>
                     <div class="col-md-4">
                         <div class="push-down"></div>
@@ -235,4 +251,5 @@ else {
         });*/
     </script>
 </body>
+
 </html>
