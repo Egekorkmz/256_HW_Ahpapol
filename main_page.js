@@ -39,11 +39,11 @@ function generatePost(data) {
         </div></div></div>`);
 }
 
-function getPostData(user_id, limit) {
+function getPostData(user_id, lim) {
     $.ajax({
         url: './backend-api.php', 
         method: 'GETFRIENDSPOST',
-        data: JSON.stringify({user_id:user_id, limit: this.limit}),
+        data: JSON.stringify({user_id:user_id, limit: lim}),
         contentType: "application/json",
         success: function(response) {
           return response;
