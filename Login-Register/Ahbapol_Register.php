@@ -54,7 +54,7 @@
       }
         else{
           $profile = new Upload("profile", "../images");
-          var_dump($profile);
+          //var_dump($profile);
           if($profile->filename === NULL){
             $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate) values (?,?,?,?,?)" ;
             $stmt = $db->prepare($sql) ;
@@ -66,8 +66,8 @@
           }
           
           //var_dump($profile);
-          //header("Location: Ahbapol_Login.php?register=ok") ;
-          //exit ;
+          header("Location: Ahbapol_Login.php?register=ok") ;
+          exit ;
         }
     }
   }
