@@ -12,7 +12,7 @@ if ($_SESSION == null) {
     $userData = $_SESSION['user'];
     $userName = $userData['first_name'] . " " . $userData['last_name'];
     $userEmail = $userData['email'];
-    $userPic = $userData['profile_picture'] != null ? "images/" . $userData['profile_picture'] : "Img\default.png";
+    $userPic = "images/" . $userData['profile_picture'];
 }
 ?>
 <!DOCTYPE html>
@@ -99,18 +99,17 @@ if ($_SESSION == null) {
                                     <div class="form-group">
                                         <label for="exampleInputFile">Picture(Optional)</label>
                                         <input type="file" id="exampleInputFile" name="picture">
-                                        <p class="help-block">Example block-level help text here.</p>
                                     </div>
                                     <button type="submit" class="btn btn-success" id="share_post">Submit</button>
                                 </form>
                                 <?php
                                 if(!empty($_POST)) {
-                                    var_dump($_FILES);
-                                    var_dump($_POST);
+                                    //var_dump($_FILES);
+                                    //var_dump($_POST);
                                     extract($_POST);
                                     $photo = new Upload("picture", "images/posts/");
                                     addPost($userData['user_id'], $txt, $photo->filename);
-                                    echo "<p class='help-block'>Example block-level help text here.</p>";
+                                    echo "<p class='help-block'>Your post has been posted.</p>";
                                 }
                                 ?>
                             </div>

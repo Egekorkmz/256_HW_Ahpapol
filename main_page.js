@@ -46,7 +46,7 @@ function generatePost(data) {
             <div class="card">
                 <div class="card-heading">
                     <div class="media m0">
-                        <div class="media-left"><a href="#"><img src="${data.profile_picture}" alt="User" class="media-object img-circle thumb48"></a></div>
+                        <div class="media-left"><a href="#"><img src="images/${data.profile_picture}" alt="User" class="media-object img-circle thumb48"></a></div>
                         <div class="media-body media-middle pt-sm">
                             <p class="media-heading m0 text-bold">${data.first_name} ${data.last_name}</p><small class="text-muted"><em class="ion-earth text-muted mr-sm"></em><span>${data.date}</span></small>
                         </div>
