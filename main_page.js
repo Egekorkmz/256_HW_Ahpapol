@@ -13,30 +13,61 @@ function sanitize(string) {
 }
 
 function generatePost(data) {
-    $(`<div class='card-body'>
-        <div class='card'>
-            <div class='card-heading'>
-                <div class='media m0'>
-                    <div class='media-left'>
-                        <a href='#'>
-                            <img src='${data}' alt='User' class='media-object img-circle thumb48'>
-                        </a>
+    if(data.image == null) {
+        $('.posts').append(`<div class='card-body'>
+            <div class='card'>
+                <div class='card-heading'>
+                    <div class='media m0'>
+                        <div class='media-left'>
+                            <a href='#'>
+                                <img src='' alt='User' class='media-object img-circle thumb48'>
+                            </a>
+                        </div>
+                        <div class='media-body media-middle pt-sm'>
+                            <p class='media-heading m0 text-bold'>Stephen Palmer</p>
+                            <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>2 hours</span></small>
+                        </div>
                     </div>
-                    <div class='media-body media-middle pt-sm'>
-                        <p class='media-heading m0 text-bold'>Stephen Palmer</p>
-                        <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>2 hours</span></small>
+                <div class='p'></div>
+            </div>
+            <div class='card-footer'>
+                <button type='button' class='btn btn-flat btn-primary like' id='like1'>Like</button>
+                <button type='button' class='btn btn-flat btn-primary comment' id='comment1'>Comment</button>
+            <div class='comment_to_post' id='comment1_to_post'>
+                <textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea>
+            </div>
+            <div class='comment_to_post' id='comment1_by_user'></div>
+            </div></div></div>`);
+    }
+    else {
+        $('.posts').append(`<div class="card-body">
+            <div class="card">
+                <div class="card-heading">
+                    <div class="media m0">
+                        <div class="media-left"><a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User" class="media-object img-circle thumb48"></a></div>
+                        <div class="media-body media-middle pt-sm">
+                            <p class="media-heading m0 text-bold">Ricky Wagner</p><small class="text-muted"><em class="ion-earth text-muted mr-sm"></em><span>10 hours</span></small>
+                        </div>
                     </div>
                 </div>
-            <div class='p'></div>
-        </div>
-        <div class='card-footer'>
-            <button type='button' class='btn btn-flat btn-primary like' id='like1'>Like</button>
-            <button type='button' class='btn btn-flat btn-primary comment' id='comment1'>Comment</button>
-        <div class='comment_to_post' id='comment1_to_post'>
-            <textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea>
-        </div>
-        <div class='comment_to_post' id='comment1_by_user'></div>
-        </div></div></div>`);
+                <div class="card-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="MaterialImg" class="fw img-responsive">
+                    <div class="card-item-text bg-transparent">
+                        <p>The sun was shinning</p>
+                    </div>
+                </div>
+                <div class="card-footer">
+                    <button type="button" class="btn btn-flat btn-primary like" id="like2">Like</button>
+                    <button type="button" class="btn btn-flat btn-primary comment" id="comment2">Comment</button>
+                    <div class="comment_to_post" id="comment2_to_post">
+                        <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
+                    </div>
+                    <div class="comment_to_post" id="comment2_by_user">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>`)
+    }
 }
 
 function getPostData(user_id, lim) {
@@ -47,10 +78,11 @@ function getPostData(user_id, lim) {
         contentType: "application/json",
         success: function(response) {
             console.log(response)
-            return response;
+            response.forEach(post => {
+                generatePost(post)
+            });
         },
         error: function(xhr, status, error) {
-          //return null;
           console.log("fail");
         }
       });
