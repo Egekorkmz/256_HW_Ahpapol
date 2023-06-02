@@ -40,7 +40,7 @@
   }
 
   if( $method === "POSTREQUEST"){
-    $out = friendRequest($input->reciever, $input->sender, $input->type);
+    $out = friendRequest($input->receiver, $input->sender, $input->type);
   }
 
   if( $method === "FINDUSER"){
