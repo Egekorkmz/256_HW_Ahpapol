@@ -20,15 +20,15 @@ function generatePost(data) {
                     <div class='media m0'>
                         <div class='media-left'>
                             <a href='#'>
-                                <img src='' alt='User' class='media-object img-circle thumb48'>
+                                <img src='images/${data.profile_picture}' alt='User' class='media-object img-circle thumb48'>
                             </a>
                         </div>
                         <div class='media-body media-middle pt-sm'>
-                            <p class='media-heading m0 text-bold'>Stephen Palmer</p>
-                            <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>2 hours</span></small>
+                            <p class='media-heading m0 text-bold'>${data.first_name} ${data.last_name}</p>
+                            <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${data.date}</span></small>
                         </div>
                     </div>
-                <div class='p'></div>
+                <div class='p'>${data.text}</div>
             </div>
             <div class='card-footer'>
                 <button type='button' class='btn btn-flat btn-primary like' id='like1'>Like</button>
@@ -95,7 +95,7 @@ $(function() {
     })
 
     //getting posts
-    posts = getPostData(4, 0)
+    posts = getPostData(user.user_id, 0)
     console.log(posts)
     //share post button
     $i=3;
