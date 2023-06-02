@@ -41,7 +41,7 @@ else {
             <div class="container-overlap bg-indigo-500 ng-scope">
 
                 <div class="media m0 pv">
-                    <div class="media-left"><a href="#"><img src=<?=$userPic?> alt="User" class="media-object img-circle thumb48 thumbMain"></a></div>
+                    <div class="media-left"><a href="#"><img src=<?=$userPic?> alt="User" class="media-object img-circle thumb64 thumbMain"></a></div>
                     <div class="media-body media-middle">
                         <h4 class="media-heading text-white"><?=$userName?></h4>
                         <span class="text-white"><?=$userEmail?></span>
