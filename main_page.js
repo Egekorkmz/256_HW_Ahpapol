@@ -13,6 +13,7 @@ function sanitize(string) {
 }
 
 function generatePost(data) {
+    //no image
     if(data.image == null) {
         $('.posts').append(`<div class='card-body'>
             <div class='card'>
@@ -28,7 +29,7 @@ function generatePost(data) {
                             <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${data.date}</span></small>
                         </div>
                     </div>
-                <div class='p'>${data.text}</div>
+                <div class='p'>${sanitize(data.text)}</div>
             </div>
             <div class='card-footer'>
                 <button type='button' class='btn btn-flat btn-primary like' id='like1'>${data.user} Like</button>
@@ -39,6 +40,7 @@ function generatePost(data) {
             <div class='comment_to_post' id='comment1_by_user'></div>
             </div></div></div>`);
     }
+    //image
     else {
         $('.posts').append(`<div class="card-body">
             <div class="card">
@@ -52,7 +54,7 @@ function generatePost(data) {
                 </div>
                 <div class="card-item"><img src="images/posts/${data.profile_picture}" alt="MaterialImg" class="fw img-responsive">
                     <div class="card-item-text bg-transparent">
-                        <p>${data.text}</p>
+                        <p>${sanitize(data.text)}</p>
                     </div>
                 </div>
                 <div class="card-footer">
@@ -89,6 +91,9 @@ function getPostData(user_id, lim) {
       });
 }
 
+//
+//jquery function
+//
 $(function() {
     //log out button
     $("#log_out").click(function() {
