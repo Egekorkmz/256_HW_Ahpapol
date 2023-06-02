@@ -99,22 +99,11 @@ if ($_SESSION == null) {
                                         <p class="help-block">Example block-level help text here.</p>
                                     </div>
                                     <button type="submit" class="btn btn-success" id="share_post">Submit</button>
-                                    <!--<div class="input-group mda-input-group">
-                                        <div class="mda-form-group">
-                                            <div class="mda-form-control">
-                                                post text area
-                                                
-                                                <div class="mda-form-control-line"></div>
-                                                <label class="m0">What's on your mind?</label>
-                                            </div>
-                                        </div>
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-success" style="margin-top:-44px" id="share_post">
-                                                POST
-                                            </button>
-                                        </span>
-                                    </div>-->
                                 </form>
+                                <?php
+                                
+                                
+                                ?>
                             </div>
                             <div class="posts">
                             </div>
