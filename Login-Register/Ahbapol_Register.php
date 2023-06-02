@@ -54,12 +54,20 @@
       }
         else{
           $profile = new Upload("profile", "../images");
-          $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate,profile_picture) values (?,?,?,?,?,?)" ;
-          $stmt = $db->prepare($sql) ;
-          $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date,  $profile->filename]) ;
+          var_dump($profile);
+          if($profile->filename === NULL){
+            $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate) values (?,?,?,?,?)" ;
+            $stmt = $db->prepare($sql) ;
+            $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date]) ;
+          }else{
+            $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate,profile_picture) values (?,?,?,?,?,?)" ;
+            $stmt = $db->prepare($sql) ;
+            $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date,  $profile->filename]) ;
+          }
+          
           //var_dump($profile);
-          header("Location: Ahbapol_Login.php?register=ok") ;
-          exit ;
+          //header("Location: Ahbapol_Login.php?register=ok") ;
+          //exit ;
         }
     }
   }
