@@ -78,7 +78,7 @@ $(function() {
             },
             error: function(xhr, status, error) {
               // Handle errors, if any
-              console.log(posts);
+              console.log("fail");
             }
           });
         }) 
