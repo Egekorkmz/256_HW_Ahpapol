@@ -82,7 +82,7 @@ $(function() {
             },
             error: function(xhr, status, error) {
               // Handle errors, if any
-              console.log("fail");
+              console.log(posts);
             }
           });
         }) 
