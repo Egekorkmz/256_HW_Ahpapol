@@ -1,4 +1,7 @@
 <?php
+require_once "Upload.php";
+require_once "userdb.php";
+
 session_start();
 if ($_SESSION == null) {
     //if user is not logged in
@@ -88,21 +91,27 @@ if ($_SESSION == null) {
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
-                                <form action class="mt ng-pristine ng-valid">
+                                <form method="post" class="mt ng-pristine ng-valid" enctype="multipart/form-data">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">What's on your mind?</label>
                                         <textarea rows="2" cols="" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputFile">Picture(Optional)</label>
-                                        <input type="file" id="exampleInputFile">
+                                        <input type="file" id="exampleInputFile" name="picture">
                                         <p class="help-block">Example block-level help text here.</p>
                                     </div>
                                     <button type="submit" class="btn btn-success" id="share_post">Submit</button>
                                 </form>
                                 <?php
-                                
-                                
+                                if(!empty($_POST)) {
+                                    var_dump($_FILES);
+                                    var_dump($_POST);
+                                    extract($_POST);
+                                    $photo = new Upload("picture", "images/posts/");
+                                    addPost($userData['user_id'], $txt, $photo->filename);
+                                    echo "<p class='help-block'>Example block-level help text here.</p>";
+                                }
                                 ?>
                             </div>
                             <div class="posts">

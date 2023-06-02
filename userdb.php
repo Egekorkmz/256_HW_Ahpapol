@@ -1,5 +1,5 @@
 <?php
-require "Upload.php"; 
+require_once "Upload.php"; 
 const DSN = "mysql:host=localhost;dbname=ahbapol;port=3306;charset=utf8mb4" ;
 const USER = "root" ; 
 const PASSWORD = "" ;
@@ -86,12 +86,12 @@ try {
     return $stmt->fetchALL();
  }
 
- function addPost($user_id, $text){
+ function addPost($user_id, $text, $photo){
     global $db ;
     try {
         //$photo = new Upload("profile", "../images");
         $stmt = $db->prepare("insert into posts (user_id, text, image) values (?, ?, ?)") ;
-        $stmt->execute([$user_id, $text, $photo->filename]) ;
+        $stmt->execute([$user_id, $text, $photo]) ;
         $id = $db->lastInsertId() ;
         return ["id" => $id,] ;
      } catch(PDOException $e) {

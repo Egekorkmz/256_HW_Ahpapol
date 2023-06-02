@@ -28,7 +28,7 @@
   }
 
   if ( $method === "POST") {
-      $out = addPost($input->user_id, $input->text);
+      $out = addPost($input->user_id, $input->text, $input->photo);
   }
 
   if ( $method === "POSTCOMMENT") {
