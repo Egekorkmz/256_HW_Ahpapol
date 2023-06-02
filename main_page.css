@@ -114,6 +114,10 @@
     width: 100% !important;
 }
 
+.thumbMain {
+    width: 128px !important;
+    height: 128px !important;
+}
 .thumb64 {
     width: 64px !important;
     height: 64px !important;

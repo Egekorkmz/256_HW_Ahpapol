@@ -6,7 +6,7 @@ if($_SESSION == null) {
     exit;
 }
 else {
-    var_dump($_SESSION);
+    //var_dump($_SESSION);
     $userData = $_SESSION['user'];
     $userName = $userData['first_name'] . " ". $userData['last_name'];
     $userEmail = $userData['email'];
@@ -27,6 +27,7 @@ else {
     <script>
         //user data dump
         user = <?=json_encode($_SESSION['user'])?>;
+        console.log("aaaaaaaaaaa")
         //console.log(user)
     </script>
     <script src="jquery-3.7.0.min.js"></script>
@@ -40,7 +41,7 @@ else {
             <div class="container-overlap bg-indigo-500 ng-scope">
 
                 <div class="media m0 pv">
-                    <div class="media-left"><a href="#"><img src=<?=$userPic?> alt="User" class="media-object img-circle thumb64"></a></div>
+                    <div class="media-left"><a href="#"><img src=<?=$userPic?> alt="User" class="media-object img-circle thumb48 thumbMain"></a></div>
                     <div class="media-body media-middle">
                         <h4 class="media-heading text-white"><?=$userName?></h4>
                         <span class="text-white"><?=$userEmail?></span>
@@ -50,7 +51,7 @@ else {
                 <div class="bu">
                     <button type="button" class="btn btn-flat btn-primary" id="friends">Friends</button>
                     <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
-                    <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.html">Search</a></button>
+                    <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
                     <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
                 </div>
 

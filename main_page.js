@@ -56,7 +56,6 @@ function getPostData(user_id, limit) {
 }
 
 $(function() {
-    
     //log out button
     $("#log_out").click(function() {
         window.location = "./Login-Register/logout.php"
