@@ -84,7 +84,7 @@ if ($_SESSION == null) {
 
             </div>
             <div class="container-lg ng-scope">
-                <div class="row">
+                <div style = "margin-top: 30px;" class="row">
                     <div class="col-md-8">
                         <div class="card">
                             <div class="card-body">
