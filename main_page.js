@@ -1,5 +1,3 @@
-alert("asdasd")
-
 //text sanitization
 function sanitize(string) {
     const map = {
@@ -66,8 +64,6 @@ $(function() {
     //getting posts
     posts = getPostData(4, 0)
     console.log(posts)
-    console.log("asdsdf")
-    alert("whuy")
     //share post button
     $i=3;
     $(`#share_post`).on(`click`, function(){
