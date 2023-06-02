@@ -32,7 +32,7 @@
         $errorPass = "Enter a password!!" ;
     }else{
       $check = checkUser($email, $password) ;
-      var_dump($check) ;
+      //var_dump($check) ;
       if ( $check === 1 ) {
         $_SESSION["user"] = getUser($email) ;
         header("Location: ..\main_page.php") ;
