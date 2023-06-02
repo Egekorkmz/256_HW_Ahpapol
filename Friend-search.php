@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    $user_id=(int)$_SESSION["user"]["user_id"];
+    echo "<p style='display:none;' id='userid' class='".$user_id."'></p>"
+?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -100,19 +106,17 @@
             $("#searchbtn").click(function(e){
                 e.preventDefault();
                 var text=$("#tosearch").val();
-                var filter=$("#filter-opt").val();
+                var fil=$("#filter-opt").val();
                // getResults(text,filter);
                 $.ajax({
-                    url: './try.php', // PHP script URL
-                    method: 'GET', // Use GET method
-                    //cache:false,
-                    data: { afilter: text, filter_type: filter }, // Send data as query parameters
+                    url: './backend-api.php', // PHP script URL
+                    method: 'FINDUSER', // Use GET method
+                    data: JSON.stringify({filter:fil,keyword:text}), // Send data as query parameters
+                    contentType: "application/json",
                     //dataType: 'json',
                     success: function(response) {
                       // Handle the response
-                      result=JSON.parse(response);
-                      console.log(result);
-                      displayFriends(result);
+                      displayFriends(response);
                     },
                     error: function(xhr, status, error) {
                       // Handle errors, if any
@@ -122,22 +126,24 @@
             });
 
             $(".friends-part").on("click",".addFriend",function(){
-                id=$(this).attr("id");
-                console.log("clicked"+id);
+                var f_id=$(this).attr("id");
+                var u_id=$("#userid").attr("class");
+                console.log("clicked "+f_id+" "+u_id);
                 $.ajax({
-                    url: './try.php', // PHP script URL
-                    method: 'POST', // Use GET method
+                    url: './backend-api.php', // PHP script URL
+                    method: 'POSTREQUEST', // Usse GET method
                     //cache:false,
-                    data: { friend_id:id }, // Send data as query parameters
+                    data: JSON.stringify({ receiver:f_id, sender:u_id,type: 0}), // Send data as query parameters
+                    contentType: "application/json",
                     //dataType: 'json',
                     success: function(response) {
                       // Handle the response
-                      //response=JSON.parse(response);
+                        response=JSON.parse(response);
                         console.log(response)
                     },
                     error: function(xhr, status, error) {
                       // Handle errors, if any
-                      console.log("fail");
+                      console.log(error);
                     }
                   });
             })
@@ -148,39 +154,6 @@
         function displayFriends(result){
             $(".friends-part").html("");
             for(var fr of result){
-
-                /*var friend=document.createElement("div");
-                friend.innerHTML=`
-                    <img src= "images/`+fr["profile_picture"]+`" >
-                    <p>`+fr["first_name"]+" "+fr["last_name"]+`</p>
-                `;
-                friend.classList.add("friend");
-
-                var link=document.createElement("div");
-                link.innerHTML="+";
-                link.classList.add(fr["user_id"]);
-                link.onclick=()=>{
-                    console.log("clicked");
-                    $.ajax({
-                        url: './try.php', // PHP script URL
-                        method: 'POST', // Use GET method
-                        //cache:false,
-                        data: { id:fr["user_id"] }, // Send data as query parameters
-                        //dataType: 'json',
-                        success: function(response) {
-                          // Handle the response
-                          console.log("success");
-                        },
-                        error: function(xhr, status, error) {
-                          // Handle errors, if any
-                          console.log("fail");
-                        }
-                      });
-                }
-
-                friend.append(link);
-                $(".friends-part").append(friend);*/
-
                 $(".friends-part").append(`
                 <div class="friend">
                     <img src= "images/`+fr["profile_picture"]+`" >

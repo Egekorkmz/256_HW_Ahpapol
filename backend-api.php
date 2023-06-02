@@ -5,12 +5,17 @@
   $method = $_SERVER["REQUEST_METHOD"] ;
   
   $json = file_get_contents('php://input'); 
-  $input = json_decode($json) ;  
+  $input = json_decode($json) ; 
 
   if ( $method === "GETPOST") {
      $out = getPosts($input->user_id) ;
      sleep(1) ;  
   }
+
+  if ( $method === "GETFRIENDPOST") {
+    $out = getFriendsPosts($input->user_id, $input->limit);
+    sleep(1) ;  
+ }
 
   if( $method === "GETCOMMENT"){
     $out = getComments($input->post_id);
