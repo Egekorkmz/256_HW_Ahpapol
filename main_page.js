@@ -1,3 +1,5 @@
+alert("asdasd")
+
 //text sanitization
 function sanitize(string) {
     const map = {
