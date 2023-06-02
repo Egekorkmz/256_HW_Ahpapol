@@ -57,7 +57,7 @@
           $sql = "insert into users (first_name,last_name,email,password_hashed,birthdate,profile_picture) values (?,?,?,?,?,?)" ;
           $stmt = $db->prepare($sql) ;
           $stmt->execute([$firstName_sanitized, $lastName_sanitized, $email, $hashPassw, $date,  $profile->filename]) ;
-          var_dump($profile);
+          //var_dump($profile);
           header("Location: Ahbapol_Login.php?register=ok") ;
           exit ;
         }
