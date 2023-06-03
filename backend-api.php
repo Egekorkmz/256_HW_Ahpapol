@@ -55,7 +55,7 @@
     $out = findUser($input->filter, $input->keyword);
   }
 
-  if( $method === "UPDATELIKES"){
+  if( $method === "PUTLIKES"){
     $out = updateLikes($input->post_id, $input->likes);
   }
 

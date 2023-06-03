@@ -12,6 +12,31 @@ function sanitize(string) {
     return string.replace(reg, (match)=>(map[match]));
 }
 
+function isLiked(user_id, post_id) {
+    var response = false;
+     $.ajax({
+        url: './backend-api.php', 
+        method: 'GETLIKEDSTATUS',
+        data: JSON.stringify({user_id, post_id}),
+        contentType: "application/json",
+        async: false,
+        success: function(response) {
+          if(response.length()) {
+            response = true
+          }
+          else {
+            response = true
+          }
+        },
+        error: function(xhr, status, error) {
+          // Handle errors, if any
+          console.log("fail");
+        }
+      });
+
+      return response;
+}
+
 function generatePost(data) {
     //no image
     if(data.image == null) {
@@ -69,8 +94,24 @@ function generatePost(data) {
                 </div>
             </div>
         </div>`)
-        
     }
+
+    $.ajax({
+       url: './backend-api.php', 
+       method: 'GETLIKEDSTATUS',
+       data: JSON.stringify({user_id, post_id}),
+       contentType: "application/json",
+       async: false,
+       success: function(response) {
+         if(response.length()) {
+            $(`.like#${data.post_id}`).removeClass("btn-light").addClass("btn-primary");
+         }
+       },
+       error: function(xhr, status, error) {
+         // Handle errors, if any
+         console.log("fail");
+       }
+     });
 }
 
 function createPosts(user_id, lim) {
@@ -96,7 +137,6 @@ function createPosts(user_id, lim) {
 //
 $(function() {
     var user_id = user.user_id
-
     //log out button
     $("#log_out").click(function() {
         window.location = "./Login-Register/logout.php"
@@ -105,24 +145,6 @@ $(function() {
     //getting posts
     posts = createPosts(user_id, 0)
     console.log(posts)
-    //share post button
-    $i=3;
-    /*$(`#share_post`).on(`click`, function(){
-        val=$(`#share_post_txt`).val();
-        $.ajax({
-            url: './backend-api.php', 
-            method: 'POST',
-            data: JSON.stringify({user_id:user.user_id,text:val}),
-            contentType: "application/json",
-            success: function(response) {
-              //displayFriends(response);
-            },
-            error: function(xhr, status, error) {
-              // Handle errors, if any
-              console.log("fail");
-            }
-          });
-        })*/
 
     $i=1;
     $(`#notifications`).on(`click`, function(){
@@ -145,6 +167,21 @@ $(function() {
 
     //like button functionality
     $(".card").on("click", ".like", function(){
+        console.log(isLiked(user_id, post_id))
+        $.ajax({
+            url: './backend-api.php', 
+            method: 'POSTLIKESTATUS',
+            data: JSON.stringify({user_id, post_id}),
+            contentType: "application/json",
+            success: function(response) {
+              //displayFriends(response);
+              console.log(response)
+            },
+            error: function(xhr, status, error) {
+              // Handle errors, if any
+              console.log("fail");
+            }
+          });
         console.log(this)
         if($(this).hasClass("btn-light")) {
             var likes = parseInt($(this).find("span").text()) + 1;
@@ -153,6 +190,21 @@ $(function() {
 
             $(this).removeClass("btn-light").addClass("btn-primary")
             $(this).find("span").text(likes)
+
+            $.ajax({
+                url: './backend-api.php', 
+                method: 'DELETELIKESTATUS',
+                data: JSON.stringify({user_id, post_id}),
+                contentType: "application/json",
+                success: function(response) {
+                  //displayFriends(response);
+                  console.log(response)
+                },
+                error: function(xhr, status, error) {
+                  // Handle errors, if any
+                  console.log("fail");
+                }
+              });
 
         }
         else {
@@ -164,27 +216,12 @@ $(function() {
 
         $.ajax({
             url: './backend-api.php', 
-            method: 'UPDATELIKES',
+            method: 'PUTLIKES',
             data: JSON.stringify({post_id,likes}),
             contentType: "application/json",
             success: function(response) {
               //displayFriends(response);
               console.log("oke")
-            },
-            error: function(xhr, status, error) {
-              // Handle errors, if any
-              console.log("fail");
-            }
-          });
-
-          $.ajax({
-            url: './backend-api.php', 
-            method: 'GETLIKESTATUS',
-            data: JSON.stringify({user_id, post_id}),
-            contentType: "application/json",
-            success: function(response) {
-              //displayFriends(response);
-              console.log(response)
             },
             error: function(xhr, status, error) {
               // Handle errors, if any
