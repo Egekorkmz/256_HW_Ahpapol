@@ -34,10 +34,7 @@ function generatePost(data, user_id) {
             <div class='card-footer form-inline'>
                 <button type='button' class='btn btn-flat btn-light like' id='${data.post_id}'><span>${data.user}</span> Like</button>
                 <input type="text" class="form-control" id="commentInput" placeholder="Write your comments...">
-                <button type='button' class='btn btn-flat btn-light comment' id='${data.post_id}'>Comment</button>
-            <div class='comment_to_post' id='comment1_to_post'>
-                <textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea>
-            </div>
+                <button type='button' class='btn btn-flat btn-light comment' id='comment${data.post_id}'>Comment</button>
             <div class='comment_to_post' id='comment1_by_user'></div>
             </div></div></div>`);
     }
@@ -61,11 +58,8 @@ function generatePost(data, user_id) {
                 <div class="card-footer">
                     <button type="button" class="btn btn-flat btn-light like" id="${data.post_id}"'><span>${data.user}</span> Like</button>
                     <input type="text" class="form-control" id="commentInput" placeholder="Write your comments...">
-                    <button type="button" class="btn btn-flat btn-light comment" id="${data.post_id}">Comment</button>
-                    <div class="comment_to_post" id="comment2_to_post">
-                        <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
-                    </div>
-                    <div class="comment_to_post" id="comment2_by_user">
+                    <button type="button" class="btn btn-flat btn-light comment" id="comment${data.post_id}">Comment</button>
+                    <div class="comment_to_post" id="${data.post_id}">
                         
                     </div>
                 </div>
@@ -78,9 +72,8 @@ function generatePost(data, user_id) {
        method: 'GETLIKESTATUS',
        data: JSON.stringify({user_id, post_id:   data.post_id}),
        contentType: "application/json",
-       async: false,
        success: function(response) {
-        console.log(response)
+        //console.log(response)
          if(response.length) {
             $(`.like#${data.post_id}`).removeClass("btn-light").addClass("btn-primary");
          }
@@ -90,6 +83,35 @@ function generatePost(data, user_id) {
          console.log("fail");
        }
      });
+}
+
+//generates comments of a spesific post
+function generateComments(post_id){
+    $.ajax({
+        url: './backend-api.php', 
+        method: 'GETCOMMENT',
+        data: JSON.stringify({post_id}),
+        contentType: "application/json",
+        success: function(response) {
+        console.log(response)
+          if(response.length) {
+            response.forEach(comment => {
+                $(`#comment${post_id}`).after(`<div class='comment_to_post' id='comment1_by_user'>
+                        <img src='images/default.png' alt='User' class='media-object img-circle thumb40'>
+                        <div class="margin10">
+                            <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${comment.first_name} ${comment.last_name}</span></small>
+                            <p class='media-heading m0'>${comment.comment}</p>
+                    </div>
+                </div>`);
+            });   
+          }
+        },
+        error: function(xhr, status, error) {
+          // Handle errors, if any
+          console.log("comment gereration fail");
+        }
+      });
+
 }
 
 function createPosts(user_id, lim) {
@@ -102,6 +124,8 @@ function createPosts(user_id, lim) {
             //console.log(response)
             response.forEach(post => {
                 generatePost(post, user_id)
+                console.log(post.post_id)
+                generateComments(post.post_id)
             });
         },
         error: function(error) {
@@ -183,6 +207,11 @@ $(function() {
 
         
         
+    })
+
+    //comment functionality
+    $(".card").on("click", ".like", function(){
+
     })
 
     $i=1;

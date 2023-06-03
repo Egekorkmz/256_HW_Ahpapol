@@ -67,7 +67,7 @@ try {
 
  function getComments($post_id){
     global $db ;
-    $stmt = $db->prepare("select * from comments where post_id = ?") ;
+    $stmt = $db->prepare("select users.first_name, users.last_name, users.profile_picture, comments.post_id, comments.comment from users, comments where users.user_id = comments.user_id and comments.post_id = ?") ;
     $stmt->execute([$post_id]);
     return $stmt->fetchALL();
  }
