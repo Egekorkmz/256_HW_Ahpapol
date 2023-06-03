@@ -23,6 +23,7 @@ if ($_SESSION == null) {
     <title>Ahbapol - Main Page</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="main_page.css">
     <script>
         //user data dump
@@ -131,7 +132,7 @@ if ($_SESSION == null) {
                                         echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
                                                 <div class='mda-list-item-text'>
                                                     <h3>{$friend['first_name']} {$friend['last_name']}</h3>
-                                                    <div class='text-muted text-ellipsis btn-delete'>delete</div>
+                                                    <div class='text-muted text-ellipsis btn-delete'><i class='fa-solid fa-trash-can' style='cursor:pointer'></i></div>
                                                 </div>
                                             </div>";
                                     }
