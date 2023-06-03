@@ -115,9 +115,9 @@ if ($_SESSION == null) {
                             </div>
                             <div class="posts">
                             </div>
-
+                            <button type="button" class="btn btn-flat btn-light" id="loadMore">Load More</button>
                         </div>
-                        <div class="page-buttons"><span class="badge bg-secondary">New</span><button type="button" class="btn btn-flat btn-light" id="friends">Next</button></div>
+                        
                     </div>
                     <div class="col-md-4">
                         <div class="push-down"></div>

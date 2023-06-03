@@ -97,7 +97,7 @@ function createPosts(user_id, lim) {
         data: JSON.stringify({user_id:user_id, limit: lim}),
         contentType: "application/json",
         success: function(response) {
-            console.log(response)
+            //console.log(response)
             response.forEach(post => {
                 generatePost(post, user_id)
             });
@@ -118,29 +118,16 @@ $(function() {
         window.location = "./Login-Register/logout.php"
     })
 
+    var limit = 0
     //getting posts
-    posts = createPosts(user_id, 0)
-    console.log(posts)
-
-    $i=1;
-    $(`#notifications`).on(`click`, function(){
-        $(".pop").css("visibility", "collapse");
-        $i++;
-        $("#pop_not").css("visibility", "visible");
-        if($i%2==1){
-            $("#pop_not").css("visibility", "collapse");
-        }
-    });
-    $i=1;
-    $(`#friends`).on(`click`, function(){
-        $(".pop").css("visibility", "collapse");
-        $i++;
-        $("#pop_frnds").css("visibility", "visible");
-        if($i%2==1){
-            $("#pop_frnds").css("visibility", "collapse");
-        }
-    });
+    createPosts(user_id, limit)
      
+    //loading more posts
+    $("#loadMore").on("click",function(){
+        limit += 10
+        createPosts(user_id, limit)
+    })
+
     //
     //like button functionality
     //
@@ -195,6 +182,25 @@ $(function() {
         
         
     })
+
+    $i=1;
+    $(`#notifications`).on(`click`, function(){
+        $(".pop").css("visibility", "collapse");
+        $i++;
+        $("#pop_not").css("visibility", "visible");
+        if($i%2==1){
+            $("#pop_not").css("visibility", "collapse");
+        }
+    });
+    $i=1;
+    $(`#friends`).on(`click`, function(){
+        $(".pop").css("visibility", "collapse");
+        $i++;
+        $("#pop_frnds").css("visibility", "visible");
+        if($i%2==1){
+            $("#pop_frnds").css("visibility", "collapse");
+        }
+    });
 
     $i=1;
     $(".card").on(`click`, ".comment" ,function(){
