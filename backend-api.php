@@ -47,4 +47,9 @@
     $out = findUser($input->filter, $input->keyword);
   }
 
+  if( $method === "UPDATELIKES"){
+    $out = updateLikes($input->post_id, $input->likes);
+  }
+
+
   echo json_encode($out) ;

@@ -60,7 +60,7 @@ try {
  //gets the posts posted by friends, page should be multiples of 10
  function getFriendsPosts($user_id, $limit) {
    global $db ;
-    $stmt = $db->prepare("select users.user_id, users.first_name, users.last_name, users.profile_picture, posts.text, posts.image, posts.date, posts.likes user FROM `posts`, `friends_with`, `users` WHERE users.user_id = friends_with.friend_id and posts.user_id = friends_with.friend_id and friends_with.user_id = ? order by posts.date desc limit $limit,".$limit + 10 . ";") ;
+    $stmt = $db->prepare("select users.user_id, users.first_name, users.last_name, users.profile_picture, posts.post_id, posts.text, posts.image, posts.date, posts.likes user FROM `posts`, `friends_with`, `users` WHERE users.user_id = friends_with.friend_id and posts.user_id = friends_with.friend_id and friends_with.user_id = ? order by posts.date desc limit $limit,".$limit + 10 . ";") ;
     $stmt->execute([$user_id]);
     return $stmt->fetchALL();
  }
@@ -142,3 +142,15 @@ try {
     $stmt->execute();
     return $stmt->fetchALL() ;
  }
+
+function updateLikes($post_id, $likes){
+   global $db ;
+   try {
+      $stmt = $db->prepare("update posts set likes = ? where post_id = ?") ;
+      $stmt->execute([$likes, $post_id]);
+      $id = $db->lastInsertId() ;
+      return ["id" => $id,] ;
+   } catch(PDOException $e) {
+     return ["error" => "API Error: Update Likes"] ;
+   }
+}

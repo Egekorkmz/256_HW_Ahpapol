@@ -32,8 +32,8 @@ function generatePost(data) {
                 <div class='p'>${sanitize(data.text)}</div>
             </div>
             <div class='card-footer'>
-                <button type='button' class='btn btn-flat btn-primary like' id='like1'>${data.user} Like</button>
-                <button type='button' class='btn btn-flat btn-primary comment' id='comment1'>Comment</button>
+                <button type='button' class='btn btn-flat btn-light like' id='${data.post_id}'><span>${data.user}</span> Like</button>
+                <button type='button' class='btn btn-flat btn-light comment' id='${data.post_id}'>Comment</button>
             <div class='comment_to_post' id='comment1_to_post'>
                 <textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea>
             </div>
@@ -58,8 +58,8 @@ function generatePost(data) {
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-flat btn-primary like" id="like2">${data.user} Like</button>
-                    <button type="button" class="btn btn-flat btn-primary comment" id="comment2">Comment</button>
+                    <button type="button" class="btn btn-flat btn-light like" id="${data.post_id}"'><span>${data.user}</span> Like</button>
+                    <button type="button" class="btn btn-flat btn-light comment" id="${data.post_id}">Comment</button>
                     <div class="comment_to_post" id="comment2_to_post">
                         <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
                     </div>
@@ -73,7 +73,7 @@ function generatePost(data) {
     }
 }
 
-function getPostData(user_id, lim) {
+function createPosts(user_id, lim) {
     $.ajax({
         url: './backend-api.php', 
         method: 'GETFRIENDPOST',
@@ -101,7 +101,7 @@ $(function() {
     })
 
     //getting posts
-    posts = getPostData(user.user_id, 0)
+    posts = createPosts(user.user_id, 0)
     console.log(posts)
     //share post button
     $i=3;
@@ -140,6 +140,43 @@ $(function() {
             $("#pop_frnds").css("visibility", "collapse");
         }
     });
+
+    //like button functionality
+    $(".card").on("click", ".like", function(){
+        console.log(this)
+        if($(this).hasClass("btn-light")) {
+            var likes = parseInt($(this).find("span").text()) + 1;
+            var post_id = parseInt($(this).attr('id'))
+            //console.log(likes, post_id)
+
+            $(this).removeClass("btn-light").addClass("btn-primary")
+            $(this).find("span").text(likes)
+
+        }
+        else {
+            var likes = parseInt($(this).find("span").text()) - 1;
+            var post_id = parseInt($(this).attr('id'))
+            $(this).removeClass("btn-primary").addClass("btn-light")
+            $(this).find("span").text(likes)
+        }
+
+        $.ajax({
+            url: './backend-api.php', 
+            method: 'UPDATELIKES',
+            data: JSON.stringify({post_id,likes}),
+            contentType: "application/json",
+            success: function(response) {
+              //displayFriends(response);
+              console.log("oke")
+            },
+            error: function(xhr, status, error) {
+              // Handle errors, if any
+              console.log("fail");
+            }
+          });
+        
+     })
+
     $i=1;
     $(`.like`).on(`click`, function(){
         $t=(this.id);
