@@ -55,7 +55,7 @@ function generatePost(data, user_id) {
                         <p>${sanitize(data.text)}</p>
                     </div>
                 </div>
-                <div class="card-footer">
+                <div class="card-footer form-inline">
                     <button type="button" class="btn btn-flat btn-light like" id="${data.post_id}"'><span>${data.user}</span> Like</button>
                     <input type="text" class="form-control" id="commentInput" placeholder="Write your comments...">
                     <button type="button" class="btn btn-flat btn-light comment" id="${data.post_id}">Comment</button>
