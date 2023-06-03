@@ -86,6 +86,15 @@ try {
     return $stmt->fetchALL();
  }
 
+ //gets like status
+ function getLikeStatus($user_id, $post_id){
+   global $db ;
+   $stmt = $db->prepare("select * from liked where user_id = ? and post_id = ?") ;
+   $stmt->execute([$user_id, $post_id]);
+   return $stmt->fetchALL();
+}
+
+
  function addPost($user_id, $text, $photo){
     global $db ;
     try {
@@ -123,18 +132,30 @@ try {
      }
  }
 
- function addFriend($user_id, $friend_id){
+ function addLikeStatus($user_id, $post_id){
     global $db ;
     try {
-        $stmt = $db->prepare("insert into friends_with (user_id, friend_id) values (?, ?)") ;
-        $stmt->execute([$user_id, $friend_id]) ;
-        $stmt->execute([$friend_id ,$user_id]) ;
+        $stmt = $db->prepare("insert into liked (user_id, post_id) values (?, ?)") ;
+        $stmt->execute([$user_id, $post_id]) ;
         $id = $db->lastInsertId() ;
         return ["id" => $id,] ;
      } catch(PDOException $e) {
-       return ["error" => "API Error: Insert friend"] ;
+       return ["error" => "API Error: add like status"] ;
      }
  }
+
+ function addFriend($user_id, $friend_id){
+   global $db ;
+   try {
+       $stmt = $db->prepare("insert into friends_with (user_id, friend_id) values (?, ?)") ;
+       $stmt->execute([$user_id, $friend_id]) ;
+       $stmt->execute([$friend_id ,$user_id]) ;
+       $id = $db->lastInsertId() ;
+       return ["id" => $id,] ;
+    } catch(PDOException $e) {
+      return ["error" => "API Error: Insert friend"] ;
+    }
+}
 
  function findUser($filter, $text){
     global $db ;
@@ -153,4 +174,16 @@ function updateLikes($post_id, $likes){
    } catch(PDOException $e) {
      return ["error" => "API Error: Update Likes"] ;
    }
+}
+
+function deleteLikeStatus($user_id, $post_id){
+   global $db ;
+   try {
+       $stmt = $db->prepare("delete from liked where user_id = ? and post_id = ?") ;
+       $stmt->execute([$user_id, $post_id]) ;
+       $id = $db->lastInsertId() ;
+       return ["id" => $id,] ;
+    } catch(PDOException $e) {
+      return ["error" => "API Error: delete like status"] ;
+    }
 }

@@ -95,13 +95,15 @@ function createPosts(user_id, lim) {
 //jquery function
 //
 $(function() {
+    var user_id = user.user_id
+
     //log out button
     $("#log_out").click(function() {
         window.location = "./Login-Register/logout.php"
     })
 
     //getting posts
-    posts = createPosts(user.user_id, 0)
+    posts = createPosts(user_id, 0)
     console.log(posts)
     //share post button
     $i=3;
@@ -174,22 +176,25 @@ $(function() {
               console.log("fail");
             }
           });
+
+          $.ajax({
+            url: './backend-api.php', 
+            method: 'GETLIKESTATUS',
+            data: JSON.stringify({user_id, post_id}),
+            contentType: "application/json",
+            success: function(response) {
+              //displayFriends(response);
+              console.log(response)
+            },
+            error: function(xhr, status, error) {
+              // Handle errors, if any
+              console.log("fail");
+            }
+          });
         
      })
-
     $i=1;
-    $(`.like`).on(`click`, function(){
-        $t=(this.id);
-        $i++;
-        $(`#${$t}`).css("background", "pink");
-        $(`#${$t}`).text("Unlike");
-        if($i%2==1){
-            $(`#${$t}`).text("Like");
-            $(`#${$t}`).css("background", "grey");
-        }
-    });
-    $i=1;
-    $(`.comment`).on(`click`, function(){
+    $(".card").on(`click`, ".comment" ,function(){
         $t = (this.id);
         
         if($i%2==1){
