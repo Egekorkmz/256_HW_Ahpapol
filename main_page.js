@@ -34,7 +34,7 @@ function generatePost(data, user_id) {
             <div class='card-footer form-inline'>
                 <button type='button' class='btn btn-flat btn-light like' id='${data.post_id}'><span>${data.user}</span> Like</button>
                 <input type="text" class="form-control" id="commentInput" placeholder="Write your comments...">
-                <button type='button' class='btn btn-flat btn-light comment' id='comment${data.post_id}'>Comment</button>
+                <button type='button' class='btn btn-flat btn-light comment' id='${data.post_id}'>Comment</button>
             <div class='comment_to_post' id='comment1_by_user'></div>
             </div></div></div>`);
     }
@@ -58,7 +58,7 @@ function generatePost(data, user_id) {
                 <div class="card-footer">
                     <button type="button" class="btn btn-flat btn-light like" id="${data.post_id}"'><span>${data.user}</span> Like</button>
                     <input type="text" class="form-control" id="commentInput" placeholder="Write your comments...">
-                    <button type="button" class="btn btn-flat btn-light comment" id="comment${data.post_id}">Comment</button>
+                    <button type="button" class="btn btn-flat btn-light comment" id="${data.post_id}">Comment</button>
                     <div class="comment_to_post" id="${data.post_id}">
                         
                     </div>
@@ -96,7 +96,7 @@ function generateComments(post_id){
         console.log(response)
           if(response.length) {
             response.forEach(comment => {
-                $(`#comment${post_id}`).after(`<div class='comment_to_post' id='comment1_by_user'>
+                $(`#${post_id}.comment`).after(`<div class='comment_to_post' id='comment1_by_user'>
                         <img src='images/default.png' alt='User' class='media-object img-circle thumb40'>
                         <div class="margin10">
                             <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${comment.first_name} ${comment.last_name}</span></small>
@@ -124,7 +124,6 @@ function createPosts(user_id, lim) {
             //console.log(response)
             response.forEach(post => {
                 generatePost(post, user_id)
-                console.log(post.post_id)
                 generateComments(post.post_id)
             });
         },
@@ -210,8 +209,24 @@ $(function() {
     })
 
     //comment functionality
-    $(".card").on("click", ".like", function(){
+    $(".card").on("click", ".comment", function(){
+        var post_id = parseInt($(this).attr('id'))
+        var text = $(this).prev().val()
 
+        $.ajax({
+            url: './backend-api.php', 
+            method: 'POSTCOMMENT',
+            data: JSON.stringify({user_id, post_id, text}),
+            contentType: "application/json",
+            success: function(response) {
+                $(".comment_to_post").remove()  
+                generateComments(post_id)
+
+            },
+            error: function(error) {
+              console.log(error['responseText']);
+            }
+          });
     })
 
     $i=1;
