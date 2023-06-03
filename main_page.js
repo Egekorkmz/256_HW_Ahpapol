@@ -93,7 +93,7 @@ function generateComments(post_id){
         data: JSON.stringify({post_id}),
         contentType: "application/json",
         success: function(response) {
-        console.log(response)
+        //console.log(response)
           if(response.length) {
             response.forEach(comment => {
                 $(`#${post_id}.comment`).after(`<div class='comment_to_post' id='comment1_by_user'>
