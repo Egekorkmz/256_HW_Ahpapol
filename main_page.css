@@ -590,3 +590,8 @@
 .margin10{
     margin-left: 10px;
 }
+
+.bu{
+    display:flex;
+    flex-direction:column;
+}

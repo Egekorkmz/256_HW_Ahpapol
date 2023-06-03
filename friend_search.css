@@ -83,6 +83,7 @@ button:hover{background-color: #9600bf;}
     align-items: center;
     justify-content: center;
 }
+.friend p{width:200px;}
 .friend div:hover{cursor:pointer;}
 
 @media screen and (max-width:800px){
