@@ -12,32 +12,7 @@ function sanitize(string) {
     return string.replace(reg, (match)=>(map[match]));
 }
 
-function isLiked(user_id, post_id) {
-    var response = false;
-     $.ajax({
-        url: './backend-api.php', 
-        method: 'GETLIKEDSTATUS',
-        data: JSON.stringify({user_id, post_id}),
-        contentType: "application/json",
-        async: false,
-        success: function(response) {
-          if(response.length()) {
-            response = true
-          }
-          else {
-            response = true
-          }
-        },
-        error: function(xhr, status, error) {
-          // Handle errors, if any
-          console.log("fail");
-        }
-      });
-
-      return response;
-}
-
-function generatePost(data) {
+function generatePost(data, user_id) {
     //no image
     if(data.image == null) {
         $('.posts').append(`<div class='card-body'>
@@ -98,12 +73,13 @@ function generatePost(data) {
 
     $.ajax({
        url: './backend-api.php', 
-       method: 'GETLIKEDSTATUS',
-       data: JSON.stringify({user_id, post_id}),
+       method: 'GETLIKESTATUS',
+       data: JSON.stringify({user_id, post_id:   data.post_id}),
        contentType: "application/json",
        async: false,
        success: function(response) {
-         if(response.length()) {
+        console.log(response)
+         if(response.length) {
             $(`.like#${data.post_id}`).removeClass("btn-light").addClass("btn-primary");
          }
        },
@@ -123,7 +99,7 @@ function createPosts(user_id, lim) {
         success: function(response) {
             console.log(response)
             response.forEach(post => {
-                generatePost(post)
+                generatePost(post, user_id)
             });
         },
         error: function(xhr, status, error) {
@@ -164,72 +140,62 @@ $(function() {
             $("#pop_frnds").css("visibility", "collapse");
         }
     });
-
+     
+    //
     //like button functionality
+    //
     $(".card").on("click", ".like", function(){
-        console.log(isLiked(user_id, post_id))
-        $.ajax({
-            url: './backend-api.php', 
-            method: 'POSTLIKESTATUS',
-            data: JSON.stringify({user_id, post_id}),
-            contentType: "application/json",
-            success: function(response) {
-              //displayFriends(response);
-              console.log(response)
-            },
-            error: function(xhr, status, error) {
-              // Handle errors, if any
-              console.log("fail");
-            }
-          });
-        console.log(this)
+        //console.log(this)
+        //if not liked
         if($(this).hasClass("btn-light")) {
             var likes = parseInt($(this).find("span").text()) + 1;
             var post_id = parseInt($(this).attr('id'))
-            //console.log(likes, post_id)
 
             $(this).removeClass("btn-light").addClass("btn-primary")
             $(this).find("span").text(likes)
-
-            $.ajax({
-                url: './backend-api.php', 
-                method: 'DELETELIKESTATUS',
-                data: JSON.stringify({user_id, post_id}),
-                contentType: "application/json",
-                success: function(response) {
-                  //displayFriends(response);
-                  console.log(response)
-                },
-                error: function(xhr, status, error) {
-                  // Handle errors, if any
-                  console.log("fail");
-                }
-              });
-
+            var method_type = 'POSTLIKESTATUS'
         }
+        //if liked
         else {
             var likes = parseInt($(this).find("span").text()) - 1;
             var post_id = parseInt($(this).attr('id'))
             $(this).removeClass("btn-primary").addClass("btn-light")
             $(this).find("span").text(likes)
-        }
 
+            var method_type = 'DELETELIKESTATUS'
+        }
+        //update database
         $.ajax({
             url: './backend-api.php', 
-            method: 'PUTLIKES',
-            data: JSON.stringify({post_id,likes}),
+            method: method_type,
+            data: JSON.stringify({user_id, post_id}),
             contentType: "application/json",
             success: function(response) {
-              //displayFriends(response);
-              console.log("oke")
+              //console.log("like should be added")
+              //updates like count
+                $.ajax({
+                    url: './backend-api.php', 
+                    method: 'PUTLIKES',
+                    data: JSON.stringify({post_id,likes}),
+                    contentType: "application/json",
+                    success: function(response) {
+                    },
+                    error: function(xhr, status, error) {
+                    // Handle errors, if any
+                    console.log("failed request");
+                    }
+                });
             },
             error: function(xhr, status, error) {
               // Handle errors, if any
-              console.log("fail");
+              console.log("failed request");
             }
           });
+
         
-     })
+        
+    })
+
     $i=1;
     $(".card").on(`click`, ".comment" ,function(){
         $t = (this.id);
