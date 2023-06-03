@@ -74,7 +74,7 @@ try {
 
  function getFriends($user_id){
     global $db ;
-    $stmt = $db->prepare("select friend_id from friends_with where user_id = ?") ;
+    $stmt = $db->prepare("select users.user_id, users.first_name, users.last_name, users.profile_picture, users.email from users, friends_with where friends_with.friend_id = users.user_id and friends_with.user_id = ?;") ;
     $stmt->execute([$user_id]);
     return $stmt->fetchALL();
  }

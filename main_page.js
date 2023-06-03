@@ -58,7 +58,7 @@ function generatePost(data) {
                     </div>
                 </div>
                 <div class="card-footer">
-                    <button type="button" class="btn btn-flat btn-primary like" id="like2">Like</button>
+                    <button type="button" class="btn btn-flat btn-primary like" id="like2">${data.user} Like</button>
                     <button type="button" class="btn btn-flat btn-primary comment" id="comment2">Comment</button>
                     <div class="comment_to_post" id="comment2_to_post">
                         <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>

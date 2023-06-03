@@ -124,54 +124,18 @@ if ($_SESSION == null) {
                         <div class="card card-transparent">
                             <h5 class="card-heading">Friends</h5>
                             <div class="mda-list">
-                                <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="List user" class="mda-list-item-img thumb48">
-                                    <div class="mda-list-item-text mda-2-line">
-                                        <h3><a href="#">Eric Graves</a></h3>
-                                        <div class="text-muted text-ellipsis">Ut ac nisi id mauris</div>
-                                    </div>
-                                </div>
-                                <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="List user" class="mda-list-item-img thumb48">
-                                    <div class="mda-list-item-text mda-2-line">
-                                        <h3><a href="#">Bruce Ramos</a></h3>
-                                        <div class="text-muted text-ellipsis">Sed lacus nisl luctus</div>
-                                    </div>
-                                </div>
-                                <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="List user" class="mda-list-item-img thumb48">
-                                    <div class="mda-list-item-text mda-2-line">
-                                        <h3><a href="#">Marie Hall</a></h3>
-                                        <div class="text-muted text-ellipsis">Donec congue sagittis mi</div>
-                                    </div>
-                                </div>
-                                <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="List user" class="mda-list-item-img thumb48">
-                                    <div class="mda-list-item-text mda-2-line">
-                                        <h3><a href="#">Russell Hart</a></h3>
-                                        <div class="text-muted text-ellipsis">Donec convallis arcu sit</div>
-                                    </div>
-                                </div>
-                                <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="List user" class="mda-list-item-img thumb48">
-                                    <div class="mda-list-item-text mda-2-line">
-                                        <h3><a href="#">Eric Graves</a></h3>
-                                        <div class="text-muted text-ellipsis">Ut ac nisi id mauris</div>
-                                    </div>
-                                </div>
-                                <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="List user" class="mda-list-item-img thumb48">
-                                    <div class="mda-list-item-text mda-2-line">
-                                        <h3><a href="#">Jessie Cox</a></h3>
-                                        <div class="text-muted text-ellipsis">Sed lacus nisl luctus</div>
-                                    </div>
-                                </div>
-                                <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="List user" class="mda-list-item-img thumb48">
-                                    <div class="mda-list-item-text mda-2-line">
-                                        <h3><a href="#">Jonathan Soto</a></h3>
-                                        <div class="text-muted text-ellipsis">Donec congue sagittis mi</div>
-                                    </div>
-                                </div>
-                                <div class="mda-list-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="List user" class="mda-list-item-img thumb48">
-                                    <div class="mda-list-item-text mda-2-line">
-                                        <h3><a href="#">Guy Carpenter</a></h3>
-                                        <div class="text-muted text-ellipsis">Donec convallis arcu sit</div>
-                                    </div>
-                                </div>
+                                <?php
+                                    $friends = getFriends($userData['user_id']);
+                                    //var_dump($friends);
+                                    foreach ($friends as $friend) {
+                                        echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
+                                                <div class='mda-list-item-text'>
+                                                    <h3><a href='#'>{$friend['first_name']} {$friend['last_name']}</a></h3>
+                                                    <div class='text-muted text-ellipsis'>{$friend['email']}</div>
+                                                </div>
+                                            </div>";
+                                    }
+                                ?>
                             </div>
                         </div>
                     </div>
