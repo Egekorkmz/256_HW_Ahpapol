@@ -27,8 +27,16 @@
       $out = getNotifications($input->user_id);
   }
 
+  if ( $method === "GETLIKESTATUS") {
+    $out = getLikeStatus($input->user_id, $input->post_id);
+  }
+
+  if ( $method === "POSTLIKESTATUS") {
+    $out = addLikeStatus($input->user_id, $input->post_id);
+  }
+
   if ( $method === "POST") {
-      $out = addPost($input->user_id, $input->text);
+      $out = addPost($input->user_id, $input->text, $input->photo);
   }
 
   if ( $method === "POSTCOMMENT") {
@@ -46,5 +54,14 @@
   if( $method === "FINDUSER"){
     $out = findUser($input->filter, $input->keyword);
   }
+
+  if( $method === "PUTLIKES"){
+    $out = updateLikes($input->post_id, $input->likes);
+  }
+
+  if( $method === "DELETELIKESTATUS"){
+    $out = deleteLikeStatus($input->user_id, $input->post_id);
+  }
+
 
   echo json_encode($out) ;

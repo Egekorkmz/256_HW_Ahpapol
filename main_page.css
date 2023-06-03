@@ -129,6 +129,11 @@
     height: 48px !important;
 }
 
+.thumb40 {
+    width: 40px !important;
+    height: 40px !important;
+}
+
 .card {
     position: relative;
     border-radius: 3px;
@@ -488,7 +493,7 @@
 }
 
 .media-body {
-    width: 10000px
+    width: 1000px
 }
 
 .media-object.img-thumbnail {
@@ -576,5 +581,12 @@
 
 .comment_to_post{
     margin-top: 10px;
-    visibility: collapse;
+    display: flex;   
+}
+
+#commentInput {
+    width: 400px;
+}
+.margin10{
+    margin-left: 10px;
 }
