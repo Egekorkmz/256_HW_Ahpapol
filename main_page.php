@@ -90,6 +90,42 @@ if ($_SESSION == null) {
                 <div style = "margin-top: 30px;" class="row">
                     <div class="col-md-8">
                         <div class="card">
+
+
+                        <div class='card-body'>
+            <div class='card'>
+                <div class='card-heading'>
+                    <div class='media m0'>
+                        <div class='media-left'>
+                            <a href='#'>
+                                <img src='images/${data.profile_picture}' alt='User' class='media-object img-circle thumb48'>
+                            </a>
+                        </div>
+                        <div class='media-body media-middle pt-sm'>
+                            <p class='media-heading m0 text-bold'>${data.first_name} ${data.last_name}</p>
+                            <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${data.date}</span></small>
+                        </div>
+                    </div>
+                <div class='p'>${sanitize(data.text)}</div>
+            </div>
+            <div class='card-footer form-inline'>
+                <button type='button' class='btn btn-flat btn-light like' id='${data.post_id}'><span>${data.user}</span> Like</button>
+                <input type="text" class="form-control" id="commentInput" placeholder="Write your comments...">
+                <button type='button' class='btn btn-flat btn-light comment' id='${data.post_id}'>Comment</button>
+            <div class='comment_to_post' id='comment1_by_user'>
+                    <img src='images/default.png' alt='User' class='media-object img-circle thumb40'>
+                    <div class="margin10">
+                        <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${data.date}</span></small>
+                        <p class='media-heading m0'>${data.first_name} ${data.last_name}</p>
+            </div>
+            </div>
+            </div>
+        </div>
+        
+        </div>
+
+
+
                             <div class="card-body">
                                 <form method="post" class="mt ng-pristine ng-valid" enctype="multipart/form-data">
                                     <div class="form-group">
@@ -130,7 +166,7 @@ if ($_SESSION == null) {
                                     foreach ($friends as $friend) {
                                         echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
                                                 <div class='mda-list-item-text'>
-                                                    <h3><a href='#'>{$friend['first_name']} {$friend['last_name']}</a></h3>
+                                                    <h3>{$friend['first_name']} {$friend['last_name']}</h3>
                                                     <div class='text-muted text-ellipsis'>{$friend['email']}</div>
                                                 </div>
                                             </div>";

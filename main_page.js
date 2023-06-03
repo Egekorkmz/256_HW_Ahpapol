@@ -31,8 +31,9 @@ function generatePost(data, user_id) {
                     </div>
                 <div class='p'>${sanitize(data.text)}</div>
             </div>
-            <div class='card-footer'>
+            <div class='card-footer form-inline'>
                 <button type='button' class='btn btn-flat btn-light like' id='${data.post_id}'><span>${data.user}</span> Like</button>
+                <input type="text" class="form-control" id="commentInput" placeholder="Write your comments...">
                 <button type='button' class='btn btn-flat btn-light comment' id='${data.post_id}'>Comment</button>
             <div class='comment_to_post' id='comment1_to_post'>
                 <textarea rows='1' aria-multiline='true' tabindex='0' aria-invalid='false' class='no-resize form-control' name='txt'></textarea>
@@ -59,6 +60,7 @@ function generatePost(data, user_id) {
                 </div>
                 <div class="card-footer">
                     <button type="button" class="btn btn-flat btn-light like" id="${data.post_id}"'><span>${data.user}</span> Like</button>
+                    <input type="text" class="form-control" id="commentInput" placeholder="Write your comments...">
                     <button type="button" class="btn btn-flat btn-light comment" id="${data.post_id}">Comment</button>
                     <div class="comment_to_post" id="comment2_to_post">
                         <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
@@ -202,7 +204,7 @@ $(function() {
         }
     });
 
-    $i=1;
+    /*$i=1;
     $(".card").on(`click`, ".comment" ,function(){
         $t = (this.id);
         
@@ -224,6 +226,6 @@ $(function() {
             
         }
         $i++;
-    });
+    });*/
 
 })
