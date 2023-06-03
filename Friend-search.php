@@ -1,9 +1,12 @@
 <?php
     session_start();
     $user_id=(int)$_SESSION["user"]["user_id"];
-    echo "<p style='display:none;' id='userid' class='".$user_id."'></p>"
+    $userData = $_SESSION['user'];
+    $userName = $userData['first_name'] . " " . $userData['last_name'];
+    $userEmail = $userData['email'];
+    $userPic = $userData['profile_picture'] != null ? "images/" . $userData['profile_picture'] : "Img\default.png";
+    echo "<p style='display:none;' id='userid' class='".$user_id."'></p>";
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -13,173 +16,65 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
-    <style>
-        *{
-            margin: 0px auto;
-        }
-
-        /*head*/
-        .head{
-            border-bottom: 10px solid black;
-            height: 150px;
-            background-color: #9600bf;
-            display: flex;
-            align-items: center;
-        }
-
-        .head div{
-            margin-left: 50px;
-        }
-
-        .pp{
-            border-radius: 50%;
-            width: 100px;
-            width: 100px;
-        }
-
-        #pp_picture{
-            margin: 20px;
-            margin-left: 50px;
-        }
-
-        /*container*/
-        .container{
-            border: 2px solid rgb(177, 177, 177);
-            border-radius: 5px;
-            width:500px;
-            height:500px;
-            margin: 20px auto;
-            display:flex;
-            flex-direction: column;
-        }
-        .container>*{
-            align-items: center;
-            text-align: center;
-        }
-
-        .timeline{
-            width:500px;
-            height:60px;
-            padding:15px;
-        }
-        .timeline *{
-            margin:5px;
-            border-radius: 5px;
-        }
-
-        button:hover{background-color: #9600bf;}
-
-        .friends-part{
-           width:100%;
-            height:440px;
-            overflow-y: scroll;
-           
-        }
-
-        .friend{
-            display:flex;
-            margin:2px auto;
-            width:80%;
-            height:60px;
-            background-color: #d4d4d4;
-            border-radius: 5px;
-            align-items: center;
-        }
-         .friend img{width:50px;border-radius: 50px;}
-        .friend div{
-            display: flex;
-            width: 10px;
-            height: 10px;
-            border-radius:20px;
-            padding:10px;
-            text-decoration: none;
-            background-color:white;
-            align-items: center;
-            justify-content: center;
-        }
-        .friend div:hover{cursor:pointer;}
-    </style>
-    <script>
-        $(function(){
-         
-            //search + display
-            $("#searchbtn").click(function(e){
-                e.preventDefault();
-                var text=$("#tosearch").val();
-                var fil=$("#filter-opt").val();
-               // getResults(text,filter);
-                $.ajax({
-                    url: './backend-api.php', // PHP script URL
-                    method: 'FINDUSER', // Use GET method
-                    data: JSON.stringify({filter:fil,keyword:text}), // Send data as query parameters
-                    contentType: "application/json",
-                    //dataType: 'json',
-                    success: function(response) {
-                      // Handle the response
-                      displayFriends(response);
-                    },
-                    error: function(xhr, status, error) {
-                      // Handle errors, if any
-                      console.log("fail");
-                    }
-                  });
-            });
-
-            $(".friends-part").on("click",".addFriend",function(){
-                var f_id=$(this).attr("id");
-                var u_id=$("#userid").attr("class");
-                console.log("clicked "+f_id+" "+u_id);
-                $.ajax({
-                    url: './backend-api.php', // PHP script URL
-                    method: 'POSTREQUEST', // Usse GET method
-                    //cache:false,
-                    data: JSON.stringify({ receiver:f_id, sender:u_id,type: 0}), // Send data as query parameters
-                    contentType: "application/json",
-                    dataType: 'json',
-                    success: function(response) {
-                      // Handle the response
-                        //response=JSON.parse(response);
-                        console.log(response)
-                    },
-                    error: function(xhr, status, error) {
-                      // Handle errors, if any
-                      console.log(error);
-                    }
-                  });
-            })
-            
-        })
-
-        //insert yaptıktan sonra click eventlerini bind laman lazım yoksa çalışmıyor
-        function displayFriends(result){
-            $(".friends-part").html("");
-            for(var fr of result){
-                $(".friends-part").append(`
-                <div class="friend">
-                    <img src= "images/`+fr["profile_picture"]+`" >
-                    <p>`+fr["first_name"]+" "+fr["last_name"]+`</p>
-                    <div id="`+fr["user_id"]+`" class="addFriend">+</div>
-               </div>
-                `);
-            }
-   
-              
-        }
-       
-    </script>
+    <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./main_page.css">
+    <link rel="stylesheet" href="./friend_search.css">
+    <script src="./friend_search.js"></script>
 </head>
 <body>
-    
-    <div class="head">
-        <div>
-            <a href="./timeline.html"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" class="pp" id="pp_picture"></a>
+
+   <section class="container">
+    <div class="container-overlap bg-indigo-500 ng-scope">
+        <div class="media m0 pv">
+            <div class="media-left"><a href="./main_page.php"><img src=<?= $userPic ?> alt="User" class="media-object img-circle thumbMain"></a></div>
+            <div class="media-body media-middle">
+                <h4 class="media-heading text-white"><?= $userName ?></h4>
+                <span class="text-white"><?= $userEmail ?></span>
+            </div>
+
         </div>
-        <div id="pp_info">
-            <h4>John Doe</h4>
-            <p>ssssssssssssssssssssssssssssssssssssss</p>
+        <div class="bu">
+            <button type="button" class="btn btn-flat btn-primary position-relative" id="friends">
+                Friends
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                    99+
+                </span>
+            </button>
+            <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
+            <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
+            <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
         </div>
-    </div>
-    <section class="container">
+
+        <div class="pop" id="pop_frnds">
+            <div class="inside">
+                <p>New friendship request from: Angela</p>
+                <button type="button" class="btn btn-flat btn-success">Accept</button>
+                <button type="button" class="btn btn-flat btn-danger">Reject</button>
+            </div>
+            <div class="inside">
+                <p>New friendship request from: Harry</p>
+                <button>Accept</button>
+                <button>Reject</button>
+            </div>
+            <div class="inside">
+                <p>New friendship request from: Eren Yeşiltepe</p>
+                <button>Accept</button>
+                <button>Reject</button>
+            </div>
+        </div>
+        <div class="pop" id="pop_not">
+            <div class="inside">
+                <p>Stephen Palmer shared a new post</p>
+            </div>
+            <div class="inside">
+                <p>My talking Tom liked your post</p>
+            </div>
+        </div>
+
+</div>
+
+
+    <section class="mycontainer">
         <div class="timeline">
             <h4>Search For A Friend</h4>
             <input type="text" id="tosearch">
@@ -189,12 +84,13 @@
                 <option value="last_name">last name</option>
             </select>
             <button id="searchbtn">Search</button>
-           
         </div>
         <div class="friends-part">
         
         </div>
-
+        <p>correct</p>
     </section>
+</section>
+    
 </body>
 </html>
