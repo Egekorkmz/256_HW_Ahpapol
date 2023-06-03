@@ -1,6 +1,9 @@
 *{
     margin: 0px auto;
 }
+body{
+    font-size: 16px;
+}
 
 /*head*/
 /*.head{
@@ -43,7 +46,7 @@
 
 .timeline{
     width:500px;
-    height:60px;
+    height:fit-content;
     padding:15px;
 }
 .timeline *{
@@ -63,16 +66,16 @@ button:hover{background-color: #9600bf;}
     display:flex;
     margin:2px auto;
     width:80%;
-    height:60px;
+    height:70px;
     background-color: #d4d4d4;
     border-radius: 5px;
     align-items: center;
 }
- .friend img{width:50px;border-radius: 50px;}
+ .friend img{width:60px;border-radius: 60px;}
 .friend div{
     display: flex;
-    width: 10px;
-    height: 10px;
+    width: 30px;
+    height: 30px;
     border-radius:20px;
     padding:10px;
     text-decoration: none;
@@ -81,3 +84,8 @@ button:hover{background-color: #9600bf;}
     justify-content: center;
 }
 .friend div:hover{cursor:pointer;}
+
+@media screen and (max-width:800px){
+    .mycontainer{ width: 80%;}
+    .timeline{width: 95%;}
+}

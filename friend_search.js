@@ -1,5 +1,6 @@
 $(function(){
-    var f_id=$(this).attr("id");
+    
+
     //search + display
     $("#searchbtn").click(function(e){
         e.preventDefault();
@@ -23,8 +24,9 @@ $(function(){
     });
 
     $(".friends-part").on("click",".addFriend",function(){
-       
         var u_id=$("#userid").attr("class");
+        var f_id=$(this).attr("id");
+        var button=$(this);
         console.log("clicked "+f_id+" "+u_id);
         $.ajax({
             url: './backend-api.php', // PHP script URL
@@ -36,14 +38,17 @@ $(function(){
             success: function(response) {
               // Handle the response
                 console.log(response)
-                $(".container p").html("Friend request is sent");
-                $(".container p").css(color,"green");
+                $("#result").html("Friend request is sent");
+                $("#result").css("color","green");
+                button.css("background-color","green");
+                button.css("pointer-events","none");
+
             },
             error: function(xhr, status, error) {
               // Handle errors, if any
               console.log(error);
-              $(".container p").html("Friend couldn't sent");
-              $(".container p").css(color,"red");
+              $("#result").html("Friend request couldn't sent");
+              $("#result").css("color","red");
             }
           });
     })
@@ -76,14 +81,18 @@ $(function(){
 
 //insert yaptıktan sonra click eventlerini bind laman lazım yoksa çalışmıyor
 function displayFriends(result){
+    var u_id=$("#userid").attr("class");
     $(".friends-part").html("");
     for(var fr of result){
-        $(".friends-part").append(`
-        <div class="friend">
-            <img src= "images/`+fr["profile_picture"]+`" >
-            <p>`+fr["first_name"]+" "+fr["last_name"]+`</p>
-            <div id="`+fr["user_id"]+`" class="addFriend">+</div>
-       </div>
-        `);
+        if(fr["user_id"]!=u_id){
+            var picture= fr["profile_picture"] ?? "default.png";  
+            $(".friends-part").append(`
+            <div class="friend">
+                <img src= "images/`+picture+`" >
+                <p>`+fr["first_name"]+" "+fr["last_name"]+`</p>
+                <div id="`+fr["user_id"]+`" class="addFriend">+</div>
+           </div>
+            `);
+        }
     }
 }

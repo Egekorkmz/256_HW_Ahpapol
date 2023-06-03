@@ -4,7 +4,7 @@
     $userData = $_SESSION['user'];
     $userName = $userData['first_name'] . " " . $userData['last_name'];
     $userEmail = $userData['email'];
-    $userPic = $userData['profile_picture'] != null ? "images/" . $userData['profile_picture'] : "Img\default.png";
+    $userPic = $userData['profile_picture'] != null ? "images/" . $userData['profile_picture'] : "images\default.png";
     echo "<p style='display:none;' id='userid' class='".$user_id."'></p>";
 ?>
 
@@ -88,7 +88,7 @@
         <div class="friends-part">
         
         </div>
-        <p>correct</p>
+        <p id="result"></p>
     </section>
 </section>
     
