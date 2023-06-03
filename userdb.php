@@ -57,11 +57,11 @@ try {
     return $stmt->fetchALL();
  }
 
- //gets the posts posted by friends, page should be multiples of 10
+ //gets the posts posted by friends and the user together, page should be multiples of 10
  function getFriendsPosts($user_id, $limit) {
    global $db ;
-    $stmt = $db->prepare("select users.user_id, users.first_name, users.last_name, users.profile_picture, posts.post_id, posts.text, posts.image, posts.date, posts.likes user FROM `posts`, `friends_with`, `users` WHERE users.user_id = friends_with.friend_id and posts.user_id = friends_with.friend_id and friends_with.user_id = ? order by posts.date desc limit $limit,".$limit + 10 . ";") ;
-    $stmt->execute([$user_id]);
+    $stmt = $db->prepare("select users.user_id, users.first_name, users.last_name, users.profile_picture, posts.post_id, posts.text, posts.image, posts.date, posts.likes user FROM `posts`, `friends_with`, `users` WHERE users.user_id = friends_with.friend_id and posts.user_id = friends_with.friend_id and friends_with.user_id = ? UNION select users.user_id, users.first_name, users.last_name, users.profile_picture, posts.post_id, posts.text, posts.image, posts.date, posts.likes user FROM `posts`, `users` WHERE users.user_id = posts.user_id  and users.user_id = ? order by date desc limit $limit,".$limit + 10 . ";") ;
+    $stmt->execute([$user_id, $user_id]);
     return $stmt->fetchALL();
  }
 

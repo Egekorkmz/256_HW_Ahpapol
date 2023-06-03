@@ -102,8 +102,8 @@ function createPosts(user_id, lim) {
                 generatePost(post, user_id)
             });
         },
-        error: function(xhr, status, error) {
-          console.log("fail");
+        error: function(error) {
+          console.log(error['responseText']);
         }
       });
 }
