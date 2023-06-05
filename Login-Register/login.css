@@ -1,4 +1,10 @@
-body{margin-top:20px;}
+body{
+  background-image: url("../Img/wallpaper.avif");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 0px -140px;
+  margin-top:20px;
+}
 
 body.login {
   position: initial;
@@ -91,7 +97,7 @@ body {
 
 .footer {
   position: absolute;
-  bottom: 0;
+  bottom: 0px;
   width: 100%;
   /* Set the fixed height of the footer here */
   height: 60px;
@@ -133,8 +139,8 @@ body.login .lock-container .panel input {
 }
 
 #register-btn{
-  border:2px solid #9600bf;
-  color:#9600bf;
+  border:2px solid #AD7BE9;
+  color:#AD7BE9;
   background-color: transparent;
 }
 
