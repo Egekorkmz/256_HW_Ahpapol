@@ -132,7 +132,7 @@ if ($_SESSION == null) {
                                         echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
                                                 <div class='mda-list-item-text'>
                                                     <h3>{$friend['first_name']} {$friend['last_name']}</h3>
-                                                    <div class='text-muted text-ellipsis btn-delete'><i class='fa-solid fa-trash-can delete-can' style='cursor:pointer'></i></div>
+                                                    <div class='text-muted text-ellipsis btn-delete'><i id='{$friend['user_id']}' class='fa-solid fa-trash-can delete-can' style='cursor:pointer'></i></div>
                                                 </div>
                                             </div>";
                                     }

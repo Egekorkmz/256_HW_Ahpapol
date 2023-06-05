@@ -191,9 +191,9 @@ function deleteLikeStatus($user_id, $post_id){
 function removeFriend($user_id, $friend_id){
    global $db ;
    try {
-       $stmt = $db->prepare("delete from friends_with where user_id = ?") ;
-       $stmt->execute([$user_id]) ;
-       $stmt->execute([$friend_id]) ;
+       $stmt = $db->prepare("delete from friends_with where user_id = ? and friend_id = ?") ;
+       $stmt->execute([$user_id, $friend_id]) ;
+       $stmt->execute([$friend_id ,$user_id]) ;
        $id = $db->lastInsertId();
        return ["id" => $id,] ;
     } catch(PDOException $e) {

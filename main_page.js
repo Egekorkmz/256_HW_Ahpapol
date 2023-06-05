@@ -248,6 +248,15 @@ $(function() {
         }
     });
 
+    $(".mda-list").on("click",".delete-can",function(){
+        var fid=$(this).attr("id")
+        var name=$(this).parent().parent().children("h3").html()
+        //console.log(fid+"   "+name)
+        deleteFriend(user_id,fid)
+        //console.log("pressed")
+        $(this).parent().parent().parent().html("<p style='color:red;'>You removed "+name+"</p>")
+    })
+
     /*$i=1;
     $(".card").on(`click`, ".comment" ,function(){
         $t = (this.id);
@@ -274,14 +283,14 @@ $(function() {
 
 })
 
-function deleteFriend(user_id,friend_id,fpost){
+function deleteFriend(userid,friendid){
     $.ajax({
         url: './backend-api.php', 
         method: 'REMOVEFRIEND',
-        data: JSON.stringify({user_id, friend_id}),
+        data: JSON.stringify({user_id:userid, friend_id:friendid}),
         contentType: "application/json",
         success: function(response) {
-           
+            console.log("successfully removed")
         },
         error: function(error) {
           console.log(error['responseText']);
@@ -290,13 +299,11 @@ function deleteFriend(user_id,friend_id,fpost){
 
       $.ajax({
         url: './backend-api.php', 
-        method: 'POSTCOMMENT',
-        data: JSON.stringify({user_id, post_id, text}),
+        method: 'POSTREQUEST',
+        data: JSON.stringify({receiver:friendid, sender:userid, type:1}),
         contentType: "application/json",
         success: function(response) {
-            $(".comment_to_post").remove()  
-            generateComments(post_id)
-
+            console.log("remove notif sent")
         },
         error: function(error) {
           console.log(error['responseText']);
