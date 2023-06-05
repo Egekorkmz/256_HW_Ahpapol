@@ -41,7 +41,6 @@
                 </span>
             </button>
             <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
-            <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
             <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
         </div>
 
