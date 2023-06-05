@@ -273,3 +273,33 @@ $(function() {
     });*/
 
 })
+
+function deleteFriend(user_id,friend_id,fpost){
+    $.ajax({
+        url: './backend-api.php', 
+        method: 'REMOVEFRIEND',
+        data: JSON.stringify({user_id, friend_id}),
+        contentType: "application/json",
+        success: function(response) {
+           
+        },
+        error: function(error) {
+          console.log(error['responseText']);
+        }
+      });
+
+      $.ajax({
+        url: './backend-api.php', 
+        method: 'POSTCOMMENT',
+        data: JSON.stringify({user_id, post_id, text}),
+        contentType: "application/json",
+        success: function(response) {
+            $(".comment_to_post").remove()  
+            generateComments(post_id)
+
+        },
+        error: function(error) {
+          console.log(error['responseText']);
+        }
+      });
+}

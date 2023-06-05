@@ -187,3 +187,16 @@ function deleteLikeStatus($user_id, $post_id){
       return ["error" => "API Error: delete like status"] ;
     }
 }
+
+function removeFriend($user_id, $friend_id){
+   global $db ;
+   try {
+       $stmt = $db->prepare("delete from friends_with where user_id = ?") ;
+       $stmt->execute([$user_id]) ;
+       $stmt->execute([$friend_id]) ;
+       $id = $db->lastInsertId();
+       return ["id" => $id,] ;
+    } catch(PDOException $e) {
+      return ["error" => "API Error: Remove friend"] ;
+    }
+}

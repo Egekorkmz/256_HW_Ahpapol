@@ -23,7 +23,7 @@
 </head>
 <body>
 
-   <section class="container">
+<section class="container">
     <div class="container-overlap bg-indigo-500 ng-scope">
         <div class="media m0 pv">
             <div class="media-left"><a href="./main_page.php"><img src=<?= $userPic ?> alt="User" class="media-object img-circle thumbMain"></a></div>
@@ -70,7 +70,7 @@
             </div>
         </div>
 
-</div>
+    </div>
 
 
     <section class="mycontainer">

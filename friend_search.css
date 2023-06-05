@@ -3,7 +3,12 @@
 }
 body{
     font-size: 16px;
+    background-image: url("./Img/wallpaper.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0px -140px;
 }
+
 
 /*head*/
 /*.head{
@@ -32,6 +37,7 @@ body{
 /*container*/
 .mycontainer{
     border: 2px solid rgb(177, 177, 177);
+    background-color: rgba(255,255,255,0.7);
     border-radius: 5px;
     width:500px;
     height:500px;
@@ -42,6 +48,7 @@ body{
 .mycontainer>*{
     align-items: center;
     text-align: center;
+    border-radius: 15px;
 }
 
 .timeline{

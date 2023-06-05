@@ -595,3 +595,5 @@
     display:flex;
     flex-direction:column;
 }
+
+.mda-list .delete-can:hover{color:red;}

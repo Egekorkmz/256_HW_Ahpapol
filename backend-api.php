@@ -63,5 +63,9 @@
     $out = deleteLikeStatus($input->user_id, $input->post_id);
   }
 
+  if($method == "REMOVEFRIEND"){
+    $out = removeFriend($input->user_id,$input->friend_id);
+  }
+
 
   echo json_encode($out) ;
