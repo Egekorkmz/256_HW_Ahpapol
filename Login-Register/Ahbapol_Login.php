@@ -58,7 +58,7 @@
               <span class = "error" ><?= $errorMail ?? "" ?></span>
               <input class="form-control" name="password" type="password" placeholder="Enter Password" >
               <span class = "error" ><?= $errorPass ?? "" ?></span>
-              <button type="submit" class="btn btn-success" style=" background-color:#9600bf;">Login</button>
+              <button type="submit" class="btn btn-success" style=" background-color:#AD7BE9; border:solid 2px #3E54AC">Login</button>
               <a href="Ahbapol_Register.php" class="btn btn-success"  id="register-btn">Register</a>
               <!--<a href="#" class="forgot-password">Forgot password?</a>-->
             </div>

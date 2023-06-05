@@ -10,7 +10,7 @@
 <link rel="icon" type="image/x-icon" href="../Img/logo.png">
 <link rel="stylesheet" href="./register.css">
 </head>
-<body>
+<body style = "background-image: url('../Img/wallpaper.avif'); background-repeat: no-repeat; background-size: cover; background-position: 0px -140px;">
 <?php
   if($_SERVER["REQUEST_METHOD"] == "POST"){
     //var_dump($_POST);
@@ -95,7 +95,7 @@
                 <span class = "error" ><?= $errorPassword ?? "" ?></span>
                 <input type="date" class="date" name="date" style="width: 320px;" value = "<?= $date ?? "" ?> "><br>
                 <span class = "error" ><?= $errorDate ?? "" ?></span>
-                <button type="submit" style="background-color: #9600bf;" class="btn btn-success">Register</button>
+                <button type="submit" style="background-color: #AD7BE9; border: solid 2px #3E54AC" class="btn btn-success">Register</button>
           </form>
           </div>
         </div>
