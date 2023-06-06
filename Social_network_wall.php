@@ -14,6 +14,7 @@
         $userEmail = $userData['email'];
         $userPic = "images/" . $userData['profile_picture'];
 
+        //bundan sonrasına ihtiyacın yok api kulanarak çekeceksin
         $postData = $_SESSION['post'];
         $post_id=(int)$_SESSION['post']['post_id'];
         $post_date=(int)$_SESSION['post']['date'];
@@ -30,7 +31,7 @@
         $not_reciever=(int)$_SESSION['notification']['receiver_id'];
         $not_sender=(int)$_SESSION['notification']['sender_id'];
         $not_seen=(int)$_SESSION['notification']['isSeen'];
-        
+        // sonu
     }
 ?>
 
