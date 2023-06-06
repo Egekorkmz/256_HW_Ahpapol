@@ -67,21 +67,6 @@
                             ";
                         }
                     ?>
-                    <div class="inside">
-                        <p>New friendship request from: Angela</p>
-                        <button>Accept</button>
-                        <button>Reject</button>
-                    </div>
-                    <div class="inside">
-                        <p>New friendship request from: Harry</p>
-                        <button>Accept</button>
-                        <button>Reject</button>
-                    </div>
-                    <div class="inside">
-                        <p>New friendship request from: Eren Yeşiltepe</p>
-                        <button>Accept</button>
-                        <button>Reject</button>
-                    </div>
                 </div>
 
             </div>
@@ -89,122 +74,96 @@
                 <div class="row">
                     <div class="col-md-8">
                         <div class="card">
-                            <div class="card-body">
-                                <form action class="mt ng-pristine ng-valid">
-                                    <div class="input-group mda-input-group">
-                                        <div class="mda-form-group">
-                                            <div class="mda-form-control">
-                                                <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
-                                                <div class="mda-form-control-line"></div>
-                                                <label class="m0">What's on your mind?</label>
-                                            </div><span class="mda-form-msg right">Any message here</span>
+                                <div class="card-body">
+                                    <form action class="mt ng-pristine ng-valid">
+                                        <div class="input-group mda-input-group">
+                                            <div class="mda-form-group">
+                                                <div class="mda-form-control">
+                                                    <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
+                                                    <div class="mda-form-control-line"></div>
+                                                    <label class="m0">What's on your mind?</label>
+                                                </div><span class="mda-form-msg right">Any message here</span>
+                                            </div>
+                                            <span class="input-group-btn">
+                                                <button type="button" class="btn btn-success" style="margin-top:-44px" id="share_post">
+                                                    POST
+                                                </button>
+                                            </span>
+                                            <?php
+                                                if(!empty($_POST)) {
+                                                //var_dump($_FILES);
+                                                //var_dump($_POST);
+                                                extract($_POST);
+                                                $photo = new Upload("picture", "images/posts/");
+                                                addPost($userData['user_id'], $txt, $photo->filename);
+                                                echo "<p class='help-block'>Your post has been posted.</p>";
+                                                }
+                                            ?>
                                         </div>
-                                        <span class="input-group-btn">
-                                            <button type="button" class="btn btn-success" style="margin-top:-44px" id="share_post">
-                                                POST
-                                            </button>
-                                        </span>
-                                        <?php
-                                            if(!empty($_POST)) {
-                                            //var_dump($_FILES);
-                                            //var_dump($_POST);
-                                            extract($_POST);
-                                            $photo = new Upload("picture", "images/posts/");
-                                            addPost($userData['user_id'], $txt, $photo->filename);
-                                            echo "<p class='help-block'>Your post has been posted.</p>";
-                                            }
-                                        ?>
-                                    </div>
-                                </form>
-                            </div>
-                        <div class="posts">
-                            <?php
-                                $limit = 10;
-                                /*$posts=getFriendsPosts($postData['user_id']);*/
-                                
-                            ?>
-                            <div class="card-body">
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <div class="media m0">
-                                            <div class="media-left"><a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User" class="media-object img-circle thumb48"></a></div>
-                                            <div class="media-body media-middle pt-sm">
-                                                <p class="media-heading m0 text-bold">Stephen Palmer</p><small class="text-muted"><em class="ion-earth text-muted mr-sm"></em><span>2 hours</span></small>
+                                    </form>
+                                </div>
+                            <div class="posts">
+                                <?php
+                                    $limit = 10;
+                                    $posts=getFriendsPosts($userData['user_id'], $limit);
+                                    foreach($posts as $p){
+                                        if($p['image'] ==null){
+                                            echo "
+                                            <div class='card-body'>
+                                            <div class='card'>
+                                                <div class='card-heading'>
+                                                    <div class='media m0'>
+                                                        <div class='media-left'>
+                                                            <a href='#'>
+                                                                <img src='images/{userData['profile_picture']}' alt='User' class='media-object img-circle thumb48'>
+                                                            </a>
+                                                        </div>
+                                                        <div class='media-body media-middle pt-sm'>
+                                                            <p class='media-heading m0 text-bold'>{userData['first_name']} {userData['last_name']}</p>
+                                                            <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>{p['date']}</span></small>
+                                                        </div>
+                                                    </div>
+                                                <div class='p'>{sanitize(p['text'])}</div>
+                                            </div>
+                                            <div class='card-footer form-inline'>
+                                                <button type='button' class='btn btn-flat btn-light like' id='{p['post_id']}'><span>{userData['user']}</span> Like</button>
+                                                <input type='text' class='form-control' id='commentInput' placeholder='Write your comments...'>
+                                                <button type='button' class='btn btn-flat btn-light comment' id='{p['post_id']}'>Comment</button>
+                                            <div class='comment_to_post' id='comment1_by_user'></div>
+                                            </div></div></div>
+                                            ";
+                                        }else{
+                                            echo "
+                                            <div class='card-body'>
+                                            <div class='card'>
+                                                <div class='card-heading'>
+                                                    <div class='media m0'>
+                                                        <div class='media-left'><a href='#'><img src='images/{userData['profile_picture']}' alt='User' class='media-object img-circle thumb48'></a></div>
+                                                        <div class='media-body media-middle pt-sm'>
+                                                            <p class='media-heading m0 text-bold'>{userData['first_name']} {userData['last_name']}</p><small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>{p['date']}</span></small>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class='card-item'><img src='images/posts/{p['image']}' alt='post image' class='fw img-responsive'>
+                                                    <div class='card-item-text bg-transparent'>
+                                                        <p>{sanitize(p['text'])}</p>
+                                                    </div>
+                                                </div>
+                                                <div class='card-footer form-inline'>
+                                                    <button type='button' class='btn btn-flat btn-light like' id='{p['post_id']}'><span>{userData['user']}</span> Like</button>
+                                                    <input type='text' class='form-control' id='commentInput' placeholder='Write your comments...'>
+                                                    <button type='button' class='btn btn-flat btn-light comment' id='{p['post_id']}'>Comment</button>
+                                                    <div class='comment_to_post' id='{p['post_id']}'>
+                                                        
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="p">Ut egestas consequat faucibus. Donec id lectus tortor. Maecenas at porta purus. Etiam feugiat risus massa. Vivamus fermentum libero vel felis aliquet interdum. </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary like" id="like1">Like</button>
-                                        <button type="button" class="btn btn-flat btn-primary comment" id="comment1">Comment</button>
-                                        <div class="comment_to_post" id="comment1_to_post">
-                                            <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
-                                        </div>
-                                        <div class="comment_to_post" id="comment1_by_user">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
+                                            ";
+                                        }
+                                    }
+                                ?>
                             </div>
-                            <div class="card-body">
-
-                                <div class="card">
-                                    <div class="card-heading">
-                                        <div class="media m0">
-                                            <div class="media-left"><a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User" class="media-object img-circle thumb48"></a></div>
-                                            <div class="media-body media-middle pt-sm">
-                                                <p class="media-heading m0 text-bold">Ricky Wagner</p><small class="text-muted"><em class="ion-earth text-muted mr-sm"></em><span>10 hours</span></small>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="card-item"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="MaterialImg" class="fw img-responsive">
-                                        <div class="card-item-text bg-transparent">
-                                            <p>The sun was shinning</p>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary like" id="like2">Like</button>
-                                        <button type="button" class="btn btn-flat btn-primary comment" id="comment2">Comment</button>
-                                        <div class="comment_to_post" id="comment2_to_post">
-                                            <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
-                                        </div>
-                                        <div class="comment_to_post" id="comment2_by_user">
-                                            
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="card-body">
-
-                                <div class="card reader-block">
-                                    <div class="card-heading">
-                                        <div class="media m0">
-                                            <div class="media-left"><a href="#"><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="User" class="media-object img-circle thumb48"></a></div>
-                                            <div class="media-body media-middle pt-sm">
-                                                <p class="media-heading m0 text-bold">Stephen Palmer</p><small class="text-muted"><em class="ion-earth text-muted mr-sm"></em><span>Yesterday</span></small>
-                                            </div>
-                                        </div>
-                                        <div class="p">
-                                            <div class="mb">Donec a purus auctor dui hendrerit accumsan non quis augue nisl sed iaculis.</div><a href>
-                                                <img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Pic" class="mr-sm thumb48"></a>
-                                            <a href><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Pic" class="mr-sm thumb48"></a>
-                                            <a href><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Pic" class="mr-sm thumb48"></a>
-                                            <a href><img src="https://bootdey.com/img/Content/avatar/avatar6.png" alt="Pic" class="mr-sm thumb48"></a>
-                                        </div>
-                                    </div>
-                                    <div class="card-footer">
-                                        <button type="button" class="btn btn-flat btn-primary like" id="like3">Like</button>
-                                        <button type="button" class="btn btn-flat btn-primary comment" id="comment3">Comment</button>
-                                    </div>
-                                    <div class="comment_to_post" id="comment3_to_post">
-                                        <textarea rows="1" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>"></textarea>
-                                    </div>
-                                    <div class="comment_to_post" id="comment3_by_user">
-                                            
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
                         </div>
                     </div>
                     <div class="col-md-4">
