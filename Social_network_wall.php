@@ -1,16 +1,36 @@
 <?php
     require_once "Upload.php";
     require_once "userdb.php";
-    /*
+    require_once "backend-api.php";
+    
     session_start();
     if($_SESSION == null){
         header("Location: Login-Register\Ahbapol_Login.php");
         exit;
-    }else*/{
+    }else{
         $userData = $_SESSION['user'];
+        $user_id=(int)$_SESSION["user"]["user_id"];
         $userName = $userData['first_name'] . " " . $userData['last_name'];
         $userEmail = $userData['email'];
         $userPic = "images/" . $userData['profile_picture'];
+
+        $postData = $_SESSION['post'];
+        $post_id=(int)$_SESSION['post']['post_id'];
+        $post_date=(int)$_SESSION['post']['date'];
+        $post_text=$postData['text'];
+        $post_image = "images/" . $postData['image'];
+        $post_likes=(int)$_SESSION['post']['likes'];
+        $post_by=(int)$_SESSION['post']['user_id'];
+
+        $requestData = $_SESSION['request'];
+        $request_reciever=(int)$_SESSION['request']['receiver_id'];
+        $request_sender=(int)$_SESSION['request']['sender_id'];
+
+        $notData = $_SESSION['notification'];
+        $not_reciever=(int)$_SESSION['notification']['receiver_id'];
+        $not_sender=(int)$_SESSION['notification']['sender_id'];
+        $not_seen=(int)$_SESSION['notification']['isSeen'];
+        
     }
 ?>
 
@@ -53,6 +73,9 @@
                 </div>
 
                 <div class="pop" id="pop_frnds">
+                    <?php
+
+                    ?>
                     <div class="inside">
                         <p>New friendship request from: Angela</p>
                         <button>Accept</button>
@@ -113,8 +136,9 @@
                             </div>
                         <div class="posts">
                             <?php
-                                /*$posts=getFriendsPosts($postDate['post_id']);*/
-
+                                $limit = 5;
+                                /*$posts=getFriendsPosts($postData['user_id']);*/
+                                
                             ?>
                             <div class="card-body">
                                 <div class="card">
