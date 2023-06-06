@@ -115,20 +115,20 @@
                                                     <div class='media m0'>
                                                         <div class='media-left'>
                                                             <a href='#'>
-                                                                <img src='images/{userData['profile_picture']}' alt='User' class='media-object img-circle thumb48'>
+                                                                <img src='images/{$p['profile_picture']}' alt='User' class='media-object img-circle thumb48'>
                                                             </a>
                                                         </div>
                                                         <div class='media-body media-middle pt-sm'>
-                                                            <p class='media-heading m0 text-bold'>{userData['first_name']} {userData['last_name']}</p>
-                                                            <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>{p['date']}</span></small>
+                                                            <p class='media-heading m0 text-bold'>{$p['first_name']} {$p['last_name']}</p>
+                                                            <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>{$p['date']}</span></small>
                                                         </div>
                                                     </div>
-                                                <div class='p'>{sanitize(p['text'])}</div>
+                                                <div class='p'>{sanitize($p[text])}</div>
                                             </div>
                                             <div class='card-footer form-inline'>
-                                                <button type='button' class='btn btn-flat btn-light like' id='{p['post_id']}'><span>{userData['user']}</span> Like</button>
+                                                <button type='button' class='btn btn-flat btn-light like' id='{$p['post_id']}'><span>{$p['user']}</span> Like</button>
                                                 <input type='text' class='form-control' id='commentInput' placeholder='Write your comments...'>
-                                                <button type='button' class='btn btn-flat btn-light comment' id='{p['post_id']}'>Comment</button>
+                                                <button type='button' class='btn btn-flat btn-light comment' id='{$p['post_id']}'>Comment</button>
                                             <div class='comment_to_post' id='comment1_by_user'></div>
                                             </div></div></div>
                                             ";
@@ -138,22 +138,22 @@
                                             <div class='card'>
                                                 <div class='card-heading'>
                                                     <div class='media m0'>
-                                                        <div class='media-left'><a href='#'><img src='images/{userData['profile_picture']}' alt='User' class='media-object img-circle thumb48'></a></div>
+                                                        <div class='media-left'><a href='#'><img src='images/{$p['profile_picture']}' alt='User' class='media-object img-circle thumb48'></a></div>
                                                         <div class='media-body media-middle pt-sm'>
-                                                            <p class='media-heading m0 text-bold'>{userData['first_name']} {userData['last_name']}</p><small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>{p['date']}</span></small>
+                                                            <p class='media-heading m0 text-bold'>{$p['first_name']} {$p['last_name']}</p><small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>{$p['date']}</span></small>
                                                         </div>
                                                     </div>
                                                 </div>
-                                                <div class='card-item'><img src='images/posts/{p['image']}' alt='post image' class='fw img-responsive'>
+                                                <div class='card-item'><img src='images/posts/{$p['image']}' alt='post image' class='fw img-responsive'>
                                                     <div class='card-item-text bg-transparent'>
-                                                        <p>{sanitize(p['text'])}</p>
+                                                        <p>{sanitize($p[text])}</p>
                                                     </div>
                                                 </div>
                                                 <div class='card-footer form-inline'>
-                                                    <button type='button' class='btn btn-flat btn-light like' id='{p['post_id']}'><span>{userData['user']}</span> Like</button>
+                                                    <button type='button' class='btn btn-flat btn-light like' id='{$p['post_id']}'><span>{$p['user']}</span> Like</button>
                                                     <input type='text' class='form-control' id='commentInput' placeholder='Write your comments...'>
-                                                    <button type='button' class='btn btn-flat btn-light comment' id='{p['post_id']}'>Comment</button>
-                                                    <div class='comment_to_post' id='{p['post_id']}'>
+                                                    <button type='button' class='btn btn-flat btn-light comment' id='{$p['post_id']}'>Comment</button>
+                                                    <div class='comment_to_post' id='{$p['post_id']}'>
                                                         
                                                     </div>
                                                 </div>
