@@ -13,25 +13,6 @@
         $userName = $userData['first_name'] . " " . $userData['last_name'];
         $userEmail = $userData['email'];
         $userPic = "images/" . $userData['profile_picture'];
-
-        //bundan sonrasına ihtiyacın yok api kulanarak çekeceksin
-        $postData = $_SESSION['post'];
-        $post_id=(int)$_SESSION['post']['post_id'];
-        $post_date=(int)$_SESSION['post']['date'];
-        $post_text=$postData['text'];
-        $post_image = "images/" . $postData['image'];
-        $post_likes=(int)$_SESSION['post']['likes'];
-        $post_by=(int)$_SESSION['post']['user_id'];
-
-        $requestData = $_SESSION['request'];
-        $request_reciever=(int)$_SESSION['request']['receiver_id'];
-        $request_sender=(int)$_SESSION['request']['sender_id'];
-
-        $notData = $_SESSION['notification'];
-        $not_reciever=(int)$_SESSION['notification']['receiver_id'];
-        $not_sender=(int)$_SESSION['notification']['sender_id'];
-        $not_seen=(int)$_SESSION['notification']['isSeen'];
-        // sonu
     }
 ?>
 
@@ -68,14 +49,23 @@
 
                 </div>
                 <div class="bu">
-                    <button type="button" class="btn btn-flat btn-primary" id="friends">Friends</button>
-                    <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
+                    <button type="button" class="btn btn-flat btn-primary" id="friends">Notifications</button>
                     <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.html">Search</a></button>
                 </div>
 
                 <div class="pop" id="pop_frnds">
                     <?php
-
+                        $notifications=getNotifications($userData['user_id']);
+                        //var_dump($notifications);
+                        foreach($notifications as $not){
+                            
+                            echo "<div class='inside'>
+                            <p>New friendship request from: {$not['first_name']}  {$not['last_name']}</p>
+                            <button>Accept</button>
+                            <button>Reject</button>
+                            </div>
+                            ";
+                        }
                     ?>
                     <div class="inside">
                         <p>New friendship request from: Angela</p>
@@ -91,14 +81,6 @@
                         <p>New friendship request from: Eren Yeşiltepe</p>
                         <button>Accept</button>
                         <button>Reject</button>
-                    </div>
-                </div>
-                <div class="pop" id="pop_not" >
-                    <div class="inside">
-                        <p>Stephen Palmer shared a new post</p>
-                    </div>
-                    <div class="inside">
-                        <p>My talking Tom liked your post</p>
                     </div>
                 </div>
 
@@ -137,7 +119,7 @@
                             </div>
                         <div class="posts">
                             <?php
-                                $limit = 5;
+                                $limit = 10;
                                 /*$posts=getFriendsPosts($postData['user_id']);*/
                                 
                             ?>
