@@ -88,8 +88,13 @@ if ($_SESSION == null) {
                                     //var_dump($_POST);
                                     extract($_POST);
                                     $photo = new Upload("picture", "images/posts/");
-                                    addPost($userData['user_id'], $txt, $photo->filename);
-                                    echo "<p class='help-block'>Your post has been posted.</p>";
+                                    if ($txt == "") {
+                                        echo "<p class='help-block'>Please enter a text.</p>";
+                                    }
+                                    else {
+                                        addPost($userData['user_id'], $txt, $photo->filename);
+                                        echo "<p class='help-block'>Your post has been posted.</p>";
+                                    }
                                 }
                                 ?>
                             </div>
