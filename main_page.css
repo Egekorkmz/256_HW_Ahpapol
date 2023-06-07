@@ -593,6 +593,7 @@
 .bu{
     display:flex;
     flex-direction:column;
+    justify-content: space-evenly;
 }
 
 .mda-list .delete-can:hover{color:red;}
