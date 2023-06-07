@@ -353,32 +353,22 @@ function getNotifications(user_id){
         data: JSON.stringify({user_id}),
         contentType: "application/json",
         success: function(response) {
-            console.log(response)
             response.forEach((temp)=>{
-                $.ajax({
-                    url: './backend-api.php', 
-                    method: 'GETUSER',
-                    data: JSON.stringify({user_id: temp["sender_id"]}),
-                    contentType: "application/json",
-                    success: function(res){
-                        console.log(temp["type"])
-                        if(temp["type"] == 1)
-                            $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
-                                                <p>New friendship request from: ${res['first_name']} ${res['last_name']} </p>
-                                                <button id='${i}accept'>Accept</button>
-                                                <button id='${i}reject'>Reject</button>
-                                                </div>`);
-                            else{
-                            $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
-                            <p> ${res['first_name']} ${res['last_name']} unfriended you.</p>
-                            </div>`);    
+                if(temp["type"] == 1)
+                    $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
+                                            <p>New friendship request from: ${temp['first_name']} ${temp['last_name']} </p>
+                                            <button id='${i}accept'>Accept</button>
+                                            <button id='${i}reject'>Reject</button>
+                                            </div>`);
+                else{
+                    $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
+                                            <p> ${temp['first_name']} ${temp['last_name']} unfriended you.</p>
+                                            </div>`);    
                         }
-                    }
+                    i++;
+                }
                 
-                })
-                i++;
-            })                       
-        },
+            )},
         error: function(error) {
             console.log(error['responseText']);
         }
