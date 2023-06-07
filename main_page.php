@@ -83,7 +83,7 @@ if ($_SESSION == null) {
                                     //var_dump($_FILES);
                                     //var_dump($_POST);
                                     extract($_POST);
-                                    $photo = new Upload("picture", "images/posts/");
+                                    $photo = new Upload("picture", "images/posts");
                                     if ($txt == "") {
                                         echo "<p class='help-block'>Please enter a text.</p>";
                                     }
