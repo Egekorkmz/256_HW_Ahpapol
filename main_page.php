@@ -60,22 +60,7 @@ if ($_SESSION == null) {
                     <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
                 </div>
 
-                <div class="pop" id="pop_frnds">
-                    <div class="inside">
-                        <p>New friendship request from: Angela</p>
-                        <button type="button" class="btn btn-flat btn-success">Accept</button>
-                        <button type="button" class="btn btn-flat btn-danger">Reject</button>
-                    </div>
-                    <div class="inside">
-                        <p>New friendship request from: Harry</p>
-                        <button>Accept</button>
-                        <button>Reject</button>
-                    </div>
-                    <div class="inside">
-                        <p>New friendship request from: Eren Yeşiltepe</p>
-                        <button>Accept</button>
-                        <button>Reject</button>
-                    </div>
+                <div class="pop" id="pop_frnds"></div>
                 </div>
                 <div class="pop" id="pop_not">
                     <div class="inside">
