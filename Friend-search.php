@@ -16,6 +16,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="https://code.jquery.com/jquery-1.10.2.min.js"></script>
+    <link rel="icon" type="image/x-icon" href="./Img/logo.png">
     <link href="https://netdna.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="./main_page.css">
     <link rel="stylesheet" href="./friend_search.css">
