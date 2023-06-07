@@ -59,7 +59,7 @@ if ($_SESSION == null) {
                         Friends
                         <span id ="numNot" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
                     </button>
-                    <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
+                    <button type="button" class="btn btn-flat btn-primary" id="srch">Search</button>
                     <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
                 </div>
                 <div class="pop" id="pop_frnds"></div>

@@ -180,6 +180,10 @@ $(function() {
         window.location = "./Login-Register/logout.php"
     })
 
+    $("#srch").click(function() {
+        window.location = "./Friend-search.php"
+    })
+
     var limit = 0
     //getting posts
     createPosts(user_id, limit)
