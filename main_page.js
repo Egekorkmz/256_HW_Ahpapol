@@ -114,11 +114,11 @@ function generateComments(post_id){
 
 }
 
-function deleteNotification(user_id, friend_id){
+function deleteNotification(user_id, friend_id, type){
     $.ajax({
         url: './backend-api.php',
         method: 'DELETENOT',
-        data: JSON.stringify({sender_id: friend_id, reciever_id: user_id, type: 1}),
+        data: JSON.stringify({sender_id: friend_id, reciever_id: user_id, type}),
         contentType: "application/json",
         });
 }
@@ -130,7 +130,7 @@ function addFriend(user_id, friend_id){
         data: JSON.stringify({user_id:user_id, friend_id:friend_id}),
         contentType: "application/json",
         success: function(response){
-            deleteNotification(user_id, friend_id);
+            deleteNotification(user_id, friend_id, 1);
         }
     })
 }
@@ -368,7 +368,7 @@ function getNotifications(user_id){
                                             <button class="btn btn-flat btn-danger" id='${i}reject'>Reject</button>
                                             </div>`);
                 else{
-                    $("#pop_frnds").append(`<div class='inside'>
+                    $("#pop_frnds").append(`<div class='inside unfriend' id='${temp['sender_id']}'>
                                             <p> ${temp['first_name']} ${temp['last_name']} unfriended you.</p>
                                             </div>`);    
                         }
@@ -396,5 +396,12 @@ $(function(){
         var user_id = user.user_id;
         deleteNotification(user_id,sender_id);
         $(this).parent().html(`<p style='color:red;'>You rejected the request. </p>`);
+    });
+
+    $("#pop_frnds").on("click",".unfriend",function(){
+        var sender_id = $(this).attr("id");
+        var user_id = user.user_id;
+        removeNotification(user_id,sender_id,0);
+        $(this).html(`<p style='color:red;'> Notification deleted.</p>`);
     });
 });        
