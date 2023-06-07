@@ -353,7 +353,8 @@ function getNotifications(user_id){
         data: JSON.stringify({user_id}),
         contentType: "application/json",
         success: function(response) {
-            $("#numNot").text("+" + response.length)
+            $("#numNot").text("+" + response.length);
+            $("#pop_frnds").html("");
             response.forEach((temp)=>{
                 if(temp["type"] == 1)
                     $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
