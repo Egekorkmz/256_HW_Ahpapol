@@ -36,6 +36,7 @@ if ($_SESSION == null) {
 
 <body>
     <script>
+        getNotifications(user['user_id']);
         setInterval(function() {
             getNotifications(user['user_id']);
         }, 5000);
