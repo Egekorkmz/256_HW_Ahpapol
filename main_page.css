@@ -544,16 +544,14 @@
 }
 
 .pop{
-    border: 3px solid black;
+    border-radius: 5px;
     background-color: #F5F5F5;
     margin-left: 100px;
     position: absolute;
-    height: 500px;
-    width: 200px;
+    width: 300px;
     right: 120px;
     top: 100px;
     z-index: 3;
-    overflow: scroll;
 }
 
 #pop_frnds{
@@ -577,6 +575,7 @@
 
 .bu button{
     background-color: yellowgreen;
+    width: 100px;
 }
 
 .comment_to_post{
