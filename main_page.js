@@ -375,7 +375,6 @@ function createFriends(user_id){
         data: JSON.stringify({user_id}),
         contentType: "application/json",
         success: function(response) {
-            console.log(response.length)
             list = $("#friend-list")
             list.html("");
             if(response.length == 0) {
@@ -383,8 +382,6 @@ function createFriends(user_id){
             }
             else {
                 response.forEach((friend)=>{
-                    console.log(friend)
-                    console.log(list)
                         list.append(`<div class='mda-list-item'><img src='images/${friend['profile_picture']}' alt='${friend['first_name']} ${friend['last_name']}' class='mda-list-item-img thumb48'>
                         <div class='mda-list-item-text'>
                             <h3>${friend['first_name']} ${friend['last_name']}</h3>
