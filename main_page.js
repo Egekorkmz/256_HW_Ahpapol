@@ -185,6 +185,8 @@ $(function() {
         createPosts(user_id, limit)
     })
 
+<<<<<<< HEAD
+=======
     //notification
     $(`.inside`).on("click", ".accept", function(){
         addFriend(user_id, friend_id)
@@ -194,6 +196,7 @@ $(function() {
         removeFriend(user_id, friend_id)
     })
 
+>>>>>>> 8acc24c719d2ad7315df0d0eaea96ad5a3bb422e
     //
     //like button functionality
     //

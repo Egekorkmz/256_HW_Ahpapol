@@ -3,6 +3,13 @@
 }
 body{
     font-size: 16px;
+<<<<<<< HEAD
+    background-image: url("./Img/wallpaper.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0px -140px;
+=======
+>>>>>>> 8acc24c719d2ad7315df0d0eaea96ad5a3bb422e
 }
 
 

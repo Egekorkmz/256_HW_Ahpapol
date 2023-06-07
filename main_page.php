@@ -92,7 +92,22 @@ if ($_SESSION == null) {
                                         <label for="exampleInputFile">Picture(Optional)</label>
                                         <input type="file" id="exampleInputFile" name="picture">
                                     </div>
-                                    <button type="submit" class="btn btn-success" id="share_post">POST</button>
+                                    <button type="submit" class="btn btn-success" id="share_post">Submit</button>
+                                    <!--<div class="input-group mda-input-group">
+                                        <div class="mda-form-group">
+                                            <div class="mda-form-control">
+                                                post text area
+                                                
+                                                <div class="mda-form-control-line"></div>
+                                                <label class="m0">What's on your mind?</label>
+                                            </div>
+                                        </div>
+                                        <span class="input-group-btn">
+                                            <button type="button" class="btn btn-success" style="margin-top:-44px" id="share_post">
+                                                POST
+                                            </button>
+                                        </span>
+                                    </div>-->
                                 </form>
                                 <?php
                                 if(!empty($_POST)) {
