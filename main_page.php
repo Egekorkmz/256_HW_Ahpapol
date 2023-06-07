@@ -36,8 +36,9 @@ if ($_SESSION == null) {
 
 <body>
     <script>
-        //console.log(user['user_id']);
-        getNotifications(user['user_id']);
+        setInterval(function() {
+            getNotifications(user['user_id']);
+        }, 5000);
     </script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <section ui-view autoscroll="false" ng-class="app.viewAnimation" class="ng-scope container ng-fadeInLeftShort" style>
