@@ -164,9 +164,11 @@ try {
     }
 }
 
- function findUser($filter, $text){
+ function findUser($filter, $text,$userId){
     global $db ;
-    $stmt = $db->prepare("select * from users where ".$filter." like '%".$text."%'") ;
+    $stmt = $db->prepare("select * from users where ".$filter." like '%".$text."%' AND
+                            users.user_id NOT IN (SELECT reciever_id FROM notification WHERE {$userId}=notification.sender_id )
+                            AND users.user_id NOT IN (SELECT user_id FROM friends_with where {$userId}=friends_with.friend_id)") ;
     $stmt->execute();
     return $stmt->fetchALL() ;
  }

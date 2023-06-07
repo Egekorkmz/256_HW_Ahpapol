@@ -22,7 +22,6 @@
     <script src="./friend_search.js"></script>
 </head>
 <body>
-
 <section class="container">
     <div class="container-overlap bg-indigo-500 ng-scope">
         <div class="media m0 pv">
@@ -49,11 +48,12 @@
                 <option value="last_name">Last name</option>
             </select>
             <button id="searchbtn">Search</button>
+            <p id="errorpart"></p>
         </div>
         <div class="friends-part">
         
         </div>
-        <p id="result"></p>
+        <p id="result" style="color:red;"></p>
     </section>
 </section>
     
