@@ -41,6 +41,7 @@
                 </span>
             </button>
             <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
+            <button type="button" class="btn btn-flat btn-primary" id="main-page">Main Page</button>
             <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
         </div>
 

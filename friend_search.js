@@ -1,5 +1,7 @@
 $(function(){
-    
+    $("#main-page").click(function() {
+        window.location = "./main_page.php"
+    })
 
     //search + display
     $("#searchbtn").click(function(e){
