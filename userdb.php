@@ -36,6 +36,13 @@ try {
      return $stmt->fetch() ;
  }
 
+ function getUserID($id){
+     global $db ;
+     $stmt = $db->prepare("select user_id, first_name, last_name from users where user_id=?") ;
+     $stmt->execute([$id]);
+     return $stmt->fetch() ;
+ }
+
  function getUsers(){
     global $db ;
      $stmt = $db->prepare("select * from users") ;

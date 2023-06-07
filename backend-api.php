@@ -67,5 +67,9 @@
     $out = removeFriend($input->user_id,$input->friend_id);
   }
 
+  if($method == "GETUSER"){
+    $out = getUserID($input->user_id);
+  }
+
 
   echo json_encode($out) ;

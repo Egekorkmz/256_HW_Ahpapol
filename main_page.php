@@ -1,6 +1,5 @@
 <?php
 require_once "Upload.php";
-require_once "userdb.php";
 
 session_start();
 if ($_SESSION == null) {
@@ -59,24 +58,46 @@ if ($_SESSION == null) {
                     <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
                 </div>
 
-                <div class="pop" id="pop_frnds">
-                    <?php
-                        $notifications=getNotifications($userData['user_id']);
-                        //var_dump($notifications);
-                        $i=1;
-                        foreach($notifications as $not){
-                            
-                            echo "<div class='inside' id='{$i}inside'>
-                            <p>New friendship request from: {$not['first_name']}  {$not['last_name']}</p>
-                            <button id='{$i}accept'>Accept</button>
-                            <button id='{$i}reject'>Reject</button>
-                            </div>
-                            ";
+                <div class="pop" id="pop_frnds"></div>
+                <script>
+                    $.ajax({
+                        url: './backend-api.php', 
+                        method: 'GETNOT',
+                        data: JSON.stringify({user_id: user["user_id"]}),
+                        contentType: "application/json",
+                        success: function(response) {
+                            //console.log(response)
+                            response.forEach((temp)=>{
+                                $.ajax({
+                                    url: './backend-api.php', 
+                                    method: 'GETUSER',
+                                    data: JSON.stringify({user_id: temp["sender_id"]}),
+                                    contentType: "application/json",
+                                    success: function(res){
+                                        //console.log(temp)
+                                        if(temp["type"] === 1)
+                                            $("#pop_frnds").append(`<div class='inside' id='{$i}inside'>
+                                                                <p>New friendship request from: `+res['first_name'] + res['last_name'] +`</p>
+                                                                <button id='{$i}accept'>Accept</button>
+                                                                <button id='{$i}reject'>Reject</button>
+                                                                </div>`);
+                                        else{
+                                            $("#pop_frnds").append(`<div class='inside' id='{$i}inside'>
+                                            <p> `+res['first_name'] + res['last_name'] +` unfriended you.</p>
+                                            </div>`);    
+                                        }
+                                    }
+                                })
 
-                            $i++;
+                            })
+
+                            
+                        },
+                        error: function(error) {
+                        $(".pop_frnds").html("<p>There is no friend request.");
                         }
-                    ?>
-                </div>
+                    });
+                </script>
             </div>
             <div class="container-lg ng-scope">
                 <div style = "margin-top: 30px;" class="row">
@@ -116,18 +137,7 @@ if ($_SESSION == null) {
                         <div class="card card-transparent">
                             <h5 class="card-heading">Friends</h5>
                             <div class="mda-list">
-                                <?php
-                                    $friends = getFriends($userData['user_id']);
-                                    //var_dump($friends);
-                                    foreach ($friends as $friend) {
-                                        echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
-                                                <div class='mda-list-item-text'>
-                                                    <h3>{$friend['first_name']} {$friend['last_name']}</h3>
-                                                    <div class='text-muted text-ellipsis btn-delete'><i id='{$friend['user_id']}' class='fa-solid fa-trash-can delete-can' style='cursor:pointer'></i></div>
-                                                </div>
-                                            </div>";
-                                    }
-                                ?>
+
                             </div>
                         </div>
                     </div>
