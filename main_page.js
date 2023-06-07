@@ -97,7 +97,7 @@ function generateComments(post_id){
           if(response.length) {
             response.forEach(comment => {
                 $(`#${post_id}.comment`).after(`<div class='comment_to_post' id='comment1_by_user'>
-                        <img src='images/default.png' alt='User' class='media-object img-circle thumb40'>
+                        <img src='images/${comment.profile_picture}' alt='User' class='media-object img-circle thumb40'>
                         <div class="margin10">
                             <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${comment.first_name} ${comment.last_name}</span></small>
                             <p class='media-heading m0'>${sanitize(comment.comment)}</p>
