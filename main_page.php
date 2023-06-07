@@ -107,7 +107,7 @@ if ($_SESSION == null) {
                                 <?php
                                     $friends = getFriends($userData['user_id']);
                                     if (empty($friends)) {
-                                        echo "<div class='text-muted text-ellipsis'>You have no friends yet.</div>";
+                                        echo "<div class='mda-list-item'><div class='text-muted text-ellipsis'>You have no friends yet.</div></div>";
                                     }
                                     else {
                                         foreach ($friends as $friend) {
