@@ -359,8 +359,8 @@ function getNotifications(user_id){
                 if(temp["type"] == 1)
                     $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
                                             <p>New friendship request from: ${temp['first_name']} ${temp['last_name']} </p>
-                                            <button id='${i}accept'>Accept</button>
-                                            <button id='${i}reject'>Reject</button>
+                                            <button class="btn btn-flat btn-success" id='${i}accept'>Accept</button>
+                                            <button class="btn btn-flat btn-danger" id='${i}reject'>Reject</button>
                                             </div>`);
                 else{
                     $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
