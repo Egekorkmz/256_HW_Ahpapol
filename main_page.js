@@ -131,6 +131,7 @@ function addFriend(user_id, friend_id){
         contentType: "application/json",
         success: function(response){
             deleteNotification(user_id, friend_id, 1);
+            createFriends(user_id)
         }
     })
 }
@@ -187,7 +188,13 @@ $(function() {
     var limit = 0
     //getting posts
     createPosts(user_id, limit)
-     
+    createFriends(user_id)
+    getNotifications(user['user_id']);
+        setInterval(function() {
+            getNotifications(user['user_id']);
+            createFriends(user['user_id'])
+        }, 5000);
+
     //loading more posts
     $("#loadMore").on("click",function(){
         limit += 10
@@ -354,6 +361,39 @@ function getNotifications(user_id){
                 }
                 
             )},
+        error: function(error) {
+            console.log(error['responseText']);
+        }
+    });
+}
+
+function createFriends(user_id){
+    //console.log(user_id)
+    $.ajax({
+        url: './backend-api.php', 
+        method: 'FRIEND',
+        data: JSON.stringify({user_id}),
+        contentType: "application/json",
+        success: function(response) {
+            console.log(response.length)
+            list = $("#friend-list")
+            list.html("");
+            if(response.length == 0) {
+                list.append("<div class='mda-list-item'><div class='text-muted text-ellipsis'>You have no friends yet.</div></div>")
+            }
+            else {
+                response.forEach((friend)=>{
+                    console.log(friend)
+                    console.log(list)
+                        list.append(`<div class='mda-list-item'><img src='images/${friend['profile_picture']}' alt='${friend['first_name']} ${friend['last_name']}' class='mda-list-item-img thumb48'>
+                        <div class='mda-list-item-text'>
+                            <h3>${friend['first_name']} ${friend['last_name']}</h3>
+                            <div class='text-muted text-ellipsis btn-delete'><i id='${friend['user_id']}' class='fa-solid fa-trash-can delete-can' style='cursor:pointer'></i></div>
+                        </div>
+                    </div>`);
+                    })
+            }
+            },
         error: function(error) {
             console.log(error['responseText']);
         }
