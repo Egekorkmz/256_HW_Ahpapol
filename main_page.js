@@ -185,6 +185,15 @@ $(function() {
         createPosts(user_id, limit)
     })
 
+    //notification
+    $(`.inside`).on("click", ".accept", function(){
+        addFriend(user_id, friend_id)
+    })
+
+    $(`.inside`).on("click", ".reject", function(){
+        removeFriend(user_id, friend_id)
+    })
+
     //
     //like button functionality
     //

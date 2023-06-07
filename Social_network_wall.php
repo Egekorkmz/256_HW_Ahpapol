@@ -167,6 +167,7 @@
                                     }
                                 ?>
                             </div>
+                            <button type="button" class="btn btn-flat btn-light" id="loadMore">Load More</button>
                         </div>
                     </div>
                     <div class="col-md-4">
