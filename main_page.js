@@ -100,7 +100,7 @@ function generateComments(post_id){
                         <img src='images/default.png' alt='User' class='media-object img-circle thumb40'>
                         <div class="margin10">
                             <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${comment.first_name} ${comment.last_name}</span></small>
-                            <p class='media-heading m0'>${comment.comment}</p>
+                            <p class='media-heading m0'>${sanitize(comment.comment)}</p>
                     </div>
                 </div>`);
             });   
