@@ -36,10 +36,6 @@ if ($_SESSION == null) {
 
 <body>
     <script>
-        getNotifications(user['user_id']);
-        setInterval(function() {
-            getNotifications(user['user_id']);
-        }, 5000);
     </script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <section ui-view autoscroll="false" ng-class="app.viewAnimation" class="ng-scope container ng-fadeInLeftShort" style>
@@ -108,23 +104,7 @@ if ($_SESSION == null) {
                         <div class="push-down"></div>
                         <div class="card card-transparent">
                             <h5 class="card-heading">Friends</h5>
-                            <div class="mda-list">
-                                <?php
-                                    $friends = getFriends($userData['user_id']);
-                                    if (empty($friends)) {
-                                        echo "<div class='mda-list-item'><div class='text-muted text-ellipsis'>You have no friends yet.</div></div>";
-                                    }
-                                    else {
-                                        foreach ($friends as $friend) {
-                                            echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
-                                                    <div class='mda-list-item-text'>
-                                                        <h3>{$friend['first_name']} {$friend['last_name']}</h3>
-                                                        <div class='text-muted text-ellipsis btn-delete'><i id='{$friend['user_id']}' class='fa-solid fa-trash-can delete-can' style='cursor:pointer'></i></div>
-                                                    </div>
-                                                </div>";
-                                        }
-                                    }
-                                ?>
+                            <div class="mda-list" id="friend-list">
                             </div>
                         </div>
                     </div>
