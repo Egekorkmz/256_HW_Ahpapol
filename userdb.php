@@ -93,13 +93,6 @@ try {
     return $stmt->fetchALL();
  }
 
- function getFriendRequests($user_id){
-    global $db ;
-    $stmt = $db->prepare("select * from friend_requests where reciever_id = ?") ;
-    $stmt->execute([$user_id]);
-    return $stmt->fetchALL();
- }
-
  //gets like status
  function getLikeStatus($user_id, $post_id){
    global $db ;
