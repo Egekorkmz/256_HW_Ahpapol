@@ -53,7 +53,7 @@
         <div class="friends-part">
         
         </div>
-        <p id="result" style="color:red;"></p>
+        <p id="result" style="color:red"></p>
     </section>
 </section>
     

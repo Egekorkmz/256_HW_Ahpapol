@@ -1,6 +1,7 @@
 *{
     margin: 0px auto;
 }
+
 body{
     font-size: 16px;
     background-image: url("./Img/wallpaper.avif");
@@ -8,31 +9,6 @@ body{
     background-size: cover;
     background-position: 0px -140px;
     backdrop-filter: blur(5px);
-}
-
-
-/*head*/
-/*.head{
-    border-bottom: 10px solid black;
-    height: 150px;
-    background-color: #9600bf;
-    display: flex;
-    align-items: center;
-}
-
-.head div{
-    margin-left: 50px;
-}
-
-.pp{
-    border-radius: 50%;
-    width: 100px;
-    width: 100px;
-}
-
-#pp_picture{
-    margin: 20px;
-    margin-left: 50px;
 }
 
 /*container*/
@@ -46,6 +22,7 @@ body{
     display:flex;
     flex-direction: column;
 }
+
 .mycontainer>*{
     align-items: center;
     text-align: center;

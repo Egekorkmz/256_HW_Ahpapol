@@ -22,39 +22,30 @@ $(function(){
         var u_id=$("#userid").attr("class");
 
         text=sanitize(text)
-
-        console.log(fil+" "+text)
-         if(fil==="email"){
-            var mail=/[a-z]*@*.com/i
-            if(!text.search(mail)){
-                console.log("error mail")
-                $("#errorpart").html("enter a valid mail")
-            }
-            else{
-                console.log("no error mail")
-            }
-
+        if(text==""){
+            $("#errorpart").html("Please fill the field")
+            $("#errorpart").css("color","red")
         }
         else{
-
-
+            $("#errorpart").html("")
+            $.ajax({
+                url: './backend-api.php', // PHP script URL
+                method: 'FINDUSER', // Use GET method
+                data: JSON.stringify({filter:fil,keyword:text,userId:u_id}), // Send data as query parameters
+                contentType: "application/json",
+                //dataType: 'json',
+                success: function(response) {
+                  // Handle the response
+                  displayFriends(response);
+                },
+                error: function(xhr, status, error) {
+                  // Handle errors, if any
+                  console.log("fail");
+                }
+              });
         }
 
-        $.ajax({
-            url: './backend-api.php', // PHP script URL
-            method: 'FINDUSER', // Use GET method
-            data: JSON.stringify({filter:fil,keyword:text,userId:u_id}), // Send data as query parameters
-            contentType: "application/json",
-            //dataType: 'json',
-            success: function(response) {
-              // Handle the response
-              displayFriends(response);
-            },
-            error: function(xhr, status, error) {
-              // Handle errors, if any
-              console.log("fail");
-            }
-          });
+       
     });
 
     $(".friends-part").on("click",".addFriend",function(){
