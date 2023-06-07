@@ -53,29 +53,29 @@ $(function(){
           });
     })
 
-    $i=1;
-    $(`#notifications`).on(`click`, function(){
-        console.log("notification")
-        $(".pop").css("visibility", "collapse");
-        $i++;
-        $("#pop_not").css("visibility", "visible");
-        if($i%2==1){
-            $("#pop_not").css("visibility", "collapse");
-        }
-    });
-    $i=1;
-    $(`#friends`).on(`click`, function(){
-        console.log("friend")
-        $(".pop").css("visibility", "collapse");
-        $i++;
-        $("#pop_frnds").css("visibility", "visible");
-        if($i%2==1){
-            $("#pop_frnds").css("visibility", "collapse");
-        }
+    $("#searchbtn").click(function(e){
+        e.preventDefault();
+        var text=$("#tosearch").val();
+        var fil=$("#filter-opt").val();
+        $.ajax({
+            url: './backend-api.php', // PHP script URL
+            method: 'FINDUSER', // Use GET method
+            data: JSON.stringify({filter:fil,keyword:text}), // Send data as query parameters
+            contentType: "application/json",
+            //dataType: 'json',
+            success: function(response) {
+              // Handle the response
+              displayFriends(response);
+            },
+            error: function(xhr, status, error) {
+              // Handle errors, if any
+              console.log("fail");
+            }
+          });
     });
 
-    $("#log_out").click(function() {
-        window.location = "./Login-Register/logout.php"
+    $("#go_back").click(function() {
+        window.location = "./main_page.php"
     })
 })
 
