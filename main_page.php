@@ -116,14 +116,18 @@ if ($_SESSION == null) {
                             <div class="mda-list">
                                 <?php
                                     $friends = getFriends($userData['user_id']);
-                                    //var_dump($friends);
-                                    foreach ($friends as $friend) {
-                                        echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
-                                                <div class='mda-list-item-text'>
-                                                    <h3>{$friend['first_name']} {$friend['last_name']}</h3>
-                                                    <div class='text-muted text-ellipsis btn-delete'><i id='{$friend['user_id']}' class='fa-solid fa-trash-can delete-can' style='cursor:pointer'></i></div>
-                                                </div>
-                                            </div>";
+                                    if (empty($friends)) {
+                                        echo "<div class='text-muted text-ellipsis'>You have no friends yet.</div>";
+                                    }
+                                    else {
+                                        foreach ($friends as $friend) {
+                                            echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
+                                                    <div class='mda-list-item-text'>
+                                                        <h3>{$friend['first_name']} {$friend['last_name']}</h3>
+                                                        <div class='text-muted text-ellipsis btn-delete'><i id='{$friend['user_id']}' class='fa-solid fa-trash-can delete-can' style='cursor:pointer'></i></div>
+                                                    </div>
+                                                </div>";
+                                        }
                                     }
                                 ?>
                             </div>
