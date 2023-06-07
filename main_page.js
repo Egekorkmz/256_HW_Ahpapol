@@ -133,7 +133,7 @@ function addFriend(user_id, friend_id){
         data: JSON.stringify({user_id:user_id, friend_id:friend_id}),
         contentType: "application/json",
         success: function(response){
-            deleteFriend(user_id, friend_id);
+            deleteNotification(user_id, friend_id);
         }
     })
 }
@@ -385,19 +385,19 @@ function getNotifications(user_id){
     });
 }
 
+$(function(){
+    $("#pop_frnds").on("click","button.btn-success",function(){
+        alert("pressed");
+        var sender_id = $(this).parent().attr("id");
+        var user_id = user.user_id;
+        addFriend(user_id,sender_id);
+        $(this).parent().html(`<p style='color:green;'>You accepted the request. </p>`);
+    });
 
-$("#pop_frnds").on("click","button.btn-success",function(){
-    allert("pressed");
-    var sender_id = $(this).parent().attr("id");
-    var user_id = user.user_id;
-    addFriend(user_id,sender_id);
-    $(this).parent().html(`<p style='color:green;'>You accepted ${temp['first_name']} ${temp['last_name']}\'s request. </p>`);
-});
-
-$(".inside").on("click",".btn-danger",function(){
-    var sender_id = $(this).parent().attr("id");
-    var user_id = user.user_id;
-    deleteNotification(user_id,sender_id);
-    $(this).parent().html(`<p style='color:red;'>You rejected ${temp['first_name']} ${temp['last_name']}\'s request. </p>`);
-});
-                
+    $("#pop_frnds").on("click",".btn-danger",function(){
+        var sender_id = $(this).parent().attr("id");
+        var user_id = user.user_id;
+        deleteNotification(user_id,sender_id);
+        $(this).parent().html(`<p style='color:red;'>You rejected the request. </p>`);
+    });
+});        

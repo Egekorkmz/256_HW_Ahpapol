@@ -32,7 +32,7 @@ $(function(){
             url: './backend-api.php', // PHP script URL
             method: 'POSTREQUEST', // Usse GET method
             //cache:false,
-            data: JSON.stringify({ receiver:f_id, sender:u_id,type: 0}), // Send data as query parameters
+            data: JSON.stringify({ receiver:f_id, sender:u_id,type: 1}), // Send data as query parameters
             contentType: "application/json",
             dataType: 'json',
             success: function(response) {
