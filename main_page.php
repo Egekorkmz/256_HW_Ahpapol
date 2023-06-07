@@ -35,6 +35,10 @@ if ($_SESSION == null) {
 </head>
 
 <body>
+    <script>
+        //console.log(user['user_id']);
+        getNotifications(user['user_id']);
+    </script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <section ui-view autoscroll="false" ng-class="app.viewAnimation" class="ng-scope container ng-fadeInLeftShort" style>
         <div ui-view class="ng-fadeInLeftShort ng-scope">
