@@ -118,11 +118,8 @@ function deleteNotification(user_id, friend_id){
     $.ajax({
         url: './backend-api.php',
         method: 'DELETENOT',
-        data: JSON.stringify({$sender_id: friend_id, $reciever_id: user_id, $type: 1}),
+        data: JSON.stringify({sender_id: friend_id, reciever_id: user_id, type: 1}),
         contentType: "application/json",
-        success: function(response){
-            getNotifications(user_id);
-            }
         });
 }
 
