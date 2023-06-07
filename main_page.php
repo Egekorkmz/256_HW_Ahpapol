@@ -110,7 +110,7 @@ function create_csrf_token() {
                                         } 
                                         else 
                                         { 
-                                           echo "CSRF Error " ; 
+                                           echo "<p class='help-block'>CSRF Error.</p>" ; 
                                            exit ;
                                         }
                                     }
