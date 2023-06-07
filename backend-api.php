@@ -27,6 +27,10 @@
       $out = getNotifications($input->user_id);
   }
 
+  if( $method === "DELETENOT"){
+    $out = deleteNotification($input->sender_id, $input->reciever_id, $input->type);
+  }
+
   if ( $method === "GETLIKESTATUS") {
     $out = getLikeStatus($input->user_id, $input->post_id);
   }

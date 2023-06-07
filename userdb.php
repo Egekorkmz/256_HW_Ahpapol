@@ -57,6 +57,13 @@ try {
     return $stmt->fetchALL();
  }
 
+ function deleteNotification($sender_id, $reciever_id, $type){
+    global $db ;
+    $stmt = $db->prepare("delete from notification where sender_id = ? and reciever_id = ? and type = ?") ;
+    $stmt->execute([$sender_id, $reciever_id, $type]);
+    return $stmt->fetchALL();
+ }
+
  function getPosts($user_id){
     global $db ;
     $stmt = $db->prepare("select * from posts where user_id = ?") ;

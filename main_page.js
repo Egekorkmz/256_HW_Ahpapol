@@ -114,6 +114,18 @@ function generateComments(post_id){
 
 }
 
+function deleteNotification(user_id, friend_id){
+    $.ajax({
+        url: './backend-api.php',
+        method: 'DELETENOT',
+        data: JSON.stringify({$sender_id: friend_id, $reciever_id: user_id, $type: 1}),
+        contentType: "application/json",
+        success: function(response){
+            getNotifications(user_id);
+            }
+        });
+}
+
 function addFriend(user_id, friend_id){
     $.ajax({
         url: './backend-api.php',
@@ -121,11 +133,7 @@ function addFriend(user_id, friend_id){
         data: JSON.stringify({user_id:user_id, friend_id:friend_id}),
         contentType: "application/json",
         success: function(response){
-            if(response.length){
-                $i=1;
-                $(`#${$i}accept`).remove(`#${$i}inside`);
-                $i++;
-            }
+            deleteFriend(user_id, friend_id);
         }
     })
 }
@@ -357,13 +365,13 @@ function getNotifications(user_id){
             $("#pop_frnds").html("");
             response.forEach((temp)=>{
                 if(temp["type"] == 1)
-                    $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
+                    $("#pop_frnds").append(`<div class='inside' id='${temp['sender_id']}'>
                                             <p>New friendship request from: ${temp['first_name']} ${temp['last_name']} </p>
                                             <button class="btn btn-flat btn-success" id='${i}accept'>Accept</button>
                                             <button class="btn btn-flat btn-danger" id='${i}reject'>Reject</button>
                                             </div>`);
                 else{
-                    $("#pop_frnds").append(`<div class='inside' id='${i}inside'>
+                    $("#pop_frnds").append(`<div class='inside'>
                                             <p> ${temp['first_name']} ${temp['last_name']} unfriended you.</p>
                                             </div>`);    
                         }
@@ -376,4 +384,20 @@ function getNotifications(user_id){
         }
     });
 }
+
+
+$("#pop_frnds").on("click","button.btn-success",function(){
+    allert("pressed");
+    var sender_id = $(this).parent().attr("id");
+    var user_id = user.user_id;
+    addFriend(user_id,sender_id);
+    $(this).parent().html(`<p style='color:green;'>You accepted ${temp['first_name']} ${temp['last_name']}\'s request. </p>`);
+});
+
+$(".inside").on("click",".btn-danger",function(){
+    var sender_id = $(this).parent().attr("id");
+    var user_id = user.user_id;
+    deleteNotification(user_id,sender_id);
+    $(this).parent().html(`<p style='color:red;'>You rejected ${temp['first_name']} ${temp['last_name']}\'s request. </p>`);
+});
                 
