@@ -261,20 +261,22 @@ $(function() {
         var post_id = parseInt($(this).attr('id'))
         var text = $(this).prev().val()
 
-        $.ajax({
-            url: './backend-api.php', 
-            method: 'POSTCOMMENT',
-            data: JSON.stringify({user_id, post_id, text}),
-            contentType: "application/json",
-            success: function(response) {
-                $(".comment_to_post").remove()  
-                generateComments(post_id)
-
-            },
-            error: function(error) {
-              console.log(error['responseText']);
-            }
-          });
+        if(text != "") {
+            $.ajax({
+                url: './backend-api.php', 
+                method: 'POSTCOMMENT',
+                data: JSON.stringify({user_id, post_id, text}),
+                contentType: "application/json",
+                success: function(response) {
+                    $(".comment_to_post").remove()  
+                    generateComments(post_id)
+    
+                },
+                error: function(error) {
+                  console.log(error['responseText']);
+                }
+              });
+        }
     })
 
     $i=1;
