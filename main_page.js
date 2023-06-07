@@ -298,30 +298,6 @@ $(function() {
         $(this).parent().parent().parent().html("<p style='color:red;'>You removed "+name+"</p>")
     })
 
-    /*$i=1;
-    $(".card").on(`click`, ".comment" ,function(){
-        $t = (this.id);
-        
-        if($i%2==1){
-            $(`#${$t}_to_post`).css("visibility", "visible");
-            $(`#${$t}`).text("Post");
-
-        }else{
-            $(`#${$t}_to_post`).css("visibility", "collapse");
-            $(`#${$t}`).text("Comment");
-            $val = $(`#${$t}_to_post>textarea`).val();
-            $(`#${$t}_by_user`).css("visibility", "visible");
-
-            $e = $("<div class='inside'><p></p></div>");
-            $e.attr(`id`, `${$t}_by_user${$i}`);
-
-            $(`#${$t}_by_user`).prepend($e);
-            $(`#${$t}_by_user${$i}`).text(`${$val}`);
-            
-        }
-        $i++;
-    });*/
-
 })
 
 function deleteFriend(userid,friendid){
@@ -361,7 +337,7 @@ function getNotifications(user_id){
         data: JSON.stringify({user_id}),
         contentType: "application/json",
         success: function(response) {
-            $("#numNot").text("+" + response.length);
+            $("#numNot").text(response.length);
             $("#pop_frnds").html("");
             response.forEach((temp)=>{
                 if(temp["type"] == 1)
