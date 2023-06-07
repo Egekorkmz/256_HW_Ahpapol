@@ -34,14 +34,7 @@
 
         </div>
         <div class="bu">
-            <button type="button" class="btn btn-flat btn-primary position-relative" id="friends">
-                Friends
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                    99+
-                </span>
-            </button>
-            <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
-            <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
+            <button type="button" class="btn btn-flat btn-primary" id="go_back">Go Back</button>
         </div>
 
         <div class="pop" id="pop_frnds">
