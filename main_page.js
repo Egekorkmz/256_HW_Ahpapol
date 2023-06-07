@@ -64,7 +64,7 @@ function generatePost(data, user_id) {
                     </div>
                 </div>
             </div>
-        </div>`)
+        </div>`) 
     }
 
     $.ajax({
@@ -112,6 +112,38 @@ function generateComments(post_id){
         }
       });
 
+}
+
+function addFriend(user_id, friend_id){
+    $.ajax({
+        url: './backend-api.php',
+        method: 'POSTFRIEND',
+        data: JSON.stringify({user_id:user_id, friend_id:friend_id}),
+        contentType: "application/json",
+        success: function(response){
+            if(response.length){
+                $i=1;
+                $(`#${$i}accept`).remove(`#${$i}inside`);
+                $i++;
+            }
+        }
+    })
+}
+
+function removeFriend(user_id, friend_id){
+    $.ajax({
+        url: './backend-api.php',
+        method: 'REMOVEFRIEND',
+        data: JSON.stringify({user_id:user_id, friend_id:friend_id}),
+        contentType: "application/json",
+        success: function(response){
+            if(response.length){
+                $i=1;
+                $(`#${$i}reject`).remove(`#${$i}inside`);
+                $i++;
+            }
+        }
+    })
 }
 
 function createPosts(user_id, lim) {

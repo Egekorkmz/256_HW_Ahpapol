@@ -57,14 +57,17 @@
                     <?php
                         $notifications=getNotifications($userData['user_id']);
                         //var_dump($notifications);
+                        $i=1;
                         foreach($notifications as $not){
                             
-                            echo "<div class='inside'>
+                            echo "<div class='inside' id='{$i}inside'>
                             <p>New friendship request from: {$not['first_name']}  {$not['last_name']}</p>
-                            <button>Accept</button>
-                            <button>Reject</button>
+                            <button id='{$i}accept'>Accept</button>
+                            <button id='{$i}reject'>Reject</button>
                             </div>
                             ";
+
+                            $i++;
                         }
                     ?>
                 </div>
