@@ -36,44 +36,17 @@
         <div class="bu">
             <button type="button" class="btn btn-flat btn-primary" id="go_back">Go Back</button>
         </div>
-
-        <div class="pop" id="pop_frnds">
-            <div class="inside">
-                <p>New friendship request from: Angela</p>
-                <button type="button" class="btn btn-flat btn-success">Accept</button>
-                <button type="button" class="btn btn-flat btn-danger">Reject</button>
-            </div>
-            <div class="inside">
-                <p>New friendship request from: Harry</p>
-                <button>Accept</button>
-                <button>Reject</button>
-            </div>
-            <div class="inside">
-                <p>New friendship request from: Eren Yeşiltepe</p>
-                <button>Accept</button>
-                <button>Reject</button>
-            </div>
-        </div>
-        <div class="pop" id="pop_not">
-            <div class="inside">
-                <p>Stephen Palmer shared a new post</p>
-            </div>
-            <div class="inside">
-                <p>My talking Tom liked your post</p>
-            </div>
-        </div>
-
     </div>
 
 
     <section class="mycontainer">
         <div class="timeline">
-            <h4>Search For A Friend</h4>
+            <h4>Search for a Friend</h4>
             <input type="text" id="tosearch">
             <select name="filter-option" id="filter-opt">
-                <option value="email">mail</option>
-                <option value="first_name">first name</option>
-                <option value="last_name">last name</option>
+                <option value="email">Mail</option>
+                <option value="first_name">First name</option>
+                <option value="last_name">Last name</option>
             </select>
             <button id="searchbtn">Search</button>
         </div>
