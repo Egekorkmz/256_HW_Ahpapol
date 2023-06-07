@@ -3,6 +3,10 @@
 }
 body{
     font-size: 16px;
+    background-image: url("./Img/wallpaper.avif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0px -140px;
 }
 
 
