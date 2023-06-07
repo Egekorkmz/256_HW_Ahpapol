@@ -1,3 +1,16 @@
+function sanitize(string) {
+    const map = {
+        '&': '&amp;',
+        '<': '&lt;',
+        '>': '&gt;',
+        '"': '&quot;',
+        "'": '&#x27;',
+        "/": '&#x2F;',
+    };
+    const reg = /[&<>"'/]/ig;
+    return string.replace(reg, (match)=>(map[match]));
+}
+
 $(function(){
     
 
@@ -6,10 +19,31 @@ $(function(){
         e.preventDefault();
         var text=$("#tosearch").val();
         var fil=$("#filter-opt").val();
+        var u_id=$("#userid").attr("class");
+
+        text=sanitize(text)
+
+        console.log(fil+" "+text)
+         if(fil==="email"){
+            var mail=/[a-z]*@*.com/i
+            if(!text.search(mail)){
+                console.log("error mail")
+                $("#errorpart").html("enter a valid mail")
+            }
+            else{
+                console.log("no error mail")
+            }
+
+        }
+        else{
+
+
+        }
+
         $.ajax({
             url: './backend-api.php', // PHP script URL
             method: 'FINDUSER', // Use GET method
-            data: JSON.stringify({filter:fil,keyword:text}), // Send data as query parameters
+            data: JSON.stringify({filter:fil,keyword:text,userId:u_id}), // Send data as query parameters
             contentType: "application/json",
             //dataType: 'json',
             success: function(response) {
@@ -53,30 +87,13 @@ $(function(){
           });
     })
 
-    $("#searchbtn").click(function(e){
-        e.preventDefault();
-        var text=$("#tosearch").val();
-        var fil=$("#filter-opt").val();
-        $.ajax({
-            url: './backend-api.php', // PHP script URL
-            method: 'FINDUSER', // Use GET method
-            data: JSON.stringify({filter:fil,keyword:text}), // Send data as query parameters
-            contentType: "application/json",
-            //dataType: 'json',
-            success: function(response) {
-              // Handle the response
-              displayFriends(response);
-            },
-            error: function(xhr, status, error) {
-              // Handle errors, if any
-              console.log("fail");
-            }
-          });
-    });
+    
 
     $("#go_back").click(function() {
         window.location = "./main_page.php"
     })
+
+
 })
 
 //insert yaptıktan sonra click eventlerini bind laman lazım yoksa çalışmıyor

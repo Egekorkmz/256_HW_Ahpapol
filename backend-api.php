@@ -56,7 +56,7 @@
   }
 
   if( $method === "FINDUSER"){
-    $out = findUser($input->filter, $input->keyword);
+    $out = findUser($input->filter, $input->keyword,$input->userId);
   }
 
   if( $method === "PUTLIKES"){

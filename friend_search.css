@@ -7,6 +7,7 @@ body{
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0px -140px;
+    backdrop-filter: blur(5px);
 }
 
 
@@ -86,7 +87,7 @@ button:hover{background-color: #9600bf;}
     border-radius:20px;
     padding:10px;
     text-decoration: none;
-    background-color:white;
+    background-color:grey;
     align-items: center;
     justify-content: center;
 }
