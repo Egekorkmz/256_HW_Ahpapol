@@ -52,7 +52,7 @@ try {
 
  function getNotifications($user_id){
     global $db ;
-    $stmt = $db->prepare("select * from notification where reciever_id = ?") ;
+    $stmt = $db->prepare("select notification.sender_id, notification.timestamp, notification.type, notification.isSeen, users.first_name, users.last_name from `notification`, `users` where reciever_id = ? and notification.sender_id = users.user_id") ;
     $stmt->execute([$user_id]);
     return $stmt->fetchALL();
  }
