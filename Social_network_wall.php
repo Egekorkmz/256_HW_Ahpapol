@@ -50,7 +50,7 @@
                 </div>
                 <div class="bu">
                     <button type="button" class="btn btn-flat btn-primary" id="friends">Notifications</button>
-                    <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.html">Search</a></button>
+                    <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
                 </div>
 
                 <div class="pop" id="pop_frnds">

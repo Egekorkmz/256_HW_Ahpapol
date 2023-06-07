@@ -50,42 +50,33 @@ if ($_SESSION == null) {
                 </div>
                 <div class="bu">
                     <button type="button" class="btn btn-flat btn-primary position-relative" id="friends">
-                        Friends
+                        Notifications
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             99+
                         </span>
                     </button>
-                    <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
                     <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
                     <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
                 </div>
 
                 <div class="pop" id="pop_frnds">
-                    <div class="inside">
-                        <p>New friendship request from: Angela</p>
-                        <button type="button" class="btn btn-flat btn-success">Accept</button>
-                        <button type="button" class="btn btn-flat btn-danger">Reject</button>
-                    </div>
-                    <div class="inside">
-                        <p>New friendship request from: Harry</p>
-                        <button>Accept</button>
-                        <button>Reject</button>
-                    </div>
-                    <div class="inside">
-                        <p>New friendship request from: Eren Yeşiltepe</p>
-                        <button>Accept</button>
-                        <button>Reject</button>
-                    </div>
-                </div>
-                <div class="pop" id="pop_not">
-                    <div class="inside">
-                        <p>Stephen Palmer shared a new post</p>
-                    </div>
-                    <div class="inside">
-                        <p>My talking Tom liked your post</p>
-                    </div>
-                </div>
+                    <?php
+                        $notifications=getNotifications($userData['user_id']);
+                        //var_dump($notifications);
+                        $i=1;
+                        foreach($notifications as $not){
+                            
+                            echo "<div class='inside' id='{$i}inside'>
+                            <p>New friendship request from: {$not['first_name']}  {$not['last_name']}</p>
+                            <button id='{$i}accept'>Accept</button>
+                            <button id='{$i}reject'>Reject</button>
+                            </div>
+                            ";
 
+                            $i++;
+                        }
+                    ?>
+                </div>
             </div>
             <div class="container-lg ng-scope">
                 <div style = "margin-top: 30px;" class="row">
@@ -101,7 +92,7 @@ if ($_SESSION == null) {
                                         <label for="exampleInputFile">Picture(Optional)</label>
                                         <input type="file" id="exampleInputFile" name="picture">
                                     </div>
-                                    <button type="submit" class="btn btn-success" id="share_post">Submit</button>
+                                    <button type="submit" class="btn btn-success" id="share_post">POST</button>
                                 </form>
                                 <?php
                                 if(!empty($_POST)) {
