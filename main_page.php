@@ -2,6 +2,8 @@
 require_once "Upload.php";
 require_once "userdb.php";
 
+const SALTING = "_256_SALT_39482766230482601" ;
+
 session_start();
 if ($_SESSION == null) {
     //if user is not logged in
@@ -14,6 +16,19 @@ if ($_SESSION == null) {
     $userEmail = $userData['email'];
     $userPic = "images/" . $userData['profile_picture'];
 }
+
+function csrf_check() { 
+    if ( isset($_POST["csrf_token"]) && isset($_COOKIE["secret"])) {
+        return password_verify($_COOKIE["secret"] . SALTING  , $_POST["csrf_token"]) ;
+    }
+    return false; 
+ }
+
+function create_csrf_token() {
+    $secret = bin2hex(random_bytes(10)) ; // create random 10 bytes (20 hex digits)
+    setcookie("secret", $secret) ; // session cookie
+    return password_hash($secret . SALTING, PASSWORD_BCRYPT) ;
+ }
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -36,10 +51,6 @@ if ($_SESSION == null) {
 
 <body>
     <script>
-        getNotifications(user['user_id']);
-        setInterval(function() {
-            getNotifications(user['user_id']);
-        }, 5000);
     </script>
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet">
     <section ui-view autoscroll="false" ng-class="app.viewAnimation" class="ng-scope container ng-fadeInLeftShort" style>
@@ -72,6 +83,7 @@ if ($_SESSION == null) {
                         <div class="card">
                             <div class="card-body">
                                 <form method="post" class="mt ng-pristine ng-valid" enctype="multipart/form-data">
+                                    <input type="hidden" name="csrf_token" value="<?= create_csrf_token() ?>">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">What's on your mind?</label>
                                         <textarea rows="2" cols="" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
@@ -87,13 +99,20 @@ if ($_SESSION == null) {
                                     //var_dump($_FILES);
                                     //var_dump($_POST);
                                     extract($_POST);
-                                    $photo = new Upload("picture", "images/posts/");
+                                    $photo = new Upload("picture", "images/posts");
                                     if ($txt == "") {
                                         echo "<p class='help-block'>Please enter a text.</p>";
                                     }
                                     else {
-                                        addPost($userData['user_id'], $txt, $photo->filename);
-                                        echo "<p class='help-block'>Your post has been posted.</p>";
+                                        if ( csrf_check() ) {
+                                            addPost($userData['user_id'], $txt, $photo->filename);
+                                            echo "<p class='help-block'>Your post has been posted.</p>";
+                                        } 
+                                        else 
+                                        { 
+                                           echo "CSRF Error " ; 
+                                           exit ;
+                                        }
                                     }
                                 }
                                 ?>
@@ -108,23 +127,7 @@ if ($_SESSION == null) {
                         <div class="push-down"></div>
                         <div class="card card-transparent">
                             <h5 class="card-heading">Friends</h5>
-                            <div class="mda-list">
-                                <?php
-                                    $friends = getFriends($userData['user_id']);
-                                    if (empty($friends)) {
-                                        echo "<div class='mda-list-item'><div class='text-muted text-ellipsis'>You have no friends yet.</div></div>";
-                                    }
-                                    else {
-                                        foreach ($friends as $friend) {
-                                            echo "<div class='mda-list-item'><img src='images/{$friend['profile_picture']}' alt='{$friend['first_name']} {$friend['last_name']}' class='mda-list-item-img thumb48'>
-                                                    <div class='mda-list-item-text'>
-                                                        <h3>{$friend['first_name']} {$friend['last_name']}</h3>
-                                                        <div class='text-muted text-ellipsis btn-delete'><i id='{$friend['user_id']}' class='fa-solid fa-trash-can delete-can' style='cursor:pointer'></i></div>
-                                                    </div>
-                                                </div>";
-                                        }
-                                    }
-                                ?>
+                            <div class="mda-list" id="friend-list">
                             </div>
                         </div>
                     </div>
