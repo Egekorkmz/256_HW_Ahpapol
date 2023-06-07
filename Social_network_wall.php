@@ -50,11 +50,7 @@
                 </div>
                 <div class="bu">
                     <button type="button" class="btn btn-flat btn-primary" id="friends">Notifications</button>
-<<<<<<< HEAD
-                    <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.html">Search</a></button>
-=======
                     <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
->>>>>>> 8acc24c719d2ad7315df0d0eaea96ad5a3bb422e
                 </div>
 
                 <div class="pop" id="pop_frnds">
@@ -171,10 +167,7 @@
                                     }
                                 ?>
                             </div>
-<<<<<<< HEAD
-=======
                             <button type="button" class="btn btn-flat btn-light" id="loadMore">Load More</button>
->>>>>>> 8acc24c719d2ad7315df0d0eaea96ad5a3bb422e
                         </div>
                     </div>
                     <div class="col-md-4">
