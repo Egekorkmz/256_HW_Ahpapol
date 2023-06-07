@@ -78,9 +78,9 @@ function create_csrf_token() {
 
             </div>
             <div class="container-lg ng-scope">
-                <div style = "margin-top: 30px;" class="row">
+                <div style = "margin-top: 30px;" class="row bgcontain">
                     <div class="col-md-8">
-                        <div class="card">
+                        <div class="card bgcard">
                             <div class="card-body">
                                 <form method="post" class="mt ng-pristine ng-valid" enctype="multipart/form-data">
                                     <input type="hidden" name="csrf_token" value="<?= create_csrf_token() ?>">
