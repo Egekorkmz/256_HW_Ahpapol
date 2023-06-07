@@ -55,24 +55,13 @@ if ($_SESSION == null) {
                 <div class="bu">
                     <button type="button" class="btn btn-flat btn-primary position-relative" id="friends">
                         Friends
-                        <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
-                            99+
-                        </span>
+                        <span id ="numNot" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"></span>
                     </button>
-                    <button type="button" class="btn btn-flat btn-primary" id="notifications">Notifications</button>
                     <button type="button" class="btn btn-flat btn-primary" id="srch"><a href="./Friend-search.php">Search</a></button>
                     <button type="button" class="btn btn-flat btn-primary" id="log_out">Log Out</button>
                 </div>
 
                 <div class="pop" id="pop_frnds"></div>
-                </div>
-                <div class="pop" id="pop_not">
-                    <div class="inside">
-                        <p>Stephen Palmer shared a new post</p>
-                    </div>
-                    <div class="inside">
-                        <p>My talking Tom liked your post</p>
-                    </div>
                 </div>
 
             </div>
