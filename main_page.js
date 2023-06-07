@@ -64,7 +64,7 @@ function generatePost(data, user_id) {
                     </div>
                 </div>
             </div>
-        </div>`)
+        </div>`) 
     }
 
     $.ajax({
@@ -100,7 +100,7 @@ function generateComments(post_id){
                         <img src='images/default.png' alt='User' class='media-object img-circle thumb40'>
                         <div class="margin10">
                             <small class='text-muted'><em class='ion-earth text-muted mr-sm'></em><span>${comment.first_name} ${comment.last_name}</span></small>
-                            <p class='media-heading m0'>${comment.comment}</p>
+                            <p class='media-heading m0'>${sanitize(comment.comment)}</p>
                     </div>
                 </div>`);
             });   
@@ -112,6 +112,38 @@ function generateComments(post_id){
         }
       });
 
+}
+
+function addFriend(user_id, friend_id){
+    $.ajax({
+        url: './backend-api.php',
+        method: 'POSTFRIEND',
+        data: JSON.stringify({user_id:user_id, friend_id:friend_id}),
+        contentType: "application/json",
+        success: function(response){
+            if(response.length){
+                $i=1;
+                $(`#${$i}accept`).remove(`#${$i}inside`);
+                $i++;
+            }
+        }
+    })
+}
+
+function removeFriend(user_id, friend_id){
+    $.ajax({
+        url: './backend-api.php',
+        method: 'REMOVEFRIEND',
+        data: JSON.stringify({user_id:user_id, friend_id:friend_id}),
+        contentType: "application/json",
+        success: function(response){
+            if(response.length){
+                $i=1;
+                $(`#${$i}reject`).remove(`#${$i}inside`);
+                $i++;
+            }
+        }
+    })
 }
 
 function createPosts(user_id, lim) {
@@ -151,6 +183,15 @@ $(function() {
     $("#loadMore").on("click",function(){
         limit += 10
         createPosts(user_id, limit)
+    })
+
+    //notification
+    $(`.inside`).on("click", ".accept", function(){
+        addFriend(user_id, friend_id)
+    })
+
+    $(`.inside`).on("click", ".reject", function(){
+        removeFriend(user_id, friend_id)
     })
 
     //
