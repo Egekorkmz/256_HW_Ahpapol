@@ -87,7 +87,7 @@ function create_csrf_token() {
                                     <input type="hidden" name="csrf_token" value="<?= create_csrf_token() ?>">
                                     <div class="form-group">
                                         <label for="exampleInputEmail1">What's on your mind?</label>
-                                        <textarea rows="2" cols="" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
+                                        <textarea rows="2" cols="" aria-multiline="true" tabindex="0" aria-invalid="false" class="no-resize form-control" name="txt" style="resize:vertical;" value="<?= isset($txt) ? filter_var($txt, FILTER_SANITIZE_FULL_SPECIAL_CHARS) : "1" ?>" id="share_post_txt"></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputFile">Picture(Optional)</label>
