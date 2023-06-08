@@ -79,7 +79,7 @@ function create_csrf_token() {
 
             </div>
             <div class="container-lg ng-scope">
-                <div style = "margin-top: 30px;" class="row bgcontain">
+                <div style = "margin-top: 10px;" class="row bgcontain">
                     <div class="col-md-8">
                         <div class="card bgcard">
                             <div class="card-body">
