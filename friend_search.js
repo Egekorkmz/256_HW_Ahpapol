@@ -36,6 +36,10 @@ $(function(){
                 //dataType: 'json',
                 success: function(response) {
                   // Handle the response
+                  if(response.length<=1){
+                    $("#errorpart").html("No users found")
+                    $("#errorpart").css("color","black")
+                  }
                   displayFriends(response);
                 },
                 error: function(xhr, status, error) {
