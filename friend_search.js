@@ -17,7 +17,7 @@ $(function(){
     //search + display
     $("#searchbtn").click(function(e){
         e.preventDefault();
-        $("#errorpart").html("")
+        $("#errorpart").html(" ")
         var text=$("#tosearch").val();
         var fil=$("#filter-opt").val();
         var u_id=$("#userid").attr("class");
@@ -28,7 +28,7 @@ $(function(){
             $("#errorpart").css("color","red")
         }
         else{
-            $("#errorpart").html("")
+            $("#errorpart").html(" ")
             $.ajax({
                 url: './backend-api.php', // PHP script URL
                 method: 'FINDUSER', // Use GET method
@@ -37,7 +37,7 @@ $(function(){
                 //dataType: 'json',
                 success: function(response) {
                   // Handle the response
-                  if(response.length<=1){
+                  if(response.length<1){
                     $("#errorpart").html("No users found")
                     $("#errorpart").css("color","black")
                   }
