@@ -17,6 +17,7 @@ $(function(){
     //search + display
     $("#searchbtn").click(function(e){
         e.preventDefault();
+        $("#errorpart").html("")
         var text=$("#tosearch").val();
         var fil=$("#filter-opt").val();
         var u_id=$("#userid").attr("class");
